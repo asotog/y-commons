@@ -1,0 +1,10 @@
+{
+    "name": "gallery-y-common-radios",
+    "builds": {
+        "gallery-y-common-radios": {
+            "jsfiles": [
+                "js/gallery-y-common-radios.js"
+            ]
+        }
+    }
+}

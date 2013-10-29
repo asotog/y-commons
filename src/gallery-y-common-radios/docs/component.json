@@ -1,0 +1,11 @@
+{
+    "name"       : "gallery-y-common-radios",
+    "displayName": "Gallery: gallery-y-common-radios",
+    "description": "*Summary Goes Here*",
+    "author"     : [ "asotog88" ],
+    "use"        : [ "gallery-y-common-radios" ],
+
+    "tags": [ "gallery" ],
+
+    "examples": []
+}
