@@ -1,0 +1,11 @@
+{
+    "name"       : "gallery-y-common-selects",
+    "displayName": "Gallery: gallery-y-common-selects",
+    "description": "*Summary Goes Here*",
+    "author"     : [ "asotog88" ],
+    "use"        : [ "gallery-y-common-selects" ],
+
+    "tags": [ "gallery" ],
+
+    "examples": []
+}

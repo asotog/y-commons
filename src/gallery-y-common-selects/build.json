@@ -1,0 +1,10 @@
+{
+    "name": "gallery-y-common-selects",
+    "builds": {
+        "gallery-y-common-selects": {
+            "jsfiles": [
+                "js/gallery-y-common-selects.js"
+            ]
+        }
+    }
+}

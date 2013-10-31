@@ -1,0 +1,8 @@
+{
+    "gallery-y-common-selects": {
+        "requires": [
+            "yui-base",
+            "base-build"
+        ]
+    }
+}
