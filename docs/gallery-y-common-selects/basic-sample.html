@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Example: Basic Example</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Maven+Pro:400,700">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <script src="../../build/yui/yui-min.js"></script>
+    
+</head>
+<body>
+
+<div id="doc">
+    <h1>Example: Basic Example</h1>
+
+    
+        <a href="basic-sample.html#toc" class="jump">Jump to Table of Contents</a>
+    
+
+    <div class="yui3-g">
+        <div class="yui3-u-3-4">
+            <div id="main">
+                <div class="content"><script src="../../build/gallery-y-common-selects/gallery-y-common-selects.js"></script>
+<style>#container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    /* select skin rules */
+    .custom-select {
+        background: url("../../tests/gallery-y-common-selects/tests/images/select-bg.png") right;
+        border: rgb(204, 204, 204) solid 1px;
+        display: block;
+        font-family: Helvetica;
+        padding: 5px;
+        position: relative;
+    }
+    
+    .custom-select,
+    .custom-select select {
+        width: 70px;
+    }
+    
+    .custom-select select {
+        opacity:0;
+        position:absolute;
+        top:0;
+        left:0;
+    }
+</style>
+<div class="intro">
+    <p>
+    The following example shows how to make work the selects skinning component
+    </p>
+</div>
+
+<div id="container">
+    <label>Colors:</label>
+    <span>
+        <select>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="yellow">Yellow</option>
+        </select>
+    </span>
+    <label>Transport:</label>
+    <span>
+        <select>
+            <option value="red">Car</option>
+            <option value="blue">Bus</option>
+            <option value="yellow">Airplane</option>
+        </select>
+    </span>
+</div>
+
+<h2 id="basic-example">Basic Example</h2>
+
+<p>This component relies on css provided to give the look and feel and also need to follow the markup structure as the following section defines"</p>
+
+<h3 id="html">HTML</h3>
+<pre class="code prettyprint">&lt;!-- component include  --&gt;
+&lt;script src=&quot;&#x2F;build&#x2F;gallery-y-common-selects&#x2F;gallery-y-common-selects.js&quot;&gt;&lt;&#x2F;script&gt;
+
+&lt;label&gt;Colors:&lt;&#x2F;label&gt;
+&lt;span&gt;
+    &lt;select&gt;
+        &lt;option value=&quot;red&quot;&gt;Red&lt;&#x2F;option&gt;
+        &lt;option value=&quot;blue&quot;&gt;Blue&lt;&#x2F;option&gt;
+        &lt;option value=&quot;yellow&quot;&gt;Yellow&lt;&#x2F;option&gt;
+    &lt;&#x2F;select&gt;
+&lt;&#x2F;span&gt;
+&lt;label&gt;Transport:&lt;&#x2F;label&gt;
+&lt;span&gt;
+    &lt;select&gt;
+        &lt;option value=&quot;red&quot;&gt;Car&lt;&#x2F;option&gt;
+        &lt;option value=&quot;blue&quot;&gt;Bus&lt;&#x2F;option&gt;
+        &lt;option value=&quot;yellow&quot;&gt;Airplane&lt;&#x2F;option&gt;
+    &lt;&#x2F;select&gt;
+&lt;&#x2F;span&gt;</pre>
+
+
+<h3 id="css">CSS</h3>
+<pre class="code prettyprint">&#x2F;* select skin styles *&#x2F;
+.custom-select {
+    background: url(..&#x2F;..&#x2F;tests&#x2F;images&#x2F;select-bg.png) right;
+    border: rgb(204, 204, 204) solid 1px;
+    display: block;
+    font-family: Helvetica;
+    padding: 5px;
+    position: relative;
+}
+
+.custom-select,
+.custom-select select {
+    width: 70px;
+}
+
+.custom-select select {
+    opacity:0;
+    position:absolute;
+    top:0;
+    left:0;
+}</pre>
+
+
+<h3 id="javascript">Javascript</h3>
+<pre class="code prettyprint">YUI().use(&#x27;gallery-y-common-selects&#x27;, function(Y) {
+    
+    new Y.Common.Selects();
+
+});</pre>
+
+
+
+<script>
+    YUI({base: 'http://yui.yahooapis.com/3.13.0/build/',comboBase: 'http://yui.yahooapis.com/combo?',root: '3.13.0/build/'}).use('gallery-y-common-selects', function(Y) {
+        new Y.Common.Selects();
+
+    });
+</script></div>
+            </div>
+        </div>
+
+        <div class="yui3-u-1-4">
+            <div class="sidebar">
+                
+                    <div id="toc" class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Table of Contents</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="toc">
+<li>
+<a href="basic-sample.html#basic-example">Basic Example</a>
+<ul class="toc">
+<li>
+<a href="basic-sample.html#html">HTML</a>
+</li>
+<li>
+<a href="basic-sample.html#css">CSS</a>
+</li>
+<li>
+<a href="basic-sample.html#javascript">Javascript</a>
+</li>
+</ul>
+</li>
+</ul>
+                        </div>
+                    </div>
+                
+
+                
+                    <div class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Examples</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="examples">
+                                
+                                    
+                                        <li data-description="The following example shows how to make work the selects skinning component">
+                                            <a href="basic-sample.html">Basic Example</a>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </div>
+                    </div>
+                
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+
+</body>
+</html>

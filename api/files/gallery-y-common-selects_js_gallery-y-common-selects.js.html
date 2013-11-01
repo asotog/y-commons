@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>gallery-y-common-selects/js/gallery-y-common-selects.js - yogi doc server</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="yogi doc server"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 3.11.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="gallery-y-common-selects_js_gallery-y-common-selects.js.html#api-classes">Classes</a></li>
+            <li><a href="gallery-y-common-selects_js_gallery-y-common-selects.js.html#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Common.Radios.html">Common.Radios</a></li>
+            
+                <li><a href="../classes/Common.Selects.html">Common.Selects</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/gallery-y-common-radios.html">gallery-y-common-radios</a></li>
+            
+                <li><a href="../modules/gallery-y-common-selects.html">gallery-y-common-selects</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: gallery-y-common-selects/js/gallery-y-common-selects.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * Utility to generate base markup to give a skin or different look and feel to &lt;code&gt;select&lt;/code&gt; tags
+ *
+ * @class Selects
+ * @namespace Common
+ * @extends Base
+ * @module gallery-y-common-selects
+ * @constructor
+ */
+
+Y.namespace(&#x27;Common&#x27;);
+
+/**
+ * Helper event that can be fired when object is instanced to refresh all the  selects associated to component instance
+ *
+ * @event refresh 
+ */
+var EVT_REFRESH = &#x27;refresh&#x27;;
+
+Y.Common.Selects = Y.Base.create(&#x27;gallery-y-common-selects&#x27;, Y.Base, [], {
+    initializer: function () {
+        this.syncUIComponents();
+    },
+    
+    /**
+     * Iterates over all the selects and adds the respective markup and attaches events
+     *
+     * @method syncUIComponents
+     */
+    syncUIComponents: function () {
+        var me = this;
+        Y.all(this.get(&#x27;selectFieldSelector&#x27;)).each(function (node, index) {
+            var parent = node.get(&#x27;parentNode&#x27;);
+            if (!parent.hasClass(me.get(&#x27;containerClass&#x27;))) {
+                parent.addClass(me.get(&#x27;containerClass&#x27;));
+                parent.prepend(me.get(&#x27;maskHtml&#x27;));
+                me.bindSelect(parent);
+            }
+        });
+    },
+
+    bindSelect: function (node) {
+        var me = this;
+        var select = node.one(&#x27;select&#x27;);
+        var mask = node.one(this.get(&#x27;maskSelector&#x27;));
+        mask.set(&#x27;text&#x27;, me.getOptionText(select));
+        this.on(EVT_REFRESH, function () {
+            mask.set(&#x27;text&#x27;, me.getOptionText(select));
+        });
+        select.on(&#x27;change&#x27;, function (e) {
+            var optionText = me.getOptionText(select);
+            mask.set(&#x27;text&#x27;, optionText);
+        });
+    },
+
+    getOptionText: function (node) {
+        var checkedOpt = node.one(&#x27;option:checked&#x27;);
+        var text = &#x27;&#x27;;
+        if (checkedOpt) {
+            text = checkedOpt.get(&#x27;text&#x27;);
+        }
+        return text;
+    }
+
+
+}, {
+    ATTRS: {
+        /**
+         * Select tag field selector
+         *
+         * @attribute selectFieldSelector
+         * @type String
+         * @default &#x27;select&#x27;
+         */
+        selectFieldSelector: {
+            value: &#x27;select&#x27;
+        },
+
+        /**
+         * Select tag container class
+         *
+         * @attribute containerClass
+         * @type String
+         * @default &#x27;custom-select&#x27;
+         */
+        containerClass: {
+            value: &#x27;custom-select&#x27;
+        },
+
+        /**
+         * Mask node selector
+         *
+         * @attribute maskSelector
+         * @type String
+         * @default &#x27;.custom-select-mask&#x27;
+         */
+        maskSelector: {
+            value: &#x27;.custom-select-mask&#x27;
+        },
+
+
+        /**
+         * Mask html
+         *
+         * @attribute maskHtml
+         * @type String
+         * @default &#x27;&lt;span class=&quot;custom-select-mask&quot;&gt;&lt;/span&gt;&#x27;
+         */
+        maskHtml: {
+            value: &#x27;&lt;span class=&quot;custom-select-mask&quot;&gt;&lt;/span&gt;&#x27;
+        }
+    }
+});
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
