@@ -24,7 +24,7 @@
             <div id="main">
                 <div class="content"><div class="intro">
     <p>
-    Selects module provides the capability to add required markup for selects fields to be skinned, in that way select tag default look and feel can be customized
+    Radios module provides a helper to style radio tags as much custom as possible adding extra markup to make easy customize look and feel
     </p>
 </div>
 
@@ -63,11 +63,19 @@ documentation for the <a href="http://127.0.0.1:5000/docs/yui/index.html">YUI Gl
 
 <h2 id="description">Description</h2>
 
-<p>*Module Description Goes Here*</p>
+<p>Use this module is as simple as adding the following code, the rest is done with css and html, please check full example:</p>
 
-<code>&#x60;</code>
-//Module example code
-<code>&#x60;</code></div>
+<pre class="code prettyprint">YUI().use(&#x27;gallery-y-common-radios&#x27;, function(Y) {
+
+    &#x2F;* initializes radio buttons *&#x2F;
+    new Y.Common.Radios();
+
+});</pre>
+
+
+<h2 id="api-docs">API Docs</h2>
+
+<p>For detailed explanation of this component, default values and constructor arguments check <a href="../../api/classes/Common.Radios.html">api docs</a></p></div>
             </div>
         </div>
 
@@ -87,6 +95,9 @@ documentation for the <a href="http://127.0.0.1:5000/docs/yui/index.html">YUI Gl
 <li>
 <a href="index.html#description">Description</a>
 </li>
+<li>
+<a href="index.html#api-docs">API Docs</a>
+</li>
 </ul>
                         </div>
                     </div>
@@ -100,6 +111,12 @@ documentation for the <a href="http://127.0.0.1:5000/docs/yui/index.html">YUI Gl
 
                         <div class="bd">
                             <ul class="examples">
+                                
+                                    
+                                        <li data-description="The following example shows how to make work the radios skinning component">
+                                            <a href="basic-sample.html">Basic Example</a>
+                                        </li>
+                                    
                                 
                             </ul>
                         </div>

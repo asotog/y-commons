@@ -29,12 +29,16 @@
     }
     /* select skin rules */
     .custom-select {
+        display: block;
+        position: relative;
+    }
+    
+    .custom-select .custom-select-mask {
         background: url("../../tests/gallery-y-common-selects/tests/images/select-bg.png") right;
         border: rgb(204, 204, 204) solid 1px;
         display: block;
         font-family: Helvetica;
         padding: 5px;
-        position: relative;
     }
     
     .custom-select,
@@ -43,7 +47,13 @@
     }
     
     .custom-select select {
+        border: 1px solid rgb(202, 202, 202);
+        height: 30px;
         opacity:0;
+        /* IE 8 opacity */
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        /* IE 7 opacity */
+        filter: alpha(opacity=0);
         position:absolute;
         top:0;
         left:0;
@@ -76,13 +86,14 @@
 
 <h2 id="basic-example">Basic Example</h2>
 
-<p>This component relies on css provided to give the look and feel and also need to follow the markup structure as the following section defines"</p>
+<p>This component relies on css provided to give the look and feel and also need to follow the markup structure as the following section defines, and js will look over all the select tags adding the extra functionality:</p>
 
 <h3 id="html">HTML</h3>
 <pre class="code prettyprint">&lt;!-- component include  --&gt;
 &lt;script src=&quot;&#x2F;build&#x2F;gallery-y-common-selects&#x2F;gallery-y-common-selects.js&quot;&gt;&lt;&#x2F;script&gt;
 
 &lt;label&gt;Colors:&lt;&#x2F;label&gt;
+&lt;!-- required html structure, span or other tag to wrap select tag --&gt;
 &lt;span&gt;
     &lt;select&gt;
         &lt;option value=&quot;red&quot;&gt;Red&lt;&#x2F;option&gt;
@@ -91,6 +102,8 @@
     &lt;&#x2F;select&gt;
 &lt;&#x2F;span&gt;
 &lt;label&gt;Transport:&lt;&#x2F;label&gt;
+
+&lt;!-- required html structure, span or other tag to wrap select tag --&gt;
 &lt;span&gt;
     &lt;select&gt;
         &lt;option value=&quot;red&quot;&gt;Car&lt;&#x2F;option&gt;
@@ -101,14 +114,18 @@
 
 
 <h3 id="css">CSS</h3>
-<pre class="code prettyprint">&#x2F;* select skin styles *&#x2F;
+<pre class="code prettyprint">&#x2F;* select skin rules *&#x2F;
 .custom-select {
-    background: url(..&#x2F;..&#x2F;tests&#x2F;images&#x2F;select-bg.png) right;
+    display: block;
+    position: relative;
+}
+
+.custom-select .custom-select-mask {
+    background: url(..&#x2F;..&#x2F;tests&#x2F;gallery-y-common-selects&#x2F;tests&#x2F;images&#x2F;select-bg.png) right;
     border: rgb(204, 204, 204) solid 1px;
     display: block;
     font-family: Helvetica;
     padding: 5px;
-    position: relative;
 }
 
 .custom-select,
@@ -117,10 +134,16 @@
 }
 
 .custom-select select {
-    opacity:0;
+    border: 1px solid rgb(202, 202, 202);
+    height: 30px;
     position:absolute;
     top:0;
     left:0;
+     opacity:0;
+    &#x2F;* IE 8 opacity *&#x2F;
+    -ms-filter: &quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;
+    &#x2F;* IE 7 opacity *&#x2F;
+    filter: alpha(opacity=0);
 }</pre>
 
 
