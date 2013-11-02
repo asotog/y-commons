@@ -125,4 +125,4 @@ Y.Common.Radios = Y.Base.create('gallery-y-common-radios', Y.Base, [], {
     }
 });
 
-}, '@VERSION@', {"requires": ["yui-base", "base-build"]});
+}, '@VERSION@', {"requires": ["yui-base", "base-build", "node"]});

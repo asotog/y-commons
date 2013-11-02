@@ -2,7 +2,8 @@
     "gallery-y-common-radios": {
         "requires": [
             "yui-base",
-            "base-build"
+            "base-build",
+            "node"
         ]
     }
 }

@@ -1,0 +1,144 @@
+<script src="/build/gallery-y-common-selects/gallery-y-common-selects.js"></script>
+<style>
+    #container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    /* select skin rules */
+    .custom-select {
+        display: block;
+        position: relative;
+    }
+    
+    .custom-select .custom-select-mask {
+        background: url(../../tests/gallery-y-common-selects/tests/images/select-bg.png) right;
+        border: rgb(204, 204, 204) solid 1px;
+        display: block;
+        font-family: Helvetica;
+        padding: 5px;
+    }
+    
+    .custom-select,
+    .custom-select select {
+        width: 70px;
+    }
+    
+    .custom-select select {
+        border: 1px solid rgb(202, 202, 202);
+        height: 30px;
+        opacity:0;
+        /* IE 8 opacity */
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+        /* IE 7 opacity */
+        filter: alpha(opacity=0);
+        position:absolute;
+        top:0;
+        left:0;
+    }
+</style>
+<div class="intro">
+    <p>
+    {{description}}
+    </p>
+</div>
+
+<div id="container">
+    <label>Colors:</label>
+    <span>
+        <select>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+            <option value="yellow">Yellow</option>
+        </select>
+    </span>
+    <label>Transport:</label>
+    <span>
+        <select>
+            <option value="red">Car</option>
+            <option value="blue">Bus</option>
+            <option value="yellow">Airplane</option>
+        </select>
+    </span>
+</div>
+
+<h2>Basic Example</h2>
+
+<p>This component relies on css provided to give the look and feel and also need to follow the markup structure as the following section defines, and js will look over all the select tags adding the extra functionality:</p>
+
+<h3>HTML</h3>
+```
+<!-- component include  -->
+<script src="/build/gallery-y-common-selects/gallery-y-common-selects.js"></script>
+
+<label>Colors:</label>
+<!-- required html structure, span or other tag to wrap select tag -->
+<span>
+    <select>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+        <option value="yellow">Yellow</option>
+    </select>
+</span>
+<label>Transport:</label>
+
+<!-- required html structure, span or other tag to wrap select tag -->
+<span>
+    <select>
+        <option value="red">Car</option>
+        <option value="blue">Bus</option>
+        <option value="yellow">Airplane</option>
+    </select>
+</span>
+```
+
+<h3>CSS</h3>
+```
+/* select skin rules */
+.custom-select {
+    display: block;
+    position: relative;
+}
+
+.custom-select .custom-select-mask {
+    background: url(../../tests/gallery-y-common-selects/tests/images/select-bg.png) right;
+    border: rgb(204, 204, 204) solid 1px;
+    display: block;
+    font-family: Helvetica;
+    padding: 5px;
+}
+
+.custom-select,
+.custom-select select {
+    width: 70px;
+}
+
+.custom-select select {
+    border: 1px solid rgb(202, 202, 202);
+    height: 30px;
+    position:absolute;
+    top:0;
+    left:0;
+     opacity:0;
+    /* IE 8 opacity */
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    /* IE 7 opacity */
+    filter: alpha(opacity=0);
+}
+```
+
+<h3>Javascript</h3>
+```
+YUI().use('gallery-y-common-selects', function(Y) {
+    
+    new Y.Common.Selects();
+
+});
+```
+
+
+<script>
+    YUI({{{yuiConfig}}}).use('gallery-y-common-selects', function(Y) {
+        new Y.Common.Selects();
+
+    });
+</script>

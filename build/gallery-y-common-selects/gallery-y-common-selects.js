@@ -114,4 +114,4 @@ Y.Common.Selects = Y.Base.create('gallery-y-common-selects', Y.Base, [], {
     }
 });
 
-}, '@VERSION@', {"requires": ["yui-base", "base-build"]});
+}, '@VERSION@', {"requires": ["yui-base", "base-build", "node"]});

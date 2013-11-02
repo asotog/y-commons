@@ -1,0 +1,121 @@
+<script src="/build/gallery-y-common-radios/gallery-y-common-radios.js"></script>
+<style>
+    #container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    
+    
+    /* radio skin rules */
+    .custom-radio-buttons .radio {
+        position: relative;
+        display: block;
+    }
+    
+    .custom-radio-buttons .radio-mask {
+        background: url(../../tests/gallery-y-common-radios/tests/images/radio-bg.png) 0px -17px;
+        display: block;
+        height: 17px;
+        width: 17px;
+        margin: 4px 10px 0 0;
+    }
+    
+    .custom-radio-buttons .radio-mask.checked {
+        background-position: 0px 0px;
+    }
+    
+    .custom-radio-buttons input[type="radio"] {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        opacity: 0;
+    }
+    
+</style>
+<div class="intro">
+    <p>
+    {{description}}
+    </p>
+</div>
+
+<div id="container">
+    <span class="custom-radio-buttons">
+        <span>
+            <input name="gender" type="radio" value="M">
+        </span>
+        <label>Male</label>
+        
+        <span>
+            <input name="gender" type="radio" value="F">
+        </span>
+        <label>Female</label>
+    </span>
+</div>
+
+<h2>Basic Example</h2>
+
+<p>This component relies on css provided to give the look and feel and also need to follow the markup structure as the following section defines, and js will look over all the radio tags adding the extra functionality:</p>
+
+<h3>HTML</h3>
+```
+<!-- component include  -->
+<script src="/build/gallery-y-common-selects/gallery-y-common-radios.js"></script>
+
+
+<span class="custom-radio-buttons">
+    <span>
+        <input name="gender" type="radio" value="M">
+    </span>
+    <label>Male</label>
+    
+    <span>
+        <input name="gender" type="radio" value="F">
+    </span>
+    <label>Female</label>
+</span>
+```
+
+<h3>CSS</h3>
+```
+/* radio skin rules */
+.custom-radio-buttons .radio {
+    position: relative;
+    display: block;
+}
+
+.custom-radio-buttons .radio-mask {
+    background: url(../../tests/gallery-y-common-radios/tests/images/radio-bg.png) 0px -17px;
+    display: block;
+    height: 17px;
+    width: 17px;
+    margin: 4px 10px 0 0;
+}
+
+.custom-radio-buttons .radio-mask.checked {
+    background-position: 0px 0px;
+}
+
+.custom-radio-buttons input[type="radio"] {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+}
+```
+
+<h3>Javascript</h3>
+```
+YUI().use('gallery-y-common-radios', function(Y) {
+    
+    new Y.Common.Radios();
+
+});
+```
+
+
+<script>
+    YUI({{{yuiConfig}}}).use('gallery-y-common-radios', function(Y) {
+        new Y.Common.Radios();
+
+    });
+</script>

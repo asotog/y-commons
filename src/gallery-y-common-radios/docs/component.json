@@ -1,11 +1,18 @@
 {
     "name"       : "gallery-y-common-radios",
     "displayName": "Gallery: gallery-y-common-radios",
-    "description": "*Summary Goes Here*",
+    "description": "Radios module provides a helper to style radio tags as much custom as possible adding extra markup to make easy customize look and feel",
     "author"     : [ "asotog88" ],
     "use"        : [ "gallery-y-common-radios" ],
 
     "tags": [ "gallery" ],
 
-    "examples": []
+    "examples": [{
+        "name": "basic-sample",
+        "displayName": "Basic Example",
+        "description": "The following example shows how to make work the radios skinning component"
+    }],
+    
+    "apiDocsUrl": "/api/classes/Common.Radios.html",
+    "yuiConfig": "{base: 'http://yui.yahooapis.com/3.13.0/build/',comboBase: 'http://yui.yahooapis.com/combo?',root: '3.13.0/build/'}"
 }

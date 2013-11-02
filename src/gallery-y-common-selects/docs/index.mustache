@@ -1,6 +1,6 @@
 <div class="intro">
     <p>
-    *Summary Goes Here*
+    {{description}}
     </p>
 </div>
 
@@ -8,9 +8,18 @@
 
 <h2>Description</h2>
 
-<p>*Module Description Goes Here*</p>
+<p>Use this module is as simple as adding the following code, the rest is done with css and html, please check full example:</p>
 
 ```
-//Module example code
+YUI().use('gallery-y-common-selects', function(Y) {
+
+    /* initializes selects */
+    new Y.Common.Selects();
+
+});
 ```
+
+<h2>API Docs</h2>
+
+<p>For detailed explanation of this component, default values and constructor arguments check <a href="{{{apiDocsUrl}}">api docs</a></p>
 
