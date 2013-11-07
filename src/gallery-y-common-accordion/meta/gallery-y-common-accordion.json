@@ -1,0 +1,8 @@
+{
+    "gallery-y-common-accordion": {
+        "requires": [
+            "widget"
+        ],
+        "skinnable": true
+    }
+}

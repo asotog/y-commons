@@ -1,0 +1,11 @@
+{
+    "name"       : "gallery-y-common-accordion",
+    "displayName": "Gallery: gallery-y-common-accordion",
+    "description": "*Summary Goes Here*",
+    "author"     : [ "asotog88" ],
+    "use"        : [ "gallery-y-common-accordion" ],
+
+    "tags": [ "gallery" ],
+
+    "examples": []
+}

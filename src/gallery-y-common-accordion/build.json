@@ -1,0 +1,10 @@
+{
+    "name": "gallery-y-common-accordion",
+    "builds": {
+        "gallery-y-common-accordion": {
+            "jsfiles": [
+                "js/gallery-y-common-accordion.js"
+            ]
+        }
+    }
+}
