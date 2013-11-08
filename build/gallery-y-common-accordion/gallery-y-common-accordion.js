@@ -208,4 +208,4 @@ Y.Common.Accordion = Y.Base.create('gallery-y-common-accordion', Y.Widget, [], {
     }
 });
 
-}, '@VERSION@', {"requires": ["widget", "base", "node", "node-event-delegate", "transition"], "skinnable": true});
+}, '@VERSION@', {"requires": ["widget", "base", "node", "node-event-delegate", "transition"], "skinnable": false});

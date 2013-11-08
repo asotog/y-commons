@@ -7,6 +7,6 @@
             "node-event-delegate",
             "transition"
         ],
-        "skinnable": true
+        "skinnable": false
     }
 }
