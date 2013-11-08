@@ -1,8 +1,11 @@
 {
     "gallery-y-common-compound-textfield": {
         "requires": [
-            "widget"
+            "widget",
+            "base",
+            "node",
+            "node-event-simulate"
         ],
-        "skinnable": true
+        "skinnable": false
     }
 }

@@ -1,3 +1,5 @@
+YUI.add('gallery-y-common-compound-textfield', function (Y, NAME) {
+
 /**
  * This module is a widget that syncs multiple fields into one field usually a hidden field to store a compound value
  * for example a social security number or phone number where usually needs like 3 different fields
@@ -148,3 +150,5 @@ Y.Common.CompoundTextField = Y.Base.create('gallery-y-common-compound-textfield'
         }
     }
 });
+
+}, '@VERSION@', {"requires": ["widget", "base", "node", "node-event-simulate"], "skinnable": false});

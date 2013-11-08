@@ -3,17 +3,50 @@
 <head>
     <title>gallery-y-common-compound-textfield</title>
     <script src="/build/yui/yui.js"></script>
+    <script src="/build/gallery-y-common-compound-textfield/gallery-y-common-compound-textfield.js"></script>
     <script src="js/tests.js"></script>
     <meta charset="utf-8" />
+    <style>
+        .compound-text-field[maxlength="3"] {
+            width: 25px;
+        }
+        .compound-text-field[maxlength="4"] {
+            width: 30px;
+        }
+    </style>
 </head>
 <body class="yui3-skin-sam">
+    <div id="container">
+        <div id="phone-container1">
+            <input type="text" class="compound-text-field" maxlength="3">
+            <input type="text" class="compound-text-field" maxlength="3">
+            <input type="text" class="compound-text-field" maxlength="4">
+            <input type="hidden" class="main-compound-field" value="1113335555">
+        </div>
+        
+        <div id="phone-container2">
+            <input type="text" class="compound-text-field" maxlength="3">
+            <input type="text" class="compound-text-field" maxlength="3">
+            <input type="text" class="compound-text-field" maxlength="4">
+            <input type="hidden" class="main-compound-field" value="111-333-5555">
+        </div>
+    </div>
 <div id="logger"></div>
 
 <script>
 YUI({
     coverage: ['gallery-y-common-compound-textfield'],
     filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
-}).use('test-console', 'test', 'module-tests', function(Y) {
+}).use('test-console', 'test', 'module-tests', 'gallery-y-common-compound-textfield', function(Y) {
+    
+    new Y.Common.CompoundTextField({
+        srcNode: '#phone-container1'
+    }).render();
+    
+    new Y.Common.CompoundTextField({
+        srcNode: '#phone-container2',
+        separator: '-'
+    }).render();
     
     (new Y.Test.Console()).render('#logger');
 
