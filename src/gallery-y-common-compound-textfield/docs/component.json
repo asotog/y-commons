@@ -1,0 +1,11 @@
+{
+    "name"       : "gallery-y-common-compound-textfield",
+    "displayName": "Gallery: gallery-y-common-compound-textfield",
+    "description": "*Summary Goes Here*",
+    "author"     : [ "asotog88" ],
+    "use"        : [ "gallery-y-common-compound-textfield" ],
+
+    "tags": [ "gallery" ],
+
+    "examples": []
+}

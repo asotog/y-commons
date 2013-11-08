@@ -1,0 +1,8 @@
+{
+    "gallery-y-common-compound-textfield": {
+        "requires": [
+            "widget"
+        ],
+        "skinnable": true
+    }
+}

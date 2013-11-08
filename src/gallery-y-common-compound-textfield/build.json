@@ -1,0 +1,10 @@
+{
+    "name": "gallery-y-common-compound-textfield",
+    "builds": {
+        "gallery-y-common-compound-textfield": {
+            "jsfiles": [
+                "js/gallery-y-common-compound-textfield.js"
+            ]
+        }
+    }
+}
