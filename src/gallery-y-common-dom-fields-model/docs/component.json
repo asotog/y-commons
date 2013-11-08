@@ -1,0 +1,11 @@
+{
+    "name"       : "gallery-y-common-dom-fields-model",
+    "displayName": "Gallery: gallery-y-common-dom-fields-model",
+    "description": "*Summary Goes Here*",
+    "author"     : [ "asotog88" ],
+    "use"        : [ "gallery-y-common-dom-fields-model" ],
+
+    "tags": [ "gallery" ],
+
+    "examples": []
+}

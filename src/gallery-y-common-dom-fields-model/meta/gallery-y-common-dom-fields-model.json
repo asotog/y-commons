@@ -1,0 +1,7 @@
+{
+    "gallery-y-common-dom-fields-model": {
+        "requires": [
+            "yui-base"
+        ]
+    }
+}

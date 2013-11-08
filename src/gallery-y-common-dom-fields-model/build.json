@@ -1,0 +1,10 @@
+{
+    "name": "gallery-y-common-dom-fields-model",
+    "builds": {
+        "gallery-y-common-dom-fields-model": {
+            "jsfiles": [
+                "js/gallery-y-common-dom-fields-model.js"
+            ]
+        }
+    }
+}
