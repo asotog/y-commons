@@ -1,7 +1,11 @@
 {
     "gallery-y-common-accordion": {
         "requires": [
-            "widget"
+            "widget",
+            "base",
+            "node",
+            "node-event-delegate",
+            "transition"
         ],
         "skinnable": true
     }

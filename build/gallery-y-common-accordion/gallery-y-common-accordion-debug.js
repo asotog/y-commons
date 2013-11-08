@@ -1,3 +1,5 @@
+YUI.add('gallery-y-common-accordion', function (Y, NAME) {
+
 /**
  * This module is a widget that helps to render an accordion
  *
@@ -205,3 +207,5 @@ Y.Common.Accordion = Y.Base.create('gallery-y-common-accordion', Y.Widget, [], {
         }
     }
 });
+
+}, '@VERSION@', {"requires": ["widget", "base", "node", "node-event-delegate", "transition"], "skinnable": true});

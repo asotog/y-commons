@@ -1,25 +1,92 @@
 <!doctype html>
 <html>
-<head>
-    <title>gallery-y-common-accordion</title>
-    <script src="/build/yui/yui.js"></script>
-    <script src="js/tests.js"></script>
-    <meta charset="utf-8" />
-</head>
-<body class="yui3-skin-sam">
-<div id="logger"></div>
-
-<script>
-YUI({
-    coverage: ['gallery-y-common-accordion'],
-    filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
-}).use('test-console', 'test', 'module-tests', function(Y) {
     
-    (new Y.Test.Console()).render('#logger');
+    <head>
+        <title>gallery-y-common-accordion</title>
+        <script src="/build/yui/yui.js"></script>
+        <script src="/build/gallery-y-common-accordion/gallery-y-common-accordion.js"></script>
+        <script src="js/tests.js"></script>
+        <meta charset="utf-8" />
+        <style>
+            .accordion-item-content, .accordion-item-content.hide {
+                display: none;
+            }
+            .accordion-item-content.show {
+                display: block;
+            }
+        </style>
+    </head>
+    
+    <body class="yui3-skin-sam">
+        <div id="container">
+            <div id="sample-accordion1">
+                <div class="accordion-item">
+                    <a href="" class="accordion-item-link">Test</a>
+                    <div class="accordion-item-content">test</div>
+                </div>
+                <div class="accordion-item">
+                    <a href="" class="accordion-item-link">Test</a>
+                    <div class="accordion-item-content">test</div>
+                </div>
+                <div class="accordion-item">
+                    <a href="" class="accordion-item-link">Test</a>
+                    <div class="accordion-item-content"></div>
+                </div>
+                <div class="accordion-item">
+                    <a href="" class="accordion-item-link">Test</a>
+                    <div class="accordion-item-content">test</div>
+                </div>
+            </div>
+            
+            <hr>
+            
+            
+            <div id="sample-accordion2">
+                <div class="accordion-item">
+                    <a href="" class="accordion-item-link">Test</a>
+                    <div class="accordion-item-content">test</div>
+                </div>
+                <div class="accordion-item">
+                    <a href="" class="accordion-item-link">Test</a>
+                    <div class="accordion-item-content">test</div>
+                </div>
+                <div class="accordion-item">
+                    <a href="" class="accordion-item-link">Test</a>
+                    <div class="accordion-item-content"></div>
+                </div>
+                <div class="accordion-item">
+                    <a href="" class="accordion-item-link">Test</a>
+                    <div class="accordion-item-content">test</div>
+                </div>
+            </div>
+           
+        </div>
+        <div id="logger"></div>
+        <script>
+            YUI({
+                coverage: ['gallery-y-common-accordion'],
+                filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
+            }).use('test-console', 'test', 'module-tests', 'gallery-y-common-accordion', function(Y) {
 
-    Y.Test.Runner.setName('gallery-y-common-accordion');
-    Y.Test.Runner.run();
-});
-</script>
-</body>
+                var acc = new Y.Common.Accordion({
+                    srcNode: '#sample-accordion1'
+                }).render();
+                
+                acc.on('itemShown', function(e) {
+                    console.info(e.node);
+                });
+                
+                new Y.Common.Accordion({
+                    srcNode: '#sample-accordion2',
+                    animated: false
+                }).render();
+
+                (new Y.Test.Console()).render('#logger');
+
+                Y.Test.Runner.setName('gallery-y-common-accordion');
+                Y.Test.Runner.run();
+            });
+        </script>
+    </body>
+
 </html>
