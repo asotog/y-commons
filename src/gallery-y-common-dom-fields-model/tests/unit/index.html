@@ -1,25 +1,74 @@
 <!doctype html>
 <html>
-<head>
-    <title>gallery-y-common-dom-fields-model</title>
-    <script src="/build/yui/yui.js"></script>
-    <script src="js/tests.js"></script>
-    <meta charset="utf-8" />
-</head>
-<body class="yui3-skin-sam">
-<div id="logger"></div>
-
-<script>
-YUI({
-    coverage: ['gallery-y-common-dom-fields-model'],
-    filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
-}).use('test-console', 'test', 'module-tests', function(Y) {
     
-    (new Y.Test.Console()).render('#logger');
+    <head>
+        <title>gallery-y-common-dom-fields-model</title>
+        <script src="/build/yui/yui.js"></script>
+        <script src="/build/gallery-y-common-dom-fields-model/gallery-y-common-dom-fields-model.js"></script>
+        <script src="js/tests.js"></script>
+        <meta charset="utf-8" />
+    </head>
+    
+    <body class="yui3-skin-sam">
+        <div id="container">
+            <form id="registration-model1" action="#">
+                <label>username:</label>
+                <input type="text" name="username">
+                <br>
+                <label>address:</label>
+                <input type="text" name="address">
+                <br>
+                <label>gender:</label>
+                <br>
+                <span>
+                    <label>male</label>
+                    <input type="radio" name="gender" value="0">
+                    <label>female</label>
+                    <input type="radio" name="gender" value="1">
+                </span>
+                <br>
+                <label>sport:</label>
+                <select name="sport">
+                    <option value="">choose your favorite sport</option>
+                    <option value="tennis">tennis</option>
+                    <option value="soccer">soccer</option>
+                    <option value="basketball">basketball</option>
+                </select>
+                <br>
+                <label>receive news?:</label>
+                <input type="checkbox" name="receive_news">
+                <br>
+                <br>
+                <input class="save" type="button" value="save">
+                <input class="load"  type="button" value="load">
+                <input type="reset" value="clean">
+            </form>
+        </div>
+        <div id="logger"></div>
+        <script>
+            YUI({
+                coverage: ['gallery-y-common-dom-fields-model'],
+                filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
+            }).use('test-console', 'test', 'module-tests', 'gallery-y-common-dom-fields-model', function(Y) {
+                var containerNode = Y.one('#registration-model1');
+                var registrationModel = new Y.Common.DomFieldsModel({
+                    container: containerNode
+                });
+                containerNode.one('.save').on('click', function() {
+                    registrationModel.save();
+                });
+                
+                containerNode.one('.load').on('click', function() {
+                    registrationModel.load();
+                });
+                
 
-    Y.Test.Runner.setName('gallery-y-common-dom-fields-model');
-    Y.Test.Runner.run();
-});
-</script>
-</body>
+                (new Y.Test.Console()).render('#logger');
+
+                Y.Test.Runner.setName('gallery-y-common-dom-fields-model');
+                Y.Test.Runner.run();
+            });
+        </script>
+    </body>
+
 </html>

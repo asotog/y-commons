@@ -1,3 +1,5 @@
+YUI.add('gallery-y-common-dom-fields-model', function (Y, NAME) {
+
 Y.namespace('Common');
 
 Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.Base, [], {
@@ -206,3 +208,5 @@ Y.Common.DomFieldsModel.statics = {
     STATIC: 'static',
     RADIO: 'radio'
 };
+
+}, '@VERSION@', {"requires": ["yui-base", "base-build", "node", "node-event-simulate"]});
