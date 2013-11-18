@@ -36,7 +36,7 @@
                 </select>
                 <br>
                 <label>receive news?:</label>
-                <input type="checkbox" name="receive_news">
+                <input type="checkbox" name="receive_news" value="yes">
                 <br>
                 <br>
                 <input class="save" type="button" value="save">
@@ -56,6 +56,7 @@
                 });
                 containerNode.one('.save').on('click', function() {
                     registrationModel.save();
+                    console.info(registrationModel.retrieveModel());
                 });
                 
                 containerNode.one('.load').on('click', function() {

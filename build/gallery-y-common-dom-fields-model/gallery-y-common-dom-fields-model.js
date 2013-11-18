@@ -25,7 +25,7 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
         this.get('container').all(this.get('formFieldsSelector')).each(function (node) {
             var m = {};
             m['node'] = node;
-            if (node.get('type') == 'radio' || node.get('type') == 'checkbox') {
+            if (node.get('type') == Y.Common.DomFieldsModel.statics.RADIO || node.get('type') == Y.Common.DomFieldsModel.statics.CHECK) {
                 m['value'] = node.get('checked');
             } else {
                 m['value'] = node.get('value');
@@ -72,9 +72,14 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
      */
     _load: function () {
         Y.Array.each(this.get('model'), function (element) {
-            if (element.node.get('type') == 'radio' && element.value) {
-                element.node.simulate('click');
-            } else if (element.node.get('type') == 'checkbox') {
+            if (element.node.get('type') == Y.Common.DomFieldsModel.statics.RADIO) {
+                if (element.value) {
+                    element.node.simulate('click');
+                } else {
+                    element.node.simulate('change');
+                    return;
+                }
+            } else if (element.node.get('type') == Y.Common.DomFieldsModel.statics.CHECK) {
                 element.node.set('checked', element.value);
             } else {
                 element.node.set('value', element.value);
@@ -144,7 +149,35 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
     _getFieldSelector: function (config) {
         return (config.type == Y.Common.DomFieldsModel.RADIO) ? (config.fieldSelector + ':checked') : config.fieldSelector;
     },
-
+    
+    /**
+     * Converts list of model fields into object, key are going to be fields names, for model using configuration, keys are going to be using
+     * the defined one in configuration
+     * 
+     */
+    retrieveModel: function() {
+        if (this.get('configuration')) {
+            return this.get('model');
+        } else {
+            var processedModel = {};
+            var model = this.get('model');
+            for (var i = 0; i < model.length; i++) {
+                var field = model[i].node;
+                var fieldName = field.get('name');
+                if (field.get('type') == Y.Common.DomFieldsModel.statics.CHECK) {
+                    processedModel[fieldName] = field.get('checked');
+                } else if (field.get('type') == Y.Common.DomFieldsModel.statics.RADIO) {
+                    processedModel[fieldName] = (field.get('checked') ? field.get('value') : (processedModel[fieldName] ? processedModel[fieldName] : null));
+                } else {
+                    processedModel[fieldName] = field.get('value');
+                }
+                
+            }
+            return processedModel;
+        }
+        
+    },
+    
     destructor: function () {
 
     }
@@ -206,7 +239,8 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
 Y.Common.DomFieldsModel.statics = {
     LIST: 'list',
     STATIC: 'static',
-    RADIO: 'radio'
+    RADIO: 'radio',
+    CHECK: 'checkbox'
 };
 
 }, '@VERSION@', {"requires": ["yui-base", "base-build", "node", "node-event-simulate"]});
