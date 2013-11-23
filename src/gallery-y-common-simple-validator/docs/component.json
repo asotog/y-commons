@@ -1,0 +1,11 @@
+{
+    "name"       : "gallery-y-common-simple-validator",
+    "displayName": "Gallery: gallery-y-common-simple-validator",
+    "description": "*Summary Goes Here*",
+    "author"     : [ "asotog88" ],
+    "use"        : [ "gallery-y-common-simple-validator" ],
+
+    "tags": [ "gallery" ],
+
+    "examples": []
+}

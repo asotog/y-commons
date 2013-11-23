@@ -1,0 +1,10 @@
+{
+    "name": "gallery-y-common-simple-validator",
+    "builds": {
+        "gallery-y-common-simple-validator": {
+            "jsfiles": [
+                "js/gallery-y-common-simple-validator.js"
+            ]
+        }
+    }
+}
