@@ -1,5 +1,15 @@
 YUI.add('gallery-y-common-dom-fields-model', function (Y, NAME) {
 
+/**
+ * This module is an utility to retrieve all the form fields values
+ *
+ * @class DomFieldsModel
+ * @namespace Common
+ * @extends Base
+ * @module gallery-y-common-dom-fields-model
+ * @constructor
+ */
+
 Y.namespace('Common');
 
 Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.Base, [], {
@@ -7,10 +17,12 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
     initializer: function () {
         var me = this;
     },
-
+    
     /**
-     * Saves fields data into model
-     *
+     * Save form fields into object or array, object when is passed a configuration in the constructor or array if only container is passed as attribute
+     * 
+     * @method save
+     * 
      */
     save: function () {
         if (this.get('configuration')) {
@@ -19,7 +31,12 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
             this._save();
         }
     },
-
+    
+    /**
+     * 
+     * Iterates over all the fields and then generates a fields array with the value obtained
+     * 
+     */
     _save: function () {
         var model = [];
         this.get('container').all(this.get('formFieldsSelector')).each(function (node) {
@@ -53,8 +70,10 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
     },
 
     /**
-     * Loads data into fields
+     * Loads previously saved data into fields
      *
+     * @method load 
+     * 
      */
     load: function () {
         if (this.get('model')) {
@@ -154,6 +173,9 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
      * Converts list of model fields into object, key are going to be fields names, for model using configuration, keys are going to be using
      * the defined one in configuration
      * 
+     * @method retrieveModel
+     * @return {Object} Key/Value Object, key will be the field name
+     * 
      */
     retrieveModel: function() {
         if (this.get('configuration')) {
@@ -185,9 +207,11 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
     ATTRS: {
 
         /**
-         * Container of the fields
+         * Container/Form node of the fields
          *
+         * @attribute container
          * @type Y.Node
+         * @default null
          *
          */
         container: {
@@ -195,11 +219,15 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
         },
 
         /**
-         * Fields mapping configuration
+         * Fields mapping configuration, this configuration can be passed in constructor when specific fields structure is required,
+         * for example when there is a list of duplicable fields such a list of fields, this configuration tells the component how to parse this
+         * structure of fields
          *
          * @comment This is a sample, type can be list, static, or radio
          * 
-         * 
+         * @attribute configuration
+         * @type Array
+         * @default null
          * 
          */
         /*[{
@@ -223,13 +251,25 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
         /**
          * Model that is going to be populated or used to load fields
          *
+         * @attribute model
          * @type Object
+         * @default null
+         * 
          *
          */
         model: {
             value: null
         },
 
+        
+        /**
+         * Selector to retrieve the types of fields that are going to processed
+         * 
+         * @attribute formFieldsSelector
+         * @type String
+         * @default 'input[type="text"],input[type="hidden"],input[type="radio"],input[type="checkbox"],select'
+         * 
+         */ 
         formFieldsSelector: {
             value: 'input[type="text"],input[type="hidden"],input[type="radio"],input[type="checkbox"],select'
         }
