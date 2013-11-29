@@ -1,3 +1,7 @@
+body {
+    padding-top: 10%;
+}
+
 #container {
     margin: 0 auto;
     width: 50%;
