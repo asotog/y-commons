@@ -1,5 +1,12 @@
+
+
+
 body {
     padding-top: 10%;
+}
+
+ul {
+    padding: 0;
 }
 
 #container {
@@ -27,4 +34,26 @@ h1 {
 .section ul {
     padding: 0;
     list-style: none;
+    width: 100%;
+}
+
+/* media queries */
+
+@media all and (min-width: 481px) and (max-width: 860px), (max-width: 480px) {
+    #container {
+        width: 80%;
+    }
+}
+ 
+@media all and (max-width: 480px) {
+    
+    .section {
+        display: block;
+        width: 100%;
+    }
+
+    .section ul {
+        float: left;
+    }
+    
 }
