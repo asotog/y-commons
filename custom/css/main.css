@@ -1,0 +1,26 @@
+#container {
+    margin: 0 auto;
+    width: 50%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 222.6%;
+}
+
+.section {
+    list-style: none;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    width: 32%;
+}
+
+.section h2 i {
+    font-size: 500%;
+}
+
+.section ul {
+    padding: 0;
+    list-style: none;
+}
