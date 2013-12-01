@@ -24,7 +24,7 @@
             <div id="main">
                 <div class="content"><div class="intro">
     <p>
-    *Summary Goes Here*
+    The dom fields model is a component created to help mapping form/container fields to javascript object literal, in this way, fields names/values can be easily converted to json string
     </p>
 </div>
 
@@ -63,9 +63,56 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
 
 <h2 id="description">Description</h2>
 
-<p>*Module Description Goes Here*</p>
+<p>This component can retrieve the fields values from a set of fields wrapped by a form or other tag containing them, please see the full example:</p>
+<pre class="code prettyprint">&lt;form id=&quot;registration-model&quot; action=&quot;#&quot;&gt;
+    &lt;label&gt;username:&lt;&#x2F;label&gt;
+    &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;
+    &lt;br&gt;
+    &lt;label&gt;address:&lt;&#x2F;label&gt;
+    &lt;input type=&quot;text&quot; name=&quot;address&quot;&gt;
+    &lt;br&gt;
+    &lt;label&gt;gender:&lt;&#x2F;label&gt;
+    &lt;br&gt;
+    &lt;span&gt;
+        &lt;label&gt;male&lt;&#x2F;label&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;0&quot;&gt;
+        &lt;label&gt;female&lt;&#x2F;label&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;1&quot;&gt;
+    &lt;&#x2F;span&gt;
+    &lt;br&gt;
+    &lt;label&gt;sport:&lt;&#x2F;label&gt;
+    &lt;select name=&quot;sport&quot;&gt;
+        &lt;option value=&quot;&quot;&gt;choose your favorite sport&lt;&#x2F;option&gt;
+        &lt;option value=&quot;tennis&quot;&gt;tennis&lt;&#x2F;option&gt;
+        &lt;option value=&quot;soccer&quot;&gt;soccer&lt;&#x2F;option&gt;
+        &lt;option value=&quot;basketball&quot;&gt;basketball&lt;&#x2F;option&gt;
+    &lt;&#x2F;select&gt;
+    &lt;br&gt;
+    &lt;label&gt;receive news?:&lt;&#x2F;label&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;receive_news&quot; value=&quot;yes&quot;&gt;
+    &lt;br&gt;
+    &lt;br&gt;
+    &lt;input class=&quot;save&quot; type=&quot;button&quot; value=&quot;save&quot;&gt;
+    &lt;input class=&quot;load&quot;  type=&quot;button&quot; value=&quot;load&quot;&gt;
+    &lt;input type=&quot;reset&quot; value=&quot;clean&quot;&gt;
+&lt;&#x2F;form&gt;</pre>
 
-<pre class="code prettyprint">&#x2F;&#x2F;Module example code</pre>
+
+<p>In the javascript side, the object receives the container node that wraps the set of fields:</p>
+<pre class="code prettyprint">YUI().use(&#x27;gallery-y-common-dom-fields-model&#x27;, function(Y) {
+    var containerNode = Y.one(&#x27;#registration-model&#x27;);
+    var registrationModel = new Y.Common.DomFieldsModel({
+        container: containerNode
+    });
+    
+    &#x2F;* fields values can be persisted in the attribute called model please refer api docs for further details *&#x2F;
+    registrationModel.save();
+});</pre>
+
+
+<h2 id="api-docs">API Docs</h2>
+
+<p>For detailed explanation of this component, default values and constructor arguments check <a href="../../api/classes/Common.DomFieldsModel.html">api docs</a></p>
 
 
 </div>
@@ -88,6 +135,9 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
 <li>
 <a href="index.html#description">Description</a>
 </li>
+<li>
+<a href="index.html#api-docs">API Docs</a>
+</li>
 </ul>
                         </div>
                     </div>
@@ -101,6 +151,12 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
 
                         <div class="bd">
                             <ul class="examples">
+                                
+                                    
+                                        <li data-description="Simple example where form values are retrieved from fields, also can be loaded again">
+                                            <a href="basic-example.html">Basic Example</a>
+                                        </li>
+                                    
                                 
                             </ul>
                         </div>

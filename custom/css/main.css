@@ -37,6 +37,14 @@ h1 {
     width: 100%;
 }
 
+span.beta {
+    color: #999;
+    font-size: 9px;
+    text-decoration: none;
+    vertical-align: top;
+    font-style: italic;
+}
+
 /* media queries */
 
 @media all and (min-width: 481px) and (max-width: 860px), (max-width: 480px) {

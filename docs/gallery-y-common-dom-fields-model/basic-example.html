@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Example: Basic Example</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Maven+Pro:400,700">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <script src="../../build/yui/yui-min.js"></script>
+    
+</head>
+<body>
+
+<div id="doc">
+    <h1>Example: Basic Example</h1>
+
+    
+        <a href="basic-example.html#toc" class="jump">Jump to Table of Contents</a>
+    
+
+    <div class="yui3-g">
+        <div class="yui3-u-3-4">
+            <div id="main">
+                <div class="content"><script src="../../build/gallery-y-common-dom-fields-model/gallery-y-common-dom-fields-model.js"></script>
+<style>
+    #container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    
+    label {
+        display: inline-block;
+        font-weight: bold;
+        width: 112px;
+    }
+    
+    .radio-group {
+        padding: 0 0 0 118px;
+    }
+    
+    .radio-group label {
+        width: auto;
+    }
+    
+</style>
+<div class="intro">
+    <p>
+    Simple example where form values are retrieved from fields, also can be loaded again
+    </p>
+</div>
+
+<div id="container">
+    <form id="registration-model" action="#">
+        <label>username:</label>
+        <input type="text" name="username">
+        <br>
+        <label>address:</label>
+        <input type="text" name="address">
+        <br>
+        <label>gender:</label>
+        <br>
+        <span class="radio-group">
+            <label>male</label>
+            <input type="radio" name="gender" value="0">
+            <label>female</label>
+            <input type="radio" name="gender" value="1">
+        </span>
+        <br>
+        <label>sport:</label>
+        <select name="sport">
+            <option value="">choose your favorite sport</option>
+            <option value="tennis">tennis</option>
+            <option value="soccer">soccer</option>
+            <option value="basketball">basketball</option>
+        </select>
+        <br>
+        <label>receive news?:</label>
+        <input type="checkbox" name="receive_news" value="yes">
+        <br>
+        <br>
+        <input class="save" type="button" value="save">
+        <input class="load"  type="button" value="load">
+        <input type="reset" value="clean">
+    </form>
+</div>
+
+<h2 id="basic-example">Basic Example</h2>
+
+<p>This example will show how this component can retrieve the set of fields values and convert them into javascript object literal, also the load button will refill the fields after save and then reset button is clicked. </p>
+<p>If save button is clicked, the object result can be seen and how the fields are retrieved.</p>
+
+<h3 id="html">HTML</h3>
+
+<p>This markup is a regular form, each field name attribute will be used as the key of the model fields, also checkbox value will be <code>true</code> or <code>false</code>.</p>
+<pre class="code prettyprint">&lt;!-- component include  --&gt;
+&lt;script src=&quot;&#x2F;build&#x2F;gallery-y-common-dom-fields-model&#x2F;gallery-y-common-dom-fields-model.js&quot;&gt;&lt;&#x2F;script&gt;
+
+&lt;form id=&quot;registration-model&quot; action=&quot;#&quot;&gt;
+    &lt;label&gt;username:&lt;&#x2F;label&gt;
+    &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;
+    &lt;br&gt;
+    &lt;label&gt;address:&lt;&#x2F;label&gt;
+    &lt;input type=&quot;text&quot; name=&quot;address&quot;&gt;
+    &lt;br&gt;
+    &lt;label&gt;gender:&lt;&#x2F;label&gt;
+    &lt;br&gt;
+    &lt;span class=&quot;radio-group&quot;&gt;
+        &lt;label&gt;male&lt;&#x2F;label&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;0&quot;&gt;
+        &lt;label&gt;female&lt;&#x2F;label&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;1&quot;&gt;
+    &lt;&#x2F;span&gt;
+    &lt;br&gt;
+    &lt;label&gt;sport:&lt;&#x2F;label&gt;
+    &lt;select name=&quot;sport&quot;&gt;
+        &lt;option value=&quot;&quot;&gt;choose your favorite sport&lt;&#x2F;option&gt;
+        &lt;option value=&quot;tennis&quot;&gt;tennis&lt;&#x2F;option&gt;
+        &lt;option value=&quot;soccer&quot;&gt;soccer&lt;&#x2F;option&gt;
+        &lt;option value=&quot;basketball&quot;&gt;basketball&lt;&#x2F;option&gt;
+    &lt;&#x2F;select&gt;
+    &lt;br&gt;
+    &lt;label&gt;receive news?:&lt;&#x2F;label&gt;
+    &lt;input type=&quot;checkbox&quot; name=&quot;receive_news&quot; value=&quot;yes&quot;&gt;
+    &lt;br&gt;
+    &lt;br&gt;
+    &lt;input class=&quot;save&quot; type=&quot;button&quot; value=&quot;save&quot;&gt;
+    &lt;input class=&quot;load&quot;  type=&quot;button&quot; value=&quot;load&quot;&gt;
+    &lt;input type=&quot;reset&quot; value=&quot;clean&quot;&gt;
+&lt;&#x2F;form&gt;</pre>
+
+
+
+<h3 id="javascript">Javascript</h3>
+
+<p>Javascript part is simple, only need to provide the container <strong>(it can be the form node or any other dom element wrapping the fields)</strong> and component will do the rest, also as an example, the model is <a href="http://yuilibrary.com/yui/docs/json/">stringified</a> to show the result object:</p>
+<pre class="code prettyprint">YUI().use(&#x27;gallery-y-common-dom-fields-model&#x27;, &#x27;json-stringify&#x27;, function(Y) {
+        
+    var containerNode = Y.one(&#x27;#registration-model&#x27;);
+    var registrationModel = new Y.Common.DomFieldsModel({
+        container: containerNode
+    });
+    containerNode.one(&#x27;.save&#x27;).on(&#x27;click&#x27;, function() {
+        registrationModel.save();
+        var model = registrationModel.retrieveModel();
+        alert(Y.JSON.stringify(model));
+    });
+    
+    containerNode.one(&#x27;.load&#x27;).on(&#x27;click&#x27;, function() {
+        registrationModel.load();
+    });
+    
+
+});</pre>
+
+
+
+<script>
+    YUI({base: 'http://yui.yahooapis.com/3.13.0/build/',comboBase: 'http://yui.yahooapis.com/combo?',root: '3.13.0/build/'}).use('gallery-y-common-dom-fields-model', 'json-stringify', function(Y) {
+        
+        var containerNode = Y.one('#registration-model');
+        var registrationModel = new Y.Common.DomFieldsModel({
+            container: containerNode
+        });
+        containerNode.one('.save').on('click', function() {
+            registrationModel.save();
+            var model = registrationModel.retrieveModel();
+            alert(Y.JSON.stringify(model));
+        });
+        
+        containerNode.one('.load').on('click', function() {
+            registrationModel.load();
+        });
+        
+
+    });
+</script></div>
+            </div>
+        </div>
+
+        <div class="yui3-u-1-4">
+            <div class="sidebar">
+                
+                    <div id="toc" class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Table of Contents</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="toc">
+<li>
+<a href="basic-example.html#basic-example">Basic Example</a>
+<ul class="toc">
+<li>
+<a href="basic-example.html#html">HTML</a>
+</li>
+<li>
+<a href="basic-example.html#javascript">Javascript</a>
+</li>
+</ul>
+</li>
+</ul>
+                        </div>
+                    </div>
+                
+
+                
+                    <div class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Examples</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="examples">
+                                
+                                    
+                                        <li data-description="Simple example where form values are retrieved from fields, also can be loaded again">
+                                            <a href="basic-example.html">Basic Example</a>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </div>
+                    </div>
+                
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+
+</body>
+</html>
