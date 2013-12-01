@@ -1,0 +1,89 @@
+<script src="/build/gallery-y-common-compound-textfield/gallery-y-common-compound-textfield.js"></script>
+<style>
+    #container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    
+    .compound-text-field[maxlength="3"] {
+            width: 25px;
+    }
+    
+    .compound-text-field[maxlength="4"] {
+        width: 30px;
+    }
+    
+</style>
+<div class="intro">
+    <p>
+    {{description}}
+    </p>
+</div>
+
+<div id="container">
+    <div id="phone-container1">
+        <label>Phone:</label>
+        <input type="text" class="compound-text-field" maxlength="3">
+        <input type="text" class="compound-text-field" maxlength="3">
+        <input type="text" class="compound-text-field" maxlength="4">
+        <input type="hidden" class="main-compound-field" value=""> 
+        <span class="output"><strong>Hidden value:</strong> <span></span></span>
+    </div>
+</div>
+
+<h2>Basic Example</h2>
+
+<p>This component depends on the inputs provided using the repective classes that also can be easily modified, please check api docs for further details.</p>
+<p>If hidden field is already set the component will take its value and will set each of the compound fields:</p>
+
+<h3>HTML</h3>
+```
+<!-- component include  -->
+<script src="/build/gallery-y-common-compound-textfield/gallery-y-common-compound-textfield.js"></script>
+
+<div id="phone-container1">
+    <input type="text" class="compound-text-field" maxlength="3">
+    <input type="text" class="compound-text-field" maxlength="3">
+    <input type="text" class="compound-text-field" maxlength="4">
+    <input type="hidden" class="main-compound-field" value="">
+</div>
+```
+
+
+<h3>Javascript</h3>
+
+<p>Using <code>separator</code> attribute will split each value by using a sign:</p>
+```
+YUI().use('gallery-y-common-compound-textfield', function(Y) {
+    var compound = new Y.Common.CompoundTextField({
+        srcNode: '#phone-container1',
+        separator: '-'
+    }).render();
+    
+    
+    /* optional: just to show how the hiddent value is reflected */
+    var output = Y.one('#phone-container1 .output span');
+    
+    // optional: refresh output
+    compound.on('compoundValueChange', function(e) {
+        output.set('text', e.newVal);
+    });
+
+});
+```
+<script>
+    YUI({{{yuiConfig}}}).use('gallery-y-common-compound-textfield', function(Y) {
+        var compound = new Y.Common.CompoundTextField({
+            srcNode: '#phone-container1',
+            separator: '-'
+        }).render();
+        
+        var output = Y.one('#phone-container1 .output span');
+        
+        // refresh output
+        compound.on('compoundValueChange', function(e) {
+            output.set('text', e.newVal);
+        });
+
+    });
+</script>

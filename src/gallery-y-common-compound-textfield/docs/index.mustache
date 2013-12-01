@@ -1,6 +1,6 @@
 <div class="intro">
     <p>
-    *Summary Goes Here*
+    {{description}}
     </p>
 </div>
 
@@ -8,9 +8,33 @@
 
 <h2>Description</h2>
 
-<p>*Module Description Goes Here*</p>
+<p>Using this component, multiple fields can be unified in one single field, usually this field is a hidden field that contains the full value based on the rest of the text fields, as you can see in the markup below:</p>
+
 
 ```
-//Module example code
+<div id="phone-container1">
+    <input type="text" class="compound-text-field" maxlength="3">
+    <input type="text" class="compound-text-field" maxlength="3">
+    <input type="text" class="compound-text-field" maxlength="4">
+    <input type="hidden" class="main-compound-field" value="1113335555">
+</div>
 ```
+<p>The text fields class can be modified using the attribute <code>fieldsSelector</code>. Please see the api docs for further details.</p>
 
+<p>In javascript side need instantiate the component passing the srcNode of the fields container:</p>
+```
+YUI().use('gallery-y-common-compound-textfield', function(Y) {
+
+    /* initializes  the component */
+    new Y.Common.CompoundTextField({
+        srcNode: '#phone-container1'
+    }).render();
+
+});
+```
+Please check out the examples for implementation details.
+
+
+<h2>API Docs</h2>
+
+<p>For detailed explanation of this component, default values and constructor arguments check <a href="{{{apiDocsUrl}}">api docs</a></p>

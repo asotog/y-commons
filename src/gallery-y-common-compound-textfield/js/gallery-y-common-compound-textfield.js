@@ -40,6 +40,8 @@ Y.Common.CompoundTextField = Y.Base.create('gallery-y-common-compound-textfield'
         }, this.get('fieldsSelector'));
 
         this.get('srcNode').delegate('keyup', function (e) {
+            me.set('compoundValue', me.getCompoundValue());
+            mainField.simulate('change');
             me._autoTab(e.currentTarget);
         }, this.get('fieldsSelector'));
 

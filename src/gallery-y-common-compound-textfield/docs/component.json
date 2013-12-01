@@ -1,11 +1,22 @@
 {
     "name"       : "gallery-y-common-compound-textfield",
     "displayName": "Gallery: gallery-y-common-compound-textfield",
-    "description": "*Summary Goes Here*",
+    "description": "Compounds text field widget is a component to create a field that depends on multiple fields is the case sometimes of phones, social numbers or id numbers",
     "author"     : [ "asotog88" ],
     "use"        : [ "gallery-y-common-compound-textfield" ],
 
     "tags": [ "gallery" ],
 
-    "examples": []
+    "examples": [{
+        "name": "basic-example",
+        "displayName": "Basic Example",
+        "description": "The following example shows how to make work the compounds fields"
+    }, {
+        "name": "separator-example",
+        "displayName": "Using separator sign to format",
+        "description": "The following example shows how to make work the compounds fields using separator"
+    }],
+    
+    "apiDocsUrl": "/api/classes/Common.CompoundTextField.html",
+    "yuiConfig": "{base: 'http://yui.yahooapis.com/3.13.0/build/',comboBase: 'http://yui.yahooapis.com/combo?',root: '3.13.0/build/'}"
 }
