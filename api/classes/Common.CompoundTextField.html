@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Common.Radios - yogi doc server</title>
+    <title>Common.CompoundTextField - yogi doc server</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -30,8 +30,8 @@
     <h2 class="off-left">APIs</h2>
     <div id="api-tabview" class="tabview">
         <ul class="tabs">
-            <li><a href="Common.Radios.html#api-classes">Classes</a></li>
-            <li><a href="Common.Radios.html#api-modules">Modules</a></li>
+            <li><a href="Common.CompoundTextField.html#api-classes">Classes</a></li>
+            <li><a href="Common.CompoundTextField.html#api-modules">Modules</a></li>
         </ul>
 
         <div id="api-tabview-filter">
@@ -100,25 +100,25 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Common.Radios Class</h1>
+                        <h1>Common.CompoundTextField Class</h1>
 <div class="box meta">
     
 
     
         <div class="extends">
-            Extends Base
+            Extends Widget
         </div>
     
 
     
         <div class="foundat">
-            Defined in: <a href="../files/gallery-y-common-radios_js_gallery-y-common-radios.js.html#l1"><code>gallery-y-common-radios&#x2F;js&#x2F;gallery-y-common-radios.js:1</code></a>
+            Defined in: <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l1"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:1</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/gallery-y-common-radios.html">gallery-y-common-radios</a>
+            Module: <a href="../modules/gallery-y-common-compound-textfield.html">gallery-y-common-compound-textfield</a>
         
     
 
@@ -128,15 +128,16 @@
 
 
 <div class="box intro">
-    <p>Utility to generate base markup to give a skin or different look and feel to radio buttons tags</p>
+    <p>This module is a widget that syncs multiple fields into one field usually a hidden field to store a compound value
+for example a social security number or phone number where usually needs like 3 different fields</p>
 
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_Common.Radios" class="method item">
-    <h3 class="name"><code>Common.Radios</code></h3>
+        <div id="method_Common.CompoundTextField" class="method item">
+    <h3 class="name"><code>Common.CompoundTextField</code></h3>
 
     
         <span class="paren">()</span>
@@ -167,7 +168,7 @@
             
         
         
-        <a href="../files/gallery-y-common-radios_js_gallery-y-common-radios.js.html#l1"><code>gallery-y-common-radios&#x2F;js&#x2F;gallery-y-common-radios.js:1</code></a>
+        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l1"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:1</code></a>
         
         </p>
 
@@ -193,15 +194,15 @@
 
 <div id="classdocs" class="tabview">
     <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="Common.Radios.html#index">Index</a></li>
+        <li class="api-class-tab index"><a href="Common.CompoundTextField.html#index">Index</a></li>
 
         
+            <li class="api-class-tab methods"><a href="Common.CompoundTextField.html#methods">Methods</a></li>
         
         
-            <li class="api-class-tab attrs"><a href="Common.Radios.html#attrs">Attributes</a></li>
         
+            <li class="api-class-tab attrs"><a href="Common.CompoundTextField.html#attrs">Attributes</a></li>
         
-            <li class="api-class-tab events"><a href="Common.Radios.html#events">Events</a></li>
         
     </ul>
 
@@ -209,6 +210,28 @@
         <div id="index" class="api-class-tabpanel index">
             <h2 class="off-left">Item Index</h2>
 
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method">
+                                <a href="Common.CompoundTextField.html#method_format">format</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="Common.CompoundTextField.html#method_getCompoundValue">getCompoundValue</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
             
 
             
@@ -220,47 +243,236 @@
                     <ul class="index-list attrs extends">
                         
                             <li class="index-item attr">
-                                <a href="Common.Radios.html#attr_maskHtml">maskHtml</a>
+                                <a href="Common.CompoundTextField.html#attr_compoundValue">compoundValue</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="Common.Radios.html#attr_maskSelector">maskSelector</a>
+                                <a href="Common.CompoundTextField.html#attr_fieldsSelector">fieldsSelector</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="Common.Radios.html#attr_radioContainerClass">radioContainerClass</a>
+                                <a href="Common.CompoundTextField.html#attr_mainField">mainField</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="Common.Radios.html#attr_radioFieldSelector">radioFieldSelector</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="Common.Radios.html#attr_radioInputSelector">radioInputSelector</a>
+                                <a href="Common.CompoundTextField.html#attr_separator">separator</a>
                             </li>
                         
                     </ul>
                 </div>
             
 
-            
-                <div class="index-section events">
-                    <h3>Events</h3>
-
-                    <ul class="index-list events extends">
-                        
-                            <li class="index-item event">
-                                <a href="Common.Radios.html#event_refresh">refresh</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
             
         </div>
 
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_format" class="method item">
+    <h3 class="name"><code>format</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>text</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>separator</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l56"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:56</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Format string based on the configured compound text field but using a separator char</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">text</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Text to be formatted</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">separator</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Char that is going to be used as separator e.g: -, _, ...</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    
+                    <p>Formatted string</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getCompoundValue" class="method item">
+    <h3 class="name"><code>getCompoundValue</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l80"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:80</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets based on the compounds fields the main field compound value</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    
+                    <p>Compound value</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         
@@ -270,9 +482,9 @@
                 <h2 class="off-left">Attributes</h2>
 
                 
-                    <div id="attr_maskHtml" class="attr item">
-    <a name="config_maskHtml"></a> 
-    <h3 class="name"><code>maskHtml</code></h3>
+                    <div id="attr_compoundValue" class="attr item">
+    <a name="config_compoundValue"></a> 
+    <h3 class="name"><code>compoundValue</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
@@ -300,7 +512,7 @@
             
         
         
-        <a href="../files/gallery-y-common-radios_js_gallery-y-common-radios.js.html#l113"><code>gallery-y-common-radios&#x2F;js&#x2F;gallery-y-common-radios.js:113</code></a>
+        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l142"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:142</code></a>
         
         </p>
 
@@ -310,20 +522,18 @@
     </div>
 
     <div class="description">
-        <p>Mask html</p>
+        <p>Compound value</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;&lt;span class=&quot;radio-mask {checked}&quot;&gt;&lt;/span&#x27;</p>
-    
 
     
         <div class="emits box">
-            <h4>Fires event <code>maskHtmlChange</code></h4>
+            <h4>Fires event <code>compoundValueChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>maskHtml</code> is
+            Fires when the value for the configuration attribute <code>compoundValue</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -375,9 +585,9 @@
 </div>
 
                 
-                    <div id="attr_maskSelector" class="attr item">
-    <a name="config_maskSelector"></a> 
-    <h3 class="name"><code>maskSelector</code></h3>
+                    <div id="attr_fieldsSelector" class="attr item">
+    <a name="config_fieldsSelector"></a> 
+    <h3 class="name"><code>fieldsSelector</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
@@ -405,7 +615,7 @@
             
         
         
-        <a href="../files/gallery-y-common-radios_js_gallery-y-common-radios.js.html#l79"><code>gallery-y-common-radios&#x2F;js&#x2F;gallery-y-common-radios.js:79</code></a>
+        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l108"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:108</code></a>
         
         </p>
 
@@ -415,20 +625,20 @@
     </div>
 
     <div class="description">
-        <p>Mask node selector</p>
+        <p>Compounds fields selector</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;.radio-mask&#x27;</p>
+        <p><strong>Default:</strong> &#x27;.compound-text-field&#x27;</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>maskSelectorChange</code></h4>
+            <h4>Fires event <code>fieldsSelectorChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>maskSelector</code> is
+            Fires when the value for the configuration attribute <code>fieldsSelector</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -480,9 +690,9 @@
 </div>
 
                 
-                    <div id="attr_radioContainerClass" class="attr item">
-    <a name="config_radioContainerClass"></a> 
-    <h3 class="name"><code>radioContainerClass</code></h3>
+                    <div id="attr_mainField" class="attr item">
+    <a name="config_mainField"></a> 
+    <h3 class="name"><code>mainField</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
@@ -510,7 +720,7 @@
             
         
         
-        <a href="../files/gallery-y-common-radios_js_gallery-y-common-radios.js.html#l91"><code>gallery-y-common-radios&#x2F;js&#x2F;gallery-y-common-radios.js:91</code></a>
+        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l131"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:131</code></a>
         
         </p>
 
@@ -520,20 +730,20 @@
     </div>
 
     <div class="description">
-        <p>Radio button wrapper class</p>
+        <p>Main field selector, this field will contain the compound value</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;radio&#x27;</p>
+        <p><strong>Default:</strong> &#x27;.main-compound-field&#x27;</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>radioContainerClassChange</code></h4>
+            <h4>Fires event <code>mainFieldChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>radioContainerClass</code> is
+            Fires when the value for the configuration attribute <code>mainField</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -585,9 +795,9 @@
 </div>
 
                 
-                    <div id="attr_radioFieldSelector" class="attr item">
-    <a name="config_radioFieldSelector"></a> 
-    <h3 class="name"><code>radioFieldSelector</code></h3>
+                    <div id="attr_separator" class="attr item">
+    <a name="config_separator"></a> 
+    <h3 class="name"><code>separator</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
@@ -615,7 +825,7 @@
             
         
         
-        <a href="../files/gallery-y-common-radios_js_gallery-y-common-radios.js.html#l67"><code>gallery-y-common-radios&#x2F;js&#x2F;gallery-y-common-radios.js:67</code></a>
+        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l119"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:119</code></a>
         
         </p>
 
@@ -625,125 +835,21 @@
     </div>
 
     <div class="description">
-        <p>Radio buttons group container selector</p>
+        <p>Compound value separator, usual value is &#39;-&#39; as separator, to make hidden field contain compound values such as
+<code>901-234-678</code></p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;.custom-radio-buttons&#x27;</p>
+        <p><strong>Default:</strong> &#x27;&#x27;</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>radioFieldSelectorChange</code></h4>
+            <h4>Fires event <code>separatorChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>radioFieldSelector</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_radioInputSelector" class="attr item">
-    <a name="config_radioInputSelector"></a> 
-    <h3 class="name"><code>radioInputSelector</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/gallery-y-common-radios_js_gallery-y-common-radios.js.html#l102"><code>gallery-y-common-radios&#x2F;js&#x2F;gallery-y-common-radios.js:102</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Radio tag field selector</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &#x27;input[type=&quot;radio&quot;]&#x27;</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>radioInputSelectorChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>radioInputSelector</code> is
+            Fires when the value for the configuration attribute <code>separator</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -798,56 +904,6 @@
             </div>
         
 
-        
-            <div id="events" class="api-class-tabpanel">
-                <h2 class="off-left">Events</h2>
-
-                
-                    <div id="event_refresh" class="events item">
-    <h3 class="name"><code>refresh</code></h3>
-    <span class="type"></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/gallery-y-common-radios_js_gallery-y-common-radios.js.html#l13"><code>gallery-y-common-radios&#x2F;js&#x2F;gallery-y-common-radios.js:13</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Helper event that can be fired when object is instanced to refresh all the  radios associated to component instance</p>
-
-    </div>
-
-    
-
-
-    
-</div>
-
-                
-            </div>
         
     </div>
 </div>

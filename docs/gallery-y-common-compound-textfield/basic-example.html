@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Example: Basic Example</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Maven+Pro:400,700">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <script src="../../build/yui/yui-min.js"></script>
+    
+</head>
+<body>
+
+<div id="doc">
+    <h1>Example: Basic Example</h1>
+
+    
+        <a href="basic-example.html#toc" class="jump">Jump to Table of Contents</a>
+    
+
+    <div class="yui3-g">
+        <div class="yui3-u-3-4">
+            <div id="main">
+                <div class="content"><script src="../../build/gallery-y-common-compound-textfield/gallery-y-common-compound-textfield.js"></script>
+<style>
+    #container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    
+    .compound-text-field[maxlength="3"] {
+            width: 25px;
+    }
+    
+    .compound-text-field[maxlength="4"] {
+        width: 30px;
+    }
+    
+</style>
+<div class="intro">
+    <p>
+    The following example shows how to make work the compounds fields
+    </p>
+</div>
+
+<div id="container">
+    <div id="phone-container1">
+        <label>Phone:</label>
+        <input type="text" class="compound-text-field" maxlength="3">
+        <input type="text" class="compound-text-field" maxlength="3">
+        <input type="text" class="compound-text-field" maxlength="4">
+        <input type="hidden" class="main-compound-field" value=""> 
+        <span class="output"><strong>Hidden value:</strong> <span></span></span>
+    </div>
+</div>
+
+<h2 id="basic-example">Basic Example</h2>
+
+<p>This component depends on the inputs provided using the repective classes that also can be easily modified, please check api docs for further details.</p>
+<p>If hidden field is already set the component will take its value and will set each of the compound fields:</p>
+
+<h3 id="html">HTML</h3>
+<pre class="code prettyprint">&lt;!-- component include  --&gt;
+&lt;script src=&quot;&#x2F;build&#x2F;gallery-y-common-compound-textfield&#x2F;gallery-y-common-compound-textfield.js&quot;&gt;&lt;&#x2F;script&gt;
+
+&lt;div id=&quot;phone-container1&quot;&gt;
+    &lt;input type=&quot;text&quot; class=&quot;compound-text-field&quot; maxlength=&quot;3&quot;&gt;
+    &lt;input type=&quot;text&quot; class=&quot;compound-text-field&quot; maxlength=&quot;3&quot;&gt;
+    &lt;input type=&quot;text&quot; class=&quot;compound-text-field&quot; maxlength=&quot;4&quot;&gt;
+    &lt;input type=&quot;hidden&quot; class=&quot;main-compound-field&quot; value=&quot;&quot;&gt;
+&lt;&#x2F;div&gt;</pre>
+
+
+
+<h3 id="javascript">Javascript</h3>
+<pre class="code prettyprint">YUI().use(&#x27;gallery-y-common-compound-textfield&#x27;, function(Y) {
+    var compound = new Y.Common.CompoundTextField({
+        srcNode: &#x27;#phone-container1&#x27;
+    }).render();
+    
+    
+    &#x2F;* optional: just to show how the hiddent value is reflected *&#x2F;
+    var output = Y.one(&#x27;#phone-container1 .output span&#x27;);
+    
+    &#x2F;&#x2F; optional: refresh output
+    compound.on(&#x27;compoundValueChange&#x27;, function(e) {
+        output.set(&#x27;text&#x27;, e.newVal);
+    });
+
+});</pre>
+
+
+
+<script>
+    YUI({base: 'http://yui.yahooapis.com/3.13.0/build/',comboBase: 'http://yui.yahooapis.com/combo?',root: '3.13.0/build/'}).use('gallery-y-common-compound-textfield', function(Y) {
+        var compound = new Y.Common.CompoundTextField({
+            srcNode: '#phone-container1'
+        }).render();
+        
+        var output = Y.one('#phone-container1 .output span');
+        
+        // refresh output
+        compound.on('compoundValueChange', function(e) {
+            output.set('text', e.newVal);
+        });
+
+    });
+</script></div>
+            </div>
+        </div>
+
+        <div class="yui3-u-1-4">
+            <div class="sidebar">
+                
+                    <div id="toc" class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Table of Contents</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="toc">
+<li>
+<a href="basic-example.html#basic-example">Basic Example</a>
+<ul class="toc">
+<li>
+<a href="basic-example.html#html">HTML</a>
+</li>
+<li>
+<a href="basic-example.html#javascript">Javascript</a>
+</li>
+</ul>
+</li>
+</ul>
+                        </div>
+                    </div>
+                
+
+                
+                    <div class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Examples</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="examples">
+                                
+                                    
+                                        <li data-description="The following example shows how to make work the compounds fields">
+                                            <a href="basic-example.html">Basic Example</a>
+                                        </li>
+                                    
+                                
+                                    
+                                        <li data-description="The following example shows how to make work the compounds fields using separator">
+                                            <a href="separator-example.html">Using separator sign to format</a>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </div>
+                    </div>
+                
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+
+</body>
+</html>

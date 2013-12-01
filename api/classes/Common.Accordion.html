@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Common.Selects - yogi doc server</title>
+    <title>Common.Accordion - yogi doc server</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -30,8 +30,8 @@
     <h2 class="off-left">APIs</h2>
     <div id="api-tabview" class="tabview">
         <ul class="tabs">
-            <li><a href="Common.Selects.html#api-classes">Classes</a></li>
-            <li><a href="Common.Selects.html#api-modules">Modules</a></li>
+            <li><a href="Common.Accordion.html#api-classes">Classes</a></li>
+            <li><a href="Common.Accordion.html#api-modules">Modules</a></li>
         </ul>
 
         <div id="api-tabview-filter">
@@ -100,25 +100,25 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Common.Selects Class</h1>
+                        <h1>Common.Accordion Class</h1>
 <div class="box meta">
     
 
     
         <div class="extends">
-            Extends Base
+            Extends Widget
         </div>
     
 
     
         <div class="foundat">
-            Defined in: <a href="../files/gallery-y-common-selects_js_gallery-y-common-selects.js.html#l1"><code>gallery-y-common-selects&#x2F;js&#x2F;gallery-y-common-selects.js:1</code></a>
+            Defined in: <a href="../files/gallery-y-common-accordion_js_gallery-y-common-accordion.js.html#l1"><code>gallery-y-common-accordion&#x2F;js&#x2F;gallery-y-common-accordion.js:1</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/gallery-y-common-selects.html">gallery-y-common-selects</a>
+            Module: <a href="../modules/gallery-y-common-accordion.html">gallery-y-common-accordion</a>
         
     
 
@@ -128,15 +128,15 @@
 
 
 <div class="box intro">
-    <p>Utility to generate base markup to give a skin or different look and feel to <code>select</code> tags</p>
+    <p>This module is a widget that helps to render an accordion</p>
 
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_Common.Selects" class="method item">
-    <h3 class="name"><code>Common.Selects</code></h3>
+        <div id="method_Common.Accordion" class="method item">
+    <h3 class="name"><code>Common.Accordion</code></h3>
 
     
         <span class="paren">()</span>
@@ -167,7 +167,7 @@
             
         
         
-        <a href="../files/gallery-y-common-selects_js_gallery-y-common-selects.js.html#l1"><code>gallery-y-common-selects&#x2F;js&#x2F;gallery-y-common-selects.js:1</code></a>
+        <a href="../files/gallery-y-common-accordion_js_gallery-y-common-accordion.js.html#l1"><code>gallery-y-common-accordion&#x2F;js&#x2F;gallery-y-common-accordion.js:1</code></a>
         
         </p>
 
@@ -193,17 +193,17 @@
 
 <div id="classdocs" class="tabview">
     <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="Common.Selects.html#index">Index</a></li>
+        <li class="api-class-tab index"><a href="Common.Accordion.html#index">Index</a></li>
 
         
-            <li class="api-class-tab methods"><a href="Common.Selects.html#methods">Methods</a></li>
+        
+            <li class="api-class-tab properties"><a href="Common.Accordion.html#properties">Properties</a></li>
         
         
+            <li class="api-class-tab attrs"><a href="Common.Accordion.html#attrs">Attributes</a></li>
         
-            <li class="api-class-tab attrs"><a href="Common.Selects.html#attrs">Attributes</a></li>
         
-        
-            <li class="api-class-tab events"><a href="Common.Selects.html#events">Events</a></li>
+            <li class="api-class-tab events"><a href="Common.Accordion.html#events">Events</a></li>
         
     </ul>
 
@@ -212,13 +212,50 @@
             <h2 class="off-left">Item Index</h2>
 
             
-                <div class="index-section methods">
-                    <h3>Methods</h3>
 
-                    <ul class="index-list methods extends">
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
                         
-                            <li class="index-item method">
-                                <a href="Common.Selects.html#method_syncUIComponents">syncUIComponents</a>
+                            <li class="index-item property public">
+                                <a href="Common.Accordion.html#property__ACCORDION_ITEM">_ACCORDION_ITEM</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="Common.Accordion.html#property__ACCORDION_ITEM_CONTENT">_ACCORDION_ITEM_CONTENT</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="Common.Accordion.html#property__ACCORDION_ITEM_LINK">_ACCORDION_ITEM_LINK</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="Common.Accordion.html#property__HIDE">_HIDE</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="Common.Accordion.html#property__SELECTED">_SELECTED</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property public">
+                                <a href="Common.Accordion.html#property__SHOW">_SHOW</a>
 
                                 
                                 
@@ -229,27 +266,17 @@
             
 
             
-
-            
                 <div class="index-section attrs">
                     <h3>Attributes</h3>
 
                     <ul class="index-list attrs extends">
                         
                             <li class="index-item attr">
-                                <a href="Common.Selects.html#attr_containerClass">containerClass</a>
+                                <a href="Common.Accordion.html#attr_animated">animated</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="Common.Selects.html#attr_maskHtml">maskHtml</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="Common.Selects.html#attr_maskSelector">maskSelector</a>
-                            </li>
-                        
-                            <li class="index-item attr">
-                                <a href="Common.Selects.html#attr_selectFieldSelector">selectFieldSelector</a>
+                                <a href="Common.Accordion.html#attr_animation">animation</a>
                             </li>
                         
                     </ul>
@@ -263,7 +290,7 @@
                     <ul class="index-list events extends">
                         
                             <li class="index-item event">
-                                <a href="Common.Selects.html#event_refresh">refresh</a>
+                                <a href="Common.Accordion.html#event_itemShown">itemShown</a>
 
                                 
                                 
@@ -275,25 +302,20 @@
         </div>
 
         
-            <div id="methods" class="api-class-tabpanel">
-                <h2 class="off-left">Methods</h2>
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="method_syncUIComponents" class="method item">
-    <h3 class="name"><code>syncUIComponents</code></h3>
-
-    
-        <span class="paren">()</span>
-    
+                    <div id="property__ACCORDION_ITEM" class="property item public">
+    <h3 class="name"><code>_ACCORDION_ITEM</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
 
     
-
-    
-
-    
-
+        <span class="flag public">public</span>
     
 
     
@@ -311,10 +333,9 @@
             
         
         
-        <a href="../files/gallery-y-common-selects_js_gallery-y-common-selects.js.html#l25"><code>gallery-y-common-selects&#x2F;js&#x2F;gallery-y-common-selects.js:25</code></a>
+        <a href="../files/gallery-y-common-accordion_js_gallery-y-common-accordion.js.html#l23"><code>gallery-y-common-accordion&#x2F;js&#x2F;gallery-y-common-accordion.js:23</code></a>
         
         </p>
-
 
         
 
@@ -322,10 +343,258 @@
     </div>
 
     <div class="description">
-        <p>Iterates over all the selects and adds the respective markup and attaches events</p>
+        <p>Selector for each accordion item container</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> &#x27;.accordion-item&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__ACCORDION_ITEM_CONTENT" class="property item public">
+    <h3 class="name"><code>_ACCORDION_ITEM_CONTENT</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/gallery-y-common-accordion_js_gallery-y-common-accordion.js.html#l43"><code>gallery-y-common-accordion&#x2F;js&#x2F;gallery-y-common-accordion.js:43</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Content container selector that goes inside of accordion item container,
+inside of this container will be going the content that is going to be displayed or not</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;.accordion-item-content&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__ACCORDION_ITEM_LINK" class="property item public">
+    <h3 class="name"><code>_ACCORDION_ITEM_LINK</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/gallery-y-common-accordion_js_gallery-y-common-accordion.js.html#l33"><code>gallery-y-common-accordion&#x2F;js&#x2F;gallery-y-common-accordion.js:33</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Selector for the accordion item container link,  this link will display the current content</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;.accordion-item-link&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__HIDE" class="property item public">
+    <h3 class="name"><code>_HIDE</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/gallery-y-common-accordion_js_gallery-y-common-accordion.js.html#l54"><code>gallery-y-common-accordion&#x2F;js&#x2F;gallery-y-common-accordion.js:54</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Class added to content container when is hidden</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;hide&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__SELECTED" class="property item public">
+    <h3 class="name"><code>_SELECTED</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/gallery-y-common-accordion_js_gallery-y-common-accordion.js.html#l74"><code>gallery-y-common-accordion&#x2F;js&#x2F;gallery-y-common-accordion.js:74</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Class added to content item container when is currently selected</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;_SELECTED&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__SHOW" class="property item public">
+    <h3 class="name"><code>_SHOW</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/gallery-y-common-accordion_js_gallery-y-common-accordion.js.html#l64"><code>gallery-y-common-accordion&#x2F;js&#x2F;gallery-y-common-accordion.js:64</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Class added to content container when is shown</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;show&#x27;</p>
     
 
     
@@ -335,8 +604,6 @@
 
                 
             </div>
-        
-
         
 
         
@@ -344,10 +611,10 @@
                 <h2 class="off-left">Attributes</h2>
 
                 
-                    <div id="attr_containerClass" class="attr item">
-    <a name="config_containerClass"></a> 
-    <h3 class="name"><code>containerClass</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    <div id="attr_animated" class="attr item">
+    <a name="config_animated"></a> 
+    <h3 class="name"><code>animated</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
 
     
 
@@ -374,7 +641,7 @@
             
         
         
-        <a href="../files/gallery-y-common-selects_js_gallery-y-common-selects.js.html#l79"><code>gallery-y-common-selects&#x2F;js&#x2F;gallery-y-common-selects.js:79</code></a>
+        <a href="../files/gallery-y-common-accordion_js_gallery-y-common-accordion.js.html#l195"><code>gallery-y-common-accordion&#x2F;js&#x2F;gallery-y-common-accordion.js:195</code></a>
         
         </p>
 
@@ -384,20 +651,21 @@
     </div>
 
     <div class="description">
-        <p>Select tag container class</p>
+        <p>Flag to set whether or not the accordion will show and hide items with animation,
+if <code>false</code>, it will just display or hide without any animation</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;custom-select&#x27;</p>
+        <p><strong>Default:</strong> true</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>containerClassChange</code></h4>
+            <h4>Fires event <code>animatedChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>containerClass</code> is
+            Fires when the value for the configuration attribute <code>animated</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -449,10 +717,10 @@
 </div>
 
                 
-                    <div id="attr_maskHtml" class="attr item">
-    <a name="config_maskHtml"></a> 
-    <h3 class="name"><code>maskHtml</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    <div id="attr_animation" class="attr item">
+    <a name="config_animation"></a> 
+    <h3 class="name"><code>animation</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
     
 
@@ -479,7 +747,7 @@
             
         
         
-        <a href="../files/gallery-y-common-selects_js_gallery-y-common-selects.js.html#l102"><code>gallery-y-common-selects&#x2F;js&#x2F;gallery-y-common-selects.js:102</code></a>
+        <a href="../files/gallery-y-common-accordion_js_gallery-y-common-accordion.js.html#l181"><code>gallery-y-common-accordion&#x2F;js&#x2F;gallery-y-common-accordion.js:181</code></a>
         
         </p>
 
@@ -489,230 +757,20 @@
     </div>
 
     <div class="description">
-        <p>Mask html</p>
+        <p>Object to configure and overwrite default animation when items are sliding up or down</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;&lt;span class=&quot;custom-select-mask&quot;&gt;&lt;/span&gt;&#x27;</p>
+        <p><strong>Default:</strong> Object with properties easing = &#x27;ease&#x27;, duration = 0.75</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>maskHtmlChange</code></h4>
+            <h4>Fires event <code>animationChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>maskHtml</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_maskSelector" class="attr item">
-    <a name="config_maskSelector"></a> 
-    <h3 class="name"><code>maskSelector</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/gallery-y-common-selects_js_gallery-y-common-selects.js.html#l90"><code>gallery-y-common-selects&#x2F;js&#x2F;gallery-y-common-selects.js:90</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Mask node selector</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &#x27;.custom-select-mask&#x27;</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>maskSelectorChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>maskSelector</code> is
-            changed. You can listen for the event using the <code>on</code> method if you
-            wish to be notified before the attribute's value has changed, or
-            using the <code>after</code> method if you wish to be notified after the
-            attribute's value has changed.
-            </p>
-
-            <div class="params">
-                <h4>Parameters:</h4>
-
-                <ul class="params-list">
-                    <li class="param">
-                        <code class="param-name">e</code>
-                        <span class="type">EventFacade</span>
-
-                        <div class="param-description">
-                            An Event Facade object with the following
-                            attribute-specific properties added:
-                        </div>
-
-                        <ul class="params-list">
-                            <li class="param">
-                                <code class="param-name">prevVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value of the attribute, prior to it being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">newVal</code>
-                                <span class="type">Any</span>
-                                <div class="param-description">The value the attribute is to be set to.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">attrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">The name of the attribute being set.</div>
-                            </li>
-                            <li class="param">
-                                <code class="param-name">subAttrName</code>
-                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                                <div class="param-description">If setting a property within the attribute's value, the name of the sub-attribute property being set.</div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="attr_selectFieldSelector" class="attr item">
-    <a name="config_selectFieldSelector"></a> 
-    <h3 class="name"><code>selectFieldSelector</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/gallery-y-common-selects_js_gallery-y-common-selects.js.html#l68"><code>gallery-y-common-selects&#x2F;js&#x2F;gallery-y-common-selects.js:68</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Select tag field selector</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &#x27;select&#x27;</p>
-    
-
-    
-        <div class="emits box">
-            <h4>Fires event <code>selectFieldSelectorChange</code></h4>
-
-            <p>
-            Fires when the value for the configuration attribute <code>selectFieldSelector</code> is
+            Fires when the value for the configuration attribute <code>animation</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -772,8 +830,8 @@
                 <h2 class="off-left">Events</h2>
 
                 
-                    <div id="event_refresh" class="events item">
-    <h3 class="name"><code>refresh</code></h3>
+                    <div id="event_itemShown" class="events item">
+    <h3 class="name"><code>itemShown</code></h3>
     <span class="type"></span>
 
     
@@ -795,7 +853,7 @@
             
         
         
-        <a href="../files/gallery-y-common-selects_js_gallery-y-common-selects.js.html#l13"><code>gallery-y-common-selects&#x2F;js&#x2F;gallery-y-common-selects.js:13</code></a>
+        <a href="../files/gallery-y-common-accordion_js_gallery-y-common-accordion.js.html#l13"><code>gallery-y-common-accordion&#x2F;js&#x2F;gallery-y-common-accordion.js:13</code></a>
         
         </p>
 
@@ -805,10 +863,34 @@
     </div>
 
     <div class="description">
-        <p>Helper event that can be fired when object is instanced to refresh all the  selects associated to component instance</p>
+        <p>Event that gets fired everytime that item gets expanded</p>
 
     </div>
 
+    
+        <div class="params">
+            <h4>Event Payload:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">node</code>
+                        <span class="type">Y.Node</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Node of the item shown</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
 

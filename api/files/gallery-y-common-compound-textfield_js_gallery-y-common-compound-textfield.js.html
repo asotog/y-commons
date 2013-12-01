@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>gallery-y-common-compound-textfield/js/gallery-y-common-compound-textfield.js - yogi doc server</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="yogi doc server"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 3.11.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#api-classes">Classes</a></li>
+            <li><a href="gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Common.Accordion.html">Common.Accordion</a></li>
+            
+                <li><a href="../classes/Common.CompoundTextField.html">Common.CompoundTextField</a></li>
+            
+                <li><a href="../classes/Common.DomFieldsModel.html">Common.DomFieldsModel</a></li>
+            
+                <li><a href="../classes/Common.Radios.html">Common.Radios</a></li>
+            
+                <li><a href="../classes/Common.Selects.html">Common.Selects</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/gallery-y-common-accordion.html">gallery-y-common-accordion</a></li>
+            
+                <li><a href="../modules/gallery-y-common-compound-textfield.html">gallery-y-common-compound-textfield</a></li>
+            
+                <li><a href="../modules/gallery-y-common-dom-fields-model.html">gallery-y-common-dom-fields-model</a></li>
+            
+                <li><a href="../modules/gallery-y-common-radios.html">gallery-y-common-radios</a></li>
+            
+                <li><a href="../modules/gallery-y-common-selects.html">gallery-y-common-selects</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: gallery-y-common-compound-textfield/js/gallery-y-common-compound-textfield.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * This module is a widget that syncs multiple fields into one field usually a hidden field to store a compound value
+ * for example a social security number or phone number where usually needs like 3 different fields
+ *
+ * @class CompoundTextField
+ * @namespace Common
+ * @extends Widget
+ * @module gallery-y-common-compound-textfield
+ * @constructor
+ */
+
+Y.namespace(&#x27;Common&#x27;);
+
+Y.Common.CompoundTextField = Y.Base.create(&#x27;gallery-y-common-compound-textfield&#x27;, Y.Widget, [], {
+
+    initializer: function () {
+        var mainField = this.get(&#x27;srcNode&#x27;).one(this.get(&#x27;mainField&#x27;));
+        if (mainField.get(&#x27;value&#x27;).length &gt; 0) {
+            var value = mainField.get(&#x27;value&#x27;);
+            /* removes separator of main field */
+            value = value.split(this.get(&#x27;separator&#x27;)).join(&#x27;&#x27;);
+            this.set(&#x27;compoundValue&#x27;, value);
+            var inputs = this.get(&#x27;srcNode&#x27;).all(this.get(&#x27;fieldsSelector&#x27;));
+            inputs.each(function (node, index) {
+                var length = parseInt(node.getAttribute(&#x27;maxlength&#x27;));
+                var part = value.slice(0, length);
+                value = value.substr(length, value.length);
+                node.set(&#x27;value&#x27;, part);
+            });
+        }
+    },
+
+    bindUI: function () {
+        var me = this;
+        var mainField = this.get(&#x27;srcNode&#x27;).one(this.get(&#x27;mainField&#x27;));
+
+        this.get(&#x27;srcNode&#x27;).delegate(&#x27;blur&#x27;, function () {
+            me.set(&#x27;compoundValue&#x27;, me.getCompoundValue());
+            mainField.simulate(&#x27;change&#x27;);
+        }, this.get(&#x27;fieldsSelector&#x27;));
+
+        this.get(&#x27;srcNode&#x27;).delegate(&#x27;keyup&#x27;, function (e) {
+            me.set(&#x27;compoundValue&#x27;, me.getCompoundValue());
+            mainField.simulate(&#x27;change&#x27;);
+            me._autoTab(e.currentTarget);
+        }, this.get(&#x27;fieldsSelector&#x27;));
+
+        this.after(&#x27;compoundValueChange&#x27;, this.syncUI, this);
+    },
+
+    syncUI: function () {
+        var mainField = this.get(&#x27;srcNode&#x27;).one(this.get(&#x27;mainField&#x27;));
+        mainField.set(&#x27;value&#x27;, this.get(&#x27;compoundValue&#x27;));
+    },
+
+    /**
+     * Format string based on the configured compound text field but using a separator char
+     * 
+     * @param {String} text Text to be formatted
+     * @param {String } separator Char that is going to be used as separator e.g: -, _, ...
+     * 
+     * @method format
+     * @return {String} Formatted string
+     */
+    format: function (text, separator) {
+        var formatted = &#x27;&#x27;;
+        if (text) {
+            var inputs = this.get(&#x27;srcNode&#x27;).all(this.get(&#x27;fieldsSelector&#x27;));
+            inputs.each(function (node, index) {
+                var length = parseInt(node.getAttribute(&#x27;maxlength&#x27;));
+                var part = text.slice(0, length);
+                text = text.substr(length, text.length);
+                formatted += part;
+                formatted += (index == (inputs.size() - 1)) ? &#x27;&#x27; : separator;
+            });
+        }
+        return formatted;
+    },
+
+    /**
+     * Gets based on the compounds fields the main field compound value
+     * 
+     * @method getCompoundValue
+     * @return {String} Compound value
+     */
+    getCompoundValue: function () {
+        var inputs = this.get(&#x27;srcNode&#x27;).all(this.get(&#x27;fieldsSelector&#x27;));
+        var compound = &#x27;&#x27;;
+        inputs.each(function (node, index) {
+            compound += node.get(&#x27;value&#x27;);
+        });
+        return this.format(compound, this.get(&#x27;separator&#x27;));
+    },
+
+    _autoTab: function (field) {
+        var value = field.get(&#x27;value&#x27;);
+        var allFields = this.get(&#x27;srcNode&#x27;).all(this.get(&#x27;fieldsSelector&#x27;));
+        var indexOfField = allFields.indexOf(field);
+        var length = parseInt(field.getAttribute(&#x27;maxlength&#x27;));
+        if (value.length == length &amp;&amp; (allFields.size() - 1) &gt; indexOfField &amp;&amp; indexOfField != -1) {
+            allFields.item(indexOfField + 1).focus();
+        };
+    }
+
+}, {
+    ATTRS: {
+        
+        /**
+         * Compounds fields selector
+         *
+         * @attribute fieldsSelector
+         * @type String
+         * @default &#x27;.compound-text-field&#x27;
+         */
+        fieldsSelector: {
+            value: &#x27;.compound-text-field&#x27;
+        },
+
+        /**
+         * Compound value separator, usual value is &#x27;-&#x27; as separator, to make hidden field contain compound values such as
+         * &lt;code&gt;901-234-678&lt;/code&gt;
+         *
+         * @attribute separator
+         * @type String
+         * @default &#x27;&#x27;
+         */
+        separator: {
+            value: &#x27;&#x27;
+        },
+
+        /**
+         * Main field selector, this field will contain the compound value
+         *
+         * @attribute mainField
+         * @type String
+         * @default &#x27;.main-compound-field&#x27;
+         */
+        mainField: {
+            value: &#x27;.main-compound-field&#x27;
+        },
+
+        /**
+         * Compound value
+         *
+         * @attribute compoundValue
+         * @type String
+         */
+        compoundValue: {
+            value: &#x27;&#x27;
+        }
+    }
+});
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

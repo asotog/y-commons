@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Gallery: gallery-y-common-selects</title>
+    <title>Gallery: gallery-y-common-compound-textfield</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Maven+Pro:400,700">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css">
     <link rel="stylesheet" href="../assets/css/main.css">
@@ -13,7 +13,7 @@
 <body>
 
 <div id="doc">
-    <h1>Gallery: gallery-y-common-selects</h1>
+    <h1>Gallery: gallery-y-common-compound-textfield</h1>
 
     
         <a href="index.html#toc" class="jump">Jump to Table of Contents</a>
@@ -24,14 +24,14 @@
             <div id="main">
                 <div class="content"><div class="intro">
     <p>
-    Selects module provides the capability to add required markup for selects fields to be skinned, in that way select tag default look and feel can be customized
+    Compounds text field widget is a component to create a field that depends on multiple fields is the case sometimes of phones, social numbers or id numbers
     </p>
 </div>
 
 <h2 id="getting-started">Getting Started</h2>
 
 <p>
-To include the source files for Gallery: gallery-y-common-selects and its dependencies, first load
+To include the source files for Gallery: gallery-y-common-compound-textfield and its dependencies, first load
 the YUI seed file if you haven't already loaded it.
 </p>
 
@@ -47,8 +47,8 @@ specify.
 
 <pre class="code prettyprint">&lt;script&gt;
 &#x2F;&#x2F; Create a new YUI instance and populate it with the required modules.
-YUI().use(&#x27;gallery-y-common-selects&#x27;, function (Y) {
-    &#x2F;&#x2F; Gallery: gallery-y-common-selects is available and ready for use. Add implementation
+YUI().use(&#x27;gallery-y-common-compound-textfield&#x27;, function (Y) {
+    &#x2F;&#x2F; Gallery: gallery-y-common-compound-textfield is available and ready for use. Add implementation
     &#x2F;&#x2F; code here.
 });
 &lt;&#x2F;script&gt;</pre>
@@ -63,20 +63,34 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
 
 <h2 id="description">Description</h2>
 
-<p>Use this module is as simple as adding the following code, the rest is done with css and html, please check full example:</p>
+<p>Using this component, multiple fields can be unified in one single field, usually this field is a hidden field that contains the full value based on the rest of the text fields, as you can see in the markup below:</p>
 
-<pre class="code prettyprint">YUI().use(&#x27;gallery-y-common-selects&#x27;, function(Y) {
 
-    &#x2F;* initializes selects *&#x2F;
-    new Y.Common.Selects();
+<pre class="code prettyprint">&lt;div id=&quot;phone-container1&quot;&gt;
+    &lt;input type=&quot;text&quot; class=&quot;compound-text-field&quot; maxlength=&quot;3&quot;&gt;
+    &lt;input type=&quot;text&quot; class=&quot;compound-text-field&quot; maxlength=&quot;3&quot;&gt;
+    &lt;input type=&quot;text&quot; class=&quot;compound-text-field&quot; maxlength=&quot;4&quot;&gt;
+    &lt;input type=&quot;hidden&quot; class=&quot;main-compound-field&quot; value=&quot;1113335555&quot;&gt;
+&lt;&#x2F;div&gt;</pre>
+
+<p>The text fields class can be modified using the attribute <code>fieldsSelector</code>. Please see the api docs for further details.</p>
+
+<p>In javascript side need instantiate the component passing the srcNode of the fields container:</p>
+<pre class="code prettyprint">YUI().use(&#x27;gallery-y-common-compound-textfield&#x27;, function(Y) {
+
+    &#x2F;* initializes  the component *&#x2F;
+    new Y.Common.CompoundTextField({
+        srcNode: &#x27;#phone-container1&#x27;
+    }).render();
 
 });</pre>
+
+Please check out the examples for implementation details.
 
 
 <h2 id="api-docs">API Docs</h2>
 
-<p>For detailed explanation of this component, default values and constructor arguments check <a href="../../api/classes/Common.Selects.html">api docs</a></p>
-
+<p>For detailed explanation of this component, default values and constructor arguments check <a href="../../api/classes/Common.CompoundTextField.html">api docs</a></p>
 </div>
             </div>
         </div>
@@ -115,8 +129,14 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
                             <ul class="examples">
                                 
                                     
-                                        <li data-description="The following example shows how to make work the selects skinning component">
-                                            <a href="basic-sample.html">Basic Example</a>
+                                        <li data-description="The following example shows how to make work the compounds fields">
+                                            <a href="basic-example.html">Basic Example</a>
+                                        </li>
+                                    
+                                
+                                    
+                                        <li data-description="The following example shows how to make work the compounds fields using separator">
+                                            <a href="separator-example.html">Using separator sign to format</a>
                                         </li>
                                     
                                 
