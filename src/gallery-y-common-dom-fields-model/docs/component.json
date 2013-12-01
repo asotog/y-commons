@@ -1,11 +1,18 @@
 {
     "name"       : "gallery-y-common-dom-fields-model",
     "displayName": "Gallery: gallery-y-common-dom-fields-model",
-    "description": "*Summary Goes Here*",
+    "description": "The dom fields model is a component created to help mapping form/container fields to javascript object literal, in this way, fields names/values can be easily converted to json string",
     "author"     : [ "asotog88" ],
     "use"        : [ "gallery-y-common-dom-fields-model" ],
 
     "tags": [ "gallery" ],
 
-    "examples": []
+    "examples": [{
+        "name": "basic-example",
+        "displayName": "Basic Example",
+        "description": "Simple example where form values are retrieved from fields, also can be loaded again"
+    }],
+    
+    "apiDocsUrl": "/api/classes/Common.DomFieldsModel.html",
+    "yuiConfig": "{base: 'http://yui.yahooapis.com/3.13.0/build/',comboBase: 'http://yui.yahooapis.com/combo?',root: '3.13.0/build/'}"
 }

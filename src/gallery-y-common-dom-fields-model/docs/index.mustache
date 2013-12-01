@@ -1,6 +1,6 @@
 <div class="intro">
     <p>
-    *Summary Goes Here*
+    {{description}}
     </p>
 </div>
 
@@ -8,9 +8,57 @@
 
 <h2>Description</h2>
 
-<p>*Module Description Goes Here*</p>
+<p>This component can retrieve the fields values from a set of fields wrapped by a form or other tag containing them, please see the full example:</p>
+```
+<form id="registration-model" action="#">
+    <label>username:</label>
+    <input type="text" name="username">
+    <br>
+    <label>address:</label>
+    <input type="text" name="address">
+    <br>
+    <label>gender:</label>
+    <br>
+    <span>
+        <label>male</label>
+        <input type="radio" name="gender" value="0">
+        <label>female</label>
+        <input type="radio" name="gender" value="1">
+    </span>
+    <br>
+    <label>sport:</label>
+    <select name="sport">
+        <option value="">choose your favorite sport</option>
+        <option value="tennis">tennis</option>
+        <option value="soccer">soccer</option>
+        <option value="basketball">basketball</option>
+    </select>
+    <br>
+    <label>receive news?:</label>
+    <input type="checkbox" name="receive_news" value="yes">
+    <br>
+    <br>
+    <input class="save" type="button" value="save">
+    <input class="load"  type="button" value="load">
+    <input type="reset" value="clean">
+</form>
+```
 
+<p>In the javascript side, the object receives the container node that wraps the set of fields:</p>
 ```
-//Module example code
+YUI().use('gallery-y-common-dom-fields-model', function(Y) {
+    var containerNode = Y.one('#registration-model');
+    var registrationModel = new Y.Common.DomFieldsModel({
+        container: containerNode
+    });
+    
+    /* fields values can be persisted in the attribute called model please refer api docs for further details */
+    registrationModel.save();
+});
 ```
+
+<h2>API Docs</h2>
+
+<p>For detailed explanation of this component, default values and constructor arguments check <a href="{{{apiDocsUrl}}">api docs</a></p>
+
 

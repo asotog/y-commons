@@ -1,0 +1,155 @@
+<script src="/build/gallery-y-common-dom-fields-model/gallery-y-common-dom-fields-model.js"></script>
+<style>
+    #container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    
+    label {
+        display: inline-block;
+        font-weight: bold;
+        width: 112px;
+    }
+    
+    .radio-group {
+        padding: 0 0 0 118px;
+    }
+    
+    .radio-group label {
+        width: auto;
+    }
+    
+</style>
+<div class="intro">
+    <p>
+    {{description}}
+    </p>
+</div>
+
+<div id="container">
+    <form id="registration-model" action="#">
+        <label>username:</label>
+        <input type="text" name="username">
+        <br>
+        <label>address:</label>
+        <input type="text" name="address">
+        <br>
+        <label>gender:</label>
+        <br>
+        <span class="radio-group">
+            <label>male</label>
+            <input type="radio" name="gender" value="0">
+            <label>female</label>
+            <input type="radio" name="gender" value="1">
+        </span>
+        <br>
+        <label>sport:</label>
+        <select name="sport">
+            <option value="">choose your favorite sport</option>
+            <option value="tennis">tennis</option>
+            <option value="soccer">soccer</option>
+            <option value="basketball">basketball</option>
+        </select>
+        <br>
+        <label>receive news?:</label>
+        <input type="checkbox" name="receive_news" value="yes">
+        <br>
+        <br>
+        <input class="save" type="button" value="save">
+        <input class="load"  type="button" value="load">
+        <input type="reset" value="clean">
+    </form>
+</div>
+
+<h2>Basic Example</h2>
+
+<p>This example will show how this component can retrieve the set of fields values and convert them into javascript object literal, also the load button will refill the fields after save and then reset button is clicked. </p>
+<p>If save button is clicked, the object result can be seen and how the fields are retrieved.</p>
+
+<h3>HTML</h3>
+
+<p>This markup is a regular form, each field name attribute will be used as the key of the model fields, also checkbox value will be <code>true</code> or <code>false</code>.</p>
+```
+<!-- component include  -->
+<script src="/build/gallery-y-common-dom-fields-model/gallery-y-common-dom-fields-model.js"></script>
+
+<form id="registration-model" action="#">
+    <label>username:</label>
+    <input type="text" name="username">
+    <br>
+    <label>address:</label>
+    <input type="text" name="address">
+    <br>
+    <label>gender:</label>
+    <br>
+    <span class="radio-group">
+        <label>male</label>
+        <input type="radio" name="gender" value="0">
+        <label>female</label>
+        <input type="radio" name="gender" value="1">
+    </span>
+    <br>
+    <label>sport:</label>
+    <select name="sport">
+        <option value="">choose your favorite sport</option>
+        <option value="tennis">tennis</option>
+        <option value="soccer">soccer</option>
+        <option value="basketball">basketball</option>
+    </select>
+    <br>
+    <label>receive news?:</label>
+    <input type="checkbox" name="receive_news" value="yes">
+    <br>
+    <br>
+    <input class="save" type="button" value="save">
+    <input class="load"  type="button" value="load">
+    <input type="reset" value="clean">
+</form>
+```
+
+
+<h3>Javascript</h3>
+
+<p>Javascript part is simple, only need to provide the container <strong>(it can be the form node or any other dom element wrapping the fields)</strong> and component will do the rest, also as an example, the model is <a href="http://yuilibrary.com/yui/docs/json/">stringified</a> to show the result object:</p>
+```
+YUI().use('gallery-y-common-dom-fields-model', 'json-stringify', function(Y) {
+        
+    var containerNode = Y.one('#registration-model');
+    var registrationModel = new Y.Common.DomFieldsModel({
+        container: containerNode
+    });
+    containerNode.one('.save').on('click', function() {
+        registrationModel.save();
+        var model = registrationModel.retrieveModel();
+        alert(Y.JSON.stringify(model));
+    });
+    
+    containerNode.one('.load').on('click', function() {
+        registrationModel.load();
+    });
+    
+
+});
+```
+
+
+<script>
+    YUI({{{yuiConfig}}}).use('gallery-y-common-dom-fields-model', 'json-stringify', function(Y) {
+        
+        var containerNode = Y.one('#registration-model');
+        var registrationModel = new Y.Common.DomFieldsModel({
+            container: containerNode
+        });
+        containerNode.one('.save').on('click', function() {
+            registrationModel.save();
+            var model = registrationModel.retrieveModel();
+            alert(Y.JSON.stringify(model));
+        });
+        
+        containerNode.one('.load').on('click', function() {
+            registrationModel.load();
+        });
+        
+
+    });
+</script>
