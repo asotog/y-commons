@@ -1,7 +1,9 @@
 {
     "gallery-y-common-simple-validator": {
         "requires": [
-            "yui-base"
+            "yui-base",
+            "base-build",
+            "node"
         ]
     }
 }

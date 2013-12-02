@@ -1,3 +1,5 @@
+YUI.add('gallery-y-common-simple-validator', function (Y, NAME) {
+
 Y.namespace('Common');
 
 var VALIDATOR_EMPTY = 'empty';
@@ -153,3 +155,5 @@ Y.Common.SimpleValidator = Y.Base.create('gallery-y-common-simple-validator', Y.
         }
     }
 });
+
+}, '@VERSION@', {"requires": ["yui-base", "base-build", "node"]});

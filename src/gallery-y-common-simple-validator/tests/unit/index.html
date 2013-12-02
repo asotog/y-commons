@@ -1,25 +1,201 @@
 <!doctype html>
 <html>
-<head>
-    <title>gallery-y-common-simple-validator</title>
-    <script src="/build/yui/yui.js"></script>
-    <script src="js/tests.js"></script>
-    <meta charset="utf-8" />
-</head>
-<body class="yui3-skin-sam">
-<div id="logger"></div>
-
-<script>
-YUI({
-    coverage: ['gallery-y-common-simple-validator'],
-    filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
-}).use('test-console', 'test', 'module-tests', function(Y) {
     
-    (new Y.Test.Console()).render('#logger');
+    <head>
+        <title>gallery-y-common-simple-validator</title>
+        <script src="/build/yui/yui.js"></script>
+        <script src="js/tests.js"></script>
+        <script src="/build/gallery-y-common-simple-validator/gallery-y-common-simple-validator.js"></script>
+        <meta charset="utf-8" />
+        <style>
+            #container {
+                padding: 20px;
+                background: #CDF2FF;
+                width: 435px;
+            }
+                
+            .fail {
+                background: rgb(255, 208, 208);
+            }
+            .pass {
+                background: rgb(119, 194, 119);
+            }
+            
+            .field-wrapper {
+                padding: 10px;
+                display: block;
+                margin: 0 0 10px 0;
+            }
+            
+            label {
+                width: 65px;
+                display:inline-block;
+            }
+        </style>
+    </head>
+    
+    <body class="yui3-skin-sam">
+        <div id="container">
+            <span class="field-wrapper name">
+                <label>Name:</label>
+                <input name="name" type="text" value="">
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper birthdate">
+                <label>Birth date:</label>
+                <input type="text" placeholder="YYYY/MM/DD" name="birthdate">
+                <span class="err-msg"></span>
+            </span>
+            
+            
+            <span class="field-wrapper gender">
+                <label>Gender:</label>
+                <span>
+                    Male<input name="gender" type="radio" value="0">
+                    Female<input name="gender" type="radio" value="1">
+                </span>
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper married">
+                <label>Married:</label>
+                <span>
+                    <input name="married" type="checkbox" value="married">
+                </span>
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper state">
+                <label>State:</label>
+                <select name="state">
+                    <option value="">Select State</option>
+                    <option value="ohio">Ohio</option>
+                    <option value="arizona">Arizona</option>
+                    <option value="texas">Texas</option>
+                    <option value="virginia">Virginia</option>
+                    <option value="colorado">Colorado</option>
+                </select>
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper zipcode">
+                <label>Zipcode:</label>
+                <input name="zipcode" type="text" value="">
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper agreement">
+                <label>Accept agreement:</label>
+                <span>
+                    <input name="agreement" type="checkbox" value="agreement">
+                </span>
+                <span class="err-msg"></span>
+            </span>
+            <button class="check-validation">Are fields valid ?</button>
+        </div>
+        <div id="logger"></div>
+        <script>
+            YUI({
+                coverage: ['gallery-y-common-simple-validator'],
+                filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw'
+            }).use('test-console', 'test', 'module-tests', 'gallery-y-common-simple-validator', function(Y) {
 
-    Y.Test.Runner.setName('gallery-y-common-simple-validator');
-    Y.Test.Runner.run();
-});
-</script>
-</body>
+                var validationRules = [
+                    {
+                        type: [{
+                                type: 'empty',
+                                message: 'This field is required '
+                            },{
+                                type: 'text-limit',
+                                message: 'This field cannot exceed 10 chars',
+                                textLength: 10
+                            },{
+                                type: 'follow-pattern',
+                                regexPattern: /^([A-Za-z])+$/,
+                                message: 'Please type only letters'
+                            }
+                        ],
+                        node: '.name',
+                        field: 'input'
+                    },
+                    
+                    {
+                        type: [{
+                            type: 'empty',
+                            message: 'This field is required '
+                        }, {
+                            type: 'follow-pattern',
+                            regexPattern:  /^[0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])$/,
+                            message: 'Invalid date format'
+                        }, {
+                            type: 'custom',
+                            isValidFn: function(value) {
+                                var birthday = +new Date(value);
+                                var age = ~~((Date.now() - birthday)); 
+                                return (age >= 0);
+                            },
+                            message: 'Cannot enter future date'
+                        }],
+                        node: '.birthdate'
+                    },
+                    
+                    {
+                        type: [{
+                            type: 'empty',
+                            message: 'This field is required '
+                        }],
+                        node: '.state',
+                        field: 'select'
+                    },
+                    
+                    {
+                        type: [{
+                            type: 'empty',
+                            message: 'This field is required '
+                        }, {
+                            type: 'follow-pattern',
+                            regexPattern: /^\d{5}(?:\d{4})?$/,
+                            message: 'Zipcode can be 5 or 9 digits only'
+                        }],
+                        node: '.zipcode'
+                    },
+                    
+                    {
+                        type: [{
+                            type: 'empty',
+                            message: 'This field is required '
+                        }],
+                        node: '.gender'
+                    },
+                    
+                    {
+                        type: [{
+                            type: 'empty',
+                            message: 'This field is required '
+                        }],
+                        node: '.agreement'
+                    }
+                ];
+                var config = {
+                    container: Y.one('#container'),
+                    rules: validationRules
+                };
+                var validator = new Y.Common.SimpleValidator({
+                    configuration: config
+                });
+                Y.one('#container').one('.check-validation').on('click', function() {
+                    // are fields valid ?
+                    alert(validator.areFieldsValid());
+                });
+                
+                
+                (new Y.Test.Console()).render('#logger');
+
+                Y.Test.Runner.setName('gallery-y-common-simple-validator');
+                Y.Test.Runner.run();
+            });
+        </script>
+    </body>
+
 </html>
