@@ -1,3 +1,15 @@
+/**
+ * Class that provides fields validation mechanisms that can be easily configured through configuration array
+ * with the set of rules per field
+ *
+ * @class SimpleValidator
+ * @namespace Common
+ * @extends Base
+ * @module gallery-y-common-simple-validator
+ * @constructor
+ */
+
+
 Y.namespace('Common');
 
 var VALIDATOR_EMPTY = 'empty';
@@ -11,11 +23,13 @@ Y.Common.SimpleValidator = Y.Base.create('gallery-y-common-simple-validator', Y.
         var me = this;
         this.addFieldSet(this.get('configuration'));
     },
-
+    
     /**
-     * Add validation dynamically
+     * Add validations dynamically only triggered with user events
      * 
+     * @method addFieldSet
      * @param Object configuration Object with the validation rules and the container of the fields 
+     *
      */
     addFieldSet: function (configuration) {
         var me = this;
@@ -40,7 +54,11 @@ Y.Common.SimpleValidator = Y.Base.create('gallery-y-common-simple-validator', Y.
     },
 
     /**
-     * fn : function to apply while iterating each configuration element
+     * Iterates over configuration array
+     * 
+     * @param Y.Node container Fields container
+     * @param {Object} configuration Object containing the set of fields validations rules
+     * @param {Function} fn Function to apply while iterating each configuration element
      * 
      */
     iterateConfig: function (container, configuration, fn) {
@@ -53,7 +71,7 @@ Y.Common.SimpleValidator = Y.Base.create('gallery-y-common-simple-validator', Y.
     },
 
     /**
-     * Validates field apply the configured rules 
+     * Validates field applying the configured rules 
      *
      */
     validate: function (field, wrapper, validationType) {
@@ -95,6 +113,10 @@ Y.Common.SimpleValidator = Y.Base.create('gallery-y-common-simple-validator', Y.
         return !hasErrors;
     },
 
+    /**
+     * Adds the required class to field wrapper after field validation
+     *  
+     */
     toggleWrapper: function (wrapper, hasErrors) {
         if (hasErrors) {
             wrapper.removeClass(this.get('passClass'));
@@ -105,6 +127,14 @@ Y.Common.SimpleValidator = Y.Base.create('gallery-y-common-simple-validator', Y.
         }
     },
 
+    /**
+     * Executes fields validation, usually this function can be called directly to know if fields are valid or not based
+     * on the rules provided when creating the validation object
+     * 
+     * @method areFieldsValid
+     * @return {Boolean} It returns <code>true</code> when fields are valid or <code>false</code> when not
+     *
+     */
     areFieldsValid: function () {
         var me = this;
         var fieldsValid = true;
@@ -129,7 +159,13 @@ Y.Common.SimpleValidator = Y.Base.create('gallery-y-common-simple-validator', Y.
 }, {
     ATTRS: {
 
-
+        /**
+         * Configuration that needs to be provided for the validations, please see further details of this class on
+         * regular documentation
+         *
+         * @attribute configuration
+         * @type {Object}
+         */
         /**
          * {
          *   container: Y.Node,
@@ -139,15 +175,37 @@ Y.Common.SimpleValidator = Y.Base.create('gallery-y-common-simple-validator', Y.
         configuration: {
             value: null
         },
-
+        
+        /**
+         * Selector for the error message container for each field
+         *
+         * @attribute errorNodeSelector
+         * @type {String}
+         * @default '.err-msg'
+         */
         errorNodeSelector: {
             value: '.err-msg'
         },
 
+        
+        /**
+         * Css class added to the field wrapper after validation success
+         *
+         * @attribute passClass
+         * @type {String}
+         * @default 'pass'
+         */
         passClass: {
             value: 'pass'
         },
 
+        /**
+         * Css class added to the field wrapper after validation fail
+         *
+         * @attribute failClass
+         * @type {String}
+         * @default 'fail'
+         */
         failClass: {
             value: 'fail'
         }
