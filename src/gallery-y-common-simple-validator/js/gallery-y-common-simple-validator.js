@@ -25,7 +25,8 @@ Y.Common.SimpleValidator = Y.Base.create('gallery-y-common-simple-validator', Y.
     },
     
     /**
-     * Add validations dynamically only triggered with user events
+     * Add validations dynamically, validations added with this method will be only triggered with user events
+     * on fields interaction
      * 
      * @method addFieldSet
      * @param Object configuration Object with the validation rules and the container of the fields 

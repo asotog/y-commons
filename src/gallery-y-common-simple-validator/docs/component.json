@@ -1,7 +1,7 @@
 {
     "name"       : "gallery-y-common-simple-validator",
     "displayName": "Gallery: gallery-y-common-simple-validator",
-    "description": "*Summary Goes Here*",
+    "description": "This validator module provides a way to validate fields based on a configuration object, and provides multiple ways to validate fields",
     "author"     : [ "asotog88" ],
     "use"        : [ "gallery-y-common-simple-validator" ],
 

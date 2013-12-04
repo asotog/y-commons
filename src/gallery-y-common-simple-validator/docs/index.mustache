@@ -1,6 +1,6 @@
 <div class="intro">
     <p>
-    *Summary Goes Here*
+    {{description}}
     </p>
 </div>
 
@@ -8,9 +8,179 @@
 
 <h2>Description</h2>
 
-<p>*Module Description Goes Here*</p>
+<p>As described in the summary this module provides a configuration to make the validations works on the fields, in the following code is placed a regular field structure:</p>
 
 ```
-//Module example code
+<div id="container">
+    ...
+    
+    <span class="field-wrapper birthdate">
+        <label>Birth date:</label>
+        <input type="text" placeholder="YYYY/MM/DD" name="birthdate">
+        <span class="err-msg"></span>
+    </span>
+    
+    ...
+</div>
 ```
 
+<p>As shown above the field convention should contain the wrapper which is <code>.birthdate</code>, the field (in this case the <code>input</code> tag) and the error message container (which is the <code>span.err-msg</code>) </p>
+
+
+<h2>Initialization</h2>
+
+<p>The code required to set the validations is simple in terms of configuration and flexibility, the following code shows how is configured but please see full example: </p>
+
+```
+YUI().use('gallery-y-common-simple-validator', function(Y) {
+
+    var validationRules = [
+            
+        ...
+    
+        {
+        
+            type: [
+                {
+                    type: 'empty',
+                    message: 'This field is required '
+                }, 
+                {
+                    type: 'follow-pattern',
+                    regexPattern:  /^[0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])$/,
+                    message: 'Invalid date format'
+                }, 
+                {
+                    type: 'custom',
+                    isValidFn: function(value) {
+                        var birthday = +new Date(value);
+                        var age = ~~((Date.now() - birthday)); 
+                        return (age >= 0);
+                    },
+                    message: 'Cannot enter future date'
+                }
+            ],
+            node: '.birthdate'
+        }
+       
+       ...
+       
+   ];
+   
+   
+   var config = {
+       container: Y.one('#container'),
+       rules: validationRules
+   };
+    
+   var validator = new Y.Common.SimpleValidator({
+       configuration: config
+   });
+   
+});
+```
+
+<p>The <code>config</code> object will contain the fields wrapper and the fields validations rules</p>
+
+<p>As shown in the code above the validationRules is an array where each item belongs to the validation rules of one field, in this case there is only one entry for the field birthdate please check full example to see multiple fields in action.</p>
+
+<h2>Field validations configuration</h2>
+
+<p>Each field entry can have multiple validations rules, but first, the following table describe the field validation entry configuration:</p>
+
+<table>
+    <tbody>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Optional?</th>
+        </tr>
+        <tr>
+            <td><code>node</code></td>
+            <td><code>String</code></td>
+            <td>Field wrapper selector, wrapper that contains the field and the error message</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td><code>type</code></td>
+            <td><code>Array</code></td>
+            <td>List of field validation rules, validation rules will be detailed in <a href="#field-validation-rules-available">validation rules available</a></td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td><code>field</code></td>
+            <td><code>String</code></td>
+            <td>Field selector, by default this value will be <code>input</code>, <code>field</code> can be defined for select or other kind of field tag different than <code>input</code></td>
+            <td>Yes</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Field validation rules available</h2>
+
+<p>This validator module provides 4 types of validation rules. The validation rule structure will be as the following code describes: </p>
+
+```
+{
+    type: '...', // type of validation detailed in the following table
+    ...  // optional: also depending on the validation type, could be additional rule configuration
+         //            property to set it up
+    message: '...' // message displayed if validation fails
+}
+```
+
+
+
+<p>Each configured validation rule will be followed by a error message for failed validation case, detailed information in the following table:</p>
+
+<table>
+    <tbody>
+        <tr>
+            <th>Type</th>
+            <th>Configuration</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><code>empty</code></td>
+            <td>The <code>empty</code> validation rule does not require additional configuration just need to provide the fail <code>message</code></td>
+            <td>This validation will show up message if field is empty</td>
+        </tr>
+        <tr>
+            <td><code>text-limit</code></td>
+            <td>Will require to set up the <code>textLength</code> as a number</td>
+            <td>Will trigger message if field exceeds the <code>textLength</code> defined</td>
+        </tr>
+        <tr>
+            <td><code>follow-pattern</code></td>
+            <td>The property <code>regexPattern</code> containing the regex expression that need to match the field. e.g: 
+                ```
+                        {
+                            type: 'follow-pattern',
+                            regexPattern: /^\d{5}(?:\d{4})?$/,
+                            message: 'Zipcode can be 5 or 9 digits only'
+                        }
+                ```
+            </td>
+            <td>Message will be shown if field does not match the regex pattern</td>
+        </tr>
+        <tr>
+            <td><code>custom</code></td>
+            <td>With <code>custom</code> type, a function can be defined to also validate the field, the function should return                         <code>true</code> if passed or <code>false</code> in case of validation not passed, the following code contains a sample                 rule using <code>custom</code>:
+                ```
+                        {
+                            type: 'custom',
+                            isValidFn: function(value) { // passes field value
+                                var birthday = +new Date(value);
+                                var age = ~~((Date.now() - birthday)); 
+                                return (age >= 0);  // returns true or false
+                            },
+                            message: 'Cannot enter future date'
+                        }
+                ```
+
+            </td>
+            <td>Validation message displayed when custom function returns <code>false</code></td>
+        </tr>
+    </tbody>
+</table>
