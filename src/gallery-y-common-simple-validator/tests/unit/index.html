@@ -42,6 +42,12 @@
                 <span class="err-msg"></span>
             </span>
             
+            <span class="field-wrapper nickname">
+                <label>Nickname:</label>
+                <input name="nickname" type="text" value="">
+                <span class="err-msg"></span>
+            </span>
+            
             <span class="field-wrapper birthdate">
                 <label>Birth date:</label>
                 <input type="text" placeholder="YYYY/MM/DD" name="birthdate">
@@ -118,6 +124,29 @@
                         ],
                         node: '.name',
                         field: 'input'
+                    },
+                    
+                    
+                    
+                    {
+                        type: [{
+                                type: 'empty',
+                                message: 'This field is required '
+                            },{
+                                type: 'min-text-limit',
+                                message: 'This field must contain 4 or more characters',
+                                textLength: 4
+                            },{
+                                type: 'text-limit',
+                                message: 'This field cannot exceed 10 chars',
+                                textLength: 10
+                            },{
+                                type: 'follow-pattern',
+                                regexPattern: /^([A-Za-z])+$/,
+                                message: 'Please type only letters'
+                            }
+                        ],
+                        node: '.nickname'
                     },
                     
                     {

@@ -7,5 +7,12 @@
 
     "tags": [ "gallery" ],
 
-    "examples": []
+    "examples": [{
+        "name": "sample",
+        "displayName": "Validations in Use",
+        "description": "The following examples describes how to use  validations in a form, given the validation rules for each field"
+    }],
+    
+    "apiDocsUrl": "/api/classes/Common.SimpleValidator.html",
+    "yuiConfig": "{base: 'http://yui.yahooapis.com/3.13.0/build/',comboBase: 'http://yui.yahooapis.com/combo?',root: '3.13.0/build/'}"
 }

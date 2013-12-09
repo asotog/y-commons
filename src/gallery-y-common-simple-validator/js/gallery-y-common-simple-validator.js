@@ -13,6 +13,7 @@
 Y.namespace('Common');
 
 var VALIDATOR_EMPTY = 'empty';
+var VALIDATOR_MIN_TEXT_LIMIT = 'min-text-limit';
 var VALIDATOR_TEXT_LIMIT = 'text-limit';
 var VALIDATOR_FOLLOW_PATTERN = 'follow-pattern';
 var VALIDATOR_CUSTOM = 'custom';
@@ -93,6 +94,11 @@ Y.Common.SimpleValidator = Y.Base.create('gallery-y-common-simple-validator', Y.
             }
 
             if (!hasErrors && object.type == VALIDATOR_TEXT_LIMIT && field.get('value').length > object.textLength) {
+                errorNode.append(object.message);
+                hasErrors = true;
+            }
+            
+            if (!hasErrors && object.type == VALIDATOR_MIN_TEXT_LIMIT && field.get('value').length < object.textLength) {
                 errorNode.append(object.message);
                 hasErrors = true;
             }

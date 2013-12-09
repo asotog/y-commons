@@ -8,7 +8,7 @@
 
 <h2>Description</h2>
 
-<p>As described in the summary this module provides a configuration to make the validations works on the fields, in the following code is placed a regular field structure:</p>
+<p>As described in the summary this module provides a configuration to make the validations work on the fields, in the following code is placed a regular field structure:</p>
 
 ```
 <div id="container">
@@ -29,7 +29,7 @@
 
 <h2>Initialization</h2>
 
-<p>The code required to set the validations is simple in terms of configuration and flexibility, the following code shows how is configured but please see full example: </p>
+<p>The code required to set the validations is simple in terms of configuration and flexibility, the following code shows how is configured, also please see full example: </p>
 
 ```
 YUI().use('gallery-y-common-simple-validator', function(Y) {
@@ -82,7 +82,7 @@ YUI().use('gallery-y-common-simple-validator', function(Y) {
 
 <p>The <code>config</code> object will contain the fields wrapper and the fields validations rules</p>
 
-<p>As shown in the code above the validationRules is an array where each item belongs to the validation rules of one field, in this case there is only one entry for the field birthdate please check full example to see multiple fields in action.</p>
+<p>As shown in the code above the <code>validationRules</code> is an array where each item belongs to the validation rules of one field, in this case there is only one entry for the field birthdate, please check full example to see multiple fields in action.</p>
 
 <h2>Field validations configuration</h2>
 
@@ -132,7 +132,7 @@ YUI().use('gallery-y-common-simple-validator', function(Y) {
 
 
 
-<p>Each configured validation rule will be followed by a error message for failed validation case, detailed information in the following table:</p>
+<p>Each configured validation rule will be followed by an error message for failed validation case, detailed information in the following table:</p>
 
 <table>
     <tbody>
@@ -145,6 +145,11 @@ YUI().use('gallery-y-common-simple-validator', function(Y) {
             <td><code>empty</code></td>
             <td>The <code>empty</code> validation rule does not require additional configuration just need to provide the fail <code>message</code></td>
             <td>This validation will show up message if field is empty</td>
+        </tr>
+        <tr>
+            <td><code>min-text-limit</code></td>
+            <td>Will require to set up the <code>textLength</code> as a number</td>
+            <td>Will trigger message if field is less than the <code>textLength</code> defined</td>
         </tr>
         <tr>
             <td><code>text-limit</code></td>
@@ -184,3 +189,10 @@ YUI().use('gallery-y-common-simple-validator', function(Y) {
         </tr>
     </tbody>
 </table>
+
+
+<h2>API Docs</h2>
+
+<p>For detailed explanation of this component, default values and constructor arguments check <a href="{{{apiDocsUrl}}">api docs</a></p>
+
+

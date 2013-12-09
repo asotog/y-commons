@@ -1,0 +1,432 @@
+<script src="/build/gallery-y-common-simple-validator/gallery-y-common-simple-validator.js"></script>
+<style>
+    #container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    
+    .fail {
+        background: rgb(255, 208, 208);
+    }
+    .pass {
+        background: rgb(119, 194, 119);
+    }
+    
+    .field-wrapper {
+        padding: 10px;
+        display: block;
+        margin: 0 0 10px 0;
+    }
+    
+    label {
+        width: 65px;
+        display:inline-block;
+        font-weight: bold;
+    }
+    
+</style>
+<div class="intro">
+    <p>
+    {{description}}
+    </p>
+</div>
+
+<div id="container">
+    <form id="registration" action="#">
+        <span class="field-wrapper name">
+                <label>Name:</label>
+                <input name="name" type="text" value="">
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper nickname">
+                <label>Nickname:</label>
+                <input name="nickname" type="text" value="">
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper birthdate">
+                <label>Birth date:</label>
+                <input type="text" placeholder="YYYY/MM/DD" name="birthdate">
+                <span class="err-msg"></span>
+            </span>
+            
+            
+            <span class="field-wrapper gender">
+                <label>Gender:</label>
+                <span>
+                    Male<input name="gender" type="radio" value="0">
+                    Female<input name="gender" type="radio" value="1">
+                </span>
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper married">
+                <label>Married:</label>
+                <span>
+                    <input name="married" type="checkbox" value="married">
+                </span>
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper state">
+                <label>State:</label>
+                <select name="state">
+                    <option value="">Select State</option>
+                    <option value="ohio">Ohio</option>
+                    <option value="arizona">Arizona</option>
+                    <option value="texas">Texas</option>
+                    <option value="virginia">Virginia</option>
+                    <option value="colorado">Colorado</option>
+                </select>
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper zipcode">
+                <label>Zipcode:</label>
+                <input name="zipcode" type="text" value="">
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper agreement">
+                <label>Accept agreement:</label>
+                <span>
+                    <input name="agreement" type="checkbox" value="agreement">
+                </span>
+                <span class="err-msg"></span>
+            </span>
+            <button class="check-validation">Are fields valid ?</button>
+    </form>
+</div>
+
+
+
+<h3>HTML</h3>
+
+<p>Markup required is a regular form, each field is wrapped by a container that also will wrap the error message:</p>
+```
+<!-- component include  -->
+<script src="/build/gallery-y-common-simple-validator/gallery-y-common-simple-validator.js"></script>
+
+<form id="registration" action="#">
+    <span class="field-wrapper name">
+        <label>Name:</label>
+        <input name="name" type="text" value="">
+        <span class="err-msg"></span>
+    </span>
+    
+    <span class="field-wrapper nickname">
+        <label>Nickname:</label>
+        <input name="nickname" type="text" value="">
+        <span class="err-msg"></span>
+    </span>
+    
+    <span class="field-wrapper birthdate">
+        <label>Birth date:</label>
+        <input type="text" placeholder="YYYY/MM/DD" name="birthdate">
+        <span class="err-msg"></span>
+    </span>
+    
+    
+    <span class="field-wrapper gender">
+        <label>Gender:</label>
+        <span>
+            Male<input name="gender" type="radio" value="0">
+            Female<input name="gender" type="radio" value="1">
+        </span>
+        <span class="err-msg"></span>
+    </span>
+    
+    <span class="field-wrapper married">
+        <label>Married:</label>
+        <span>
+            <input name="married" type="checkbox" value="married">
+        </span>
+        <span class="err-msg"></span>
+    </span>
+    
+    <span class="field-wrapper state">
+        <label>State:</label>
+        <select name="state">
+            <option value="">Select State</option>
+            <option value="ohio">Ohio</option>
+            <option value="arizona">Arizona</option>
+            <option value="texas">Texas</option>
+            <option value="virginia">Virginia</option>
+            <option value="colorado">Colorado</option>
+        </select>
+        <span class="err-msg"></span>
+    </span>
+    
+    <span class="field-wrapper zipcode">
+        <label>Zipcode:</label>
+        <input name="zipcode" type="text" value="">
+        <span class="err-msg"></span>
+    </span>
+    
+    <span class="field-wrapper agreement">
+        <label>Accept agreement:</label>
+        <span>
+            <input name="agreement" type="checkbox" value="agreement">
+        </span>
+        <span class="err-msg"></span>
+    </span>
+    <button class="check-validation">Are fields valid ?</button>
+</form>
+```
+
+
+<h3>Javascript</h3>
+
+<p>Make validation works is really simple just need to set up the validations rules per each field and then instantiate the class:</p>
+```
+ YUI().use('gallery-y-common-simple-validator', function(Y) {
+        
+   // fields configuration with validation rules
+   var validationRules = [
+        {
+            type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                },{
+                    type: 'text-limit',
+                    message: 'This field cannot exceed 10 chars',
+                    textLength: 10
+                },{
+                    type: 'follow-pattern',
+                    regexPattern: /^([A-Za-z])+$/,
+                    message: 'Please type only letters'
+                }
+            ],
+            node: '.name',
+            field: 'input'
+        },
+        
+        {
+            type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                },{
+                    type: 'min-text-limit',
+                    message: 'This field must contain 4 or more characters',
+                    textLength: 4
+                },{
+                    type: 'text-limit',
+                    message: 'This field cannot exceed 10 chars',
+                    textLength: 10
+                },{
+                    type: 'follow-pattern',
+                    regexPattern: /^([A-Za-z])+$/,
+                    message: 'Please type only letters'
+                }
+            ],
+            node: '.nickname'
+        },
+        
+        {
+            type: [{
+                type: 'empty',
+                message: 'This field is required '
+            }, {
+                type: 'follow-pattern',
+                regexPattern:  /^[0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])$/,
+                message: 'Invalid date format'
+            }, {
+                type: 'custom',
+                isValidFn: function(value) {
+                    var birthday = +new Date(value);
+                    var age = ~~((Date.now() - birthday)); 
+                    return (age >= 0);
+                },
+                message: 'Cannot enter future date'
+            }],
+            node: '.birthdate'
+        },
+        
+        {
+            type: [{
+                type: 'empty',
+                message: 'This field is required '
+            }],
+            node: '.state',
+            field: 'select'
+        },
+        
+        {
+            type: [{
+                type: 'empty',
+                message: 'This field is required '
+            }, {
+                type: 'follow-pattern',
+                regexPattern: /^\d{5}(?:\d{4})?$/,
+                message: 'Zipcode can be 5 or 9 digits only'
+            }],
+            node: '.zipcode'
+        },
+        
+        {
+            type: [{
+                type: 'empty',
+                message: 'This field is required '
+            }],
+            node: '.gender'
+        },
+        
+        {
+            type: [{
+                type: 'empty',
+                message: 'This field is required '
+            }],
+            node: '.agreement'
+        }
+    ];
+    var config = {
+        container: Y.one('#registration'),
+        rules: validationRules
+    };
+    var validator = new Y.Common.SimpleValidator({
+        configuration: config
+    });
+    // fields are validated after change or blur but validations can be triggered manually
+    Y.one('#container').one('.check-validation').on('click', function(e) {
+        e.preventDefault();
+        // are fields valid ?
+        alert(validator.areFieldsValid());
+    });
+
+});
+```
+
+<h3>CSS</h3>
+
+<p>After validation execution the fail or pass class is added on to the field wrapper, the name of this class can be changed, by default this classes are <code>.fail</code> or <code>.pass</code>, check <a href="{{{apiDocsUrl}}#attrs">api documentation</a> to see further details on how to modify this via arguments:</p>
+
+```
+.fail {
+    background: rgb(255, 208, 208);
+}
+.pass {
+    background: rgb(119, 194, 119);
+}
+```
+
+
+
+<p></p>
+
+<script>
+    YUI({{{yuiConfig}}}).use('gallery-y-common-simple-validator', function(Y) {
+        
+       var validationRules = [
+            {
+                type: [{
+                        type: 'empty',
+                        message: 'This field is required '
+                    },{
+                        type: 'text-limit',
+                        message: 'This field cannot exceed 10 chars',
+                        textLength: 10
+                    },{
+                        type: 'follow-pattern',
+                        regexPattern: /^([A-Za-z])+$/,
+                        message: 'Please type only letters'
+                    }
+                ],
+                node: '.name',
+                field: 'input'
+            },
+            
+            {
+                type: [{
+                        type: 'empty',
+                        message: 'This field is required '
+                    },{
+                        type: 'min-text-limit',
+                        message: 'This field must contain 4 or more characters',
+                        textLength: 4
+                    },{
+                        type: 'text-limit',
+                        message: 'This field cannot exceed 10 chars',
+                        textLength: 10
+                    },{
+                        type: 'follow-pattern',
+                        regexPattern: /^([A-Za-z])+$/,
+                        message: 'Please type only letters'
+                    }
+                ],
+                node: '.nickname'
+            },
+            
+            
+            {
+                type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                }, {
+                    type: 'follow-pattern',
+                    regexPattern:  /^[0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])$/,
+                    message: 'Invalid date format'
+                }, {
+                    type: 'custom',
+                    isValidFn: function(value) {
+                        var birthday = +new Date(value);
+                        var age = ~~((Date.now() - birthday)); 
+                        return (age >= 0);
+                    },
+                    message: 'Cannot enter future date'
+                }],
+                node: '.birthdate'
+            },
+            
+            {
+                type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                }],
+                node: '.state',
+                field: 'select'
+            },
+            
+            {
+                type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                }, {
+                    type: 'follow-pattern',
+                    regexPattern: /^\d{5}(?:\d{4})?$/,
+                    message: 'Zipcode can be 5 or 9 digits only'
+                }],
+                node: '.zipcode'
+            },
+            
+            {
+                type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                }],
+                node: '.gender'
+            },
+            
+            {
+                type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                }],
+                node: '.agreement'
+            }
+        ];
+        var config = {
+            container: Y.one('#registration'),
+            rules: validationRules
+        };
+        var validator = new Y.Common.SimpleValidator({
+            configuration: config
+        });
+        Y.one('#container').one('.check-validation').on('click', function(e) {
+            e.preventDefault();
+            // are fields valid ?
+            alert(validator.areFieldsValid());
+        });
+
+    });
+</script>
