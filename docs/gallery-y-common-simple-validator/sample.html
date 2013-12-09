@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Example: Validations in Use</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Maven+Pro:400,700">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <script src="../../build/yui/yui-min.js"></script>
+    
+</head>
+<body>
+
+<div id="doc">
+    <h1>Example: Validations in Use</h1>
+
+    
+        <a href="sample.html#toc" class="jump">Jump to Table of Contents</a>
+    
+
+    <div class="yui3-g">
+        <div class="yui3-u-3-4">
+            <div id="main">
+                <div class="content"><script src="../../build/gallery-y-common-simple-validator/gallery-y-common-simple-validator.js"></script>
+<style>
+    #container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    
+    .fail {
+        background: rgb(255, 208, 208);
+    }
+    .pass {
+        background: rgb(119, 194, 119);
+    }
+    
+    .field-wrapper {
+        padding: 10px;
+        display: block;
+        margin: 0 0 10px 0;
+    }
+    
+    label {
+        width: 65px;
+        display:inline-block;
+        font-weight: bold;
+    }
+    
+</style>
+<div class="intro">
+    <p>
+    The following examples describes how to use  validations in a form, given the validation rules for each field
+    </p>
+</div>
+
+<div id="container">
+    <form id="registration" action="#">
+        <span class="field-wrapper name">
+                <label>Name:</label>
+                <input name="name" type="text" value="">
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper nickname">
+                <label>Nickname:</label>
+                <input name="nickname" type="text" value="">
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper birthdate">
+                <label>Birth date:</label>
+                <input type="text" placeholder="YYYY/MM/DD" name="birthdate">
+                <span class="err-msg"></span>
+            </span>
+            
+            
+            <span class="field-wrapper gender">
+                <label>Gender:</label>
+                <span>
+                    Male<input name="gender" type="radio" value="0">
+                    Female<input name="gender" type="radio" value="1">
+                </span>
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper married">
+                <label>Married:</label>
+                <span>
+                    <input name="married" type="checkbox" value="married">
+                </span>
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper state">
+                <label>State:</label>
+                <select name="state">
+                    <option value="">Select State</option>
+                    <option value="ohio">Ohio</option>
+                    <option value="arizona">Arizona</option>
+                    <option value="texas">Texas</option>
+                    <option value="virginia">Virginia</option>
+                    <option value="colorado">Colorado</option>
+                </select>
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper zipcode">
+                <label>Zipcode:</label>
+                <input name="zipcode" type="text" value="">
+                <span class="err-msg"></span>
+            </span>
+            
+            <span class="field-wrapper agreement">
+                <label>Accept agreement:</label>
+                <span>
+                    <input name="agreement" type="checkbox" value="agreement">
+                </span>
+                <span class="err-msg"></span>
+            </span>
+            <button class="check-validation">Are fields valid ?</button>
+    </form>
+</div>
+
+
+
+<h3 id="html">HTML</h3>
+
+<p>Markup required is a regular form, each field is wrapped by a container that also will wrap the error message:</p>
+<pre class="code prettyprint">&lt;!-- component include  --&gt;
+&lt;script src=&quot;&#x2F;build&#x2F;gallery-y-common-simple-validator&#x2F;gallery-y-common-simple-validator.js&quot;&gt;&lt;&#x2F;script&gt;
+
+&lt;form id=&quot;registration&quot; action=&quot;#&quot;&gt;
+    &lt;span class=&quot;field-wrapper name&quot;&gt;
+        &lt;label&gt;Name:&lt;&#x2F;label&gt;
+        &lt;input name=&quot;name&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
+        &lt;span class=&quot;err-msg&quot;&gt;&lt;&#x2F;span&gt;
+    &lt;&#x2F;span&gt;
+    
+    &lt;span class=&quot;field-wrapper nickname&quot;&gt;
+        &lt;label&gt;Nickname:&lt;&#x2F;label&gt;
+        &lt;input name=&quot;nickname&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
+        &lt;span class=&quot;err-msg&quot;&gt;&lt;&#x2F;span&gt;
+    &lt;&#x2F;span&gt;
+    
+    &lt;span class=&quot;field-wrapper birthdate&quot;&gt;
+        &lt;label&gt;Birth date:&lt;&#x2F;label&gt;
+        &lt;input type=&quot;text&quot; placeholder=&quot;YYYY&#x2F;MM&#x2F;DD&quot; name=&quot;birthdate&quot;&gt;
+        &lt;span class=&quot;err-msg&quot;&gt;&lt;&#x2F;span&gt;
+    &lt;&#x2F;span&gt;
+    
+    
+    &lt;span class=&quot;field-wrapper gender&quot;&gt;
+        &lt;label&gt;Gender:&lt;&#x2F;label&gt;
+        &lt;span&gt;
+            Male&lt;input name=&quot;gender&quot; type=&quot;radio&quot; value=&quot;0&quot;&gt;
+            Female&lt;input name=&quot;gender&quot; type=&quot;radio&quot; value=&quot;1&quot;&gt;
+        &lt;&#x2F;span&gt;
+        &lt;span class=&quot;err-msg&quot;&gt;&lt;&#x2F;span&gt;
+    &lt;&#x2F;span&gt;
+    
+    &lt;span class=&quot;field-wrapper married&quot;&gt;
+        &lt;label&gt;Married:&lt;&#x2F;label&gt;
+        &lt;span&gt;
+            &lt;input name=&quot;married&quot; type=&quot;checkbox&quot; value=&quot;married&quot;&gt;
+        &lt;&#x2F;span&gt;
+        &lt;span class=&quot;err-msg&quot;&gt;&lt;&#x2F;span&gt;
+    &lt;&#x2F;span&gt;
+    
+    &lt;span class=&quot;field-wrapper state&quot;&gt;
+        &lt;label&gt;State:&lt;&#x2F;label&gt;
+        &lt;select name=&quot;state&quot;&gt;
+            &lt;option value=&quot;&quot;&gt;Select State&lt;&#x2F;option&gt;
+            &lt;option value=&quot;ohio&quot;&gt;Ohio&lt;&#x2F;option&gt;
+            &lt;option value=&quot;arizona&quot;&gt;Arizona&lt;&#x2F;option&gt;
+            &lt;option value=&quot;texas&quot;&gt;Texas&lt;&#x2F;option&gt;
+            &lt;option value=&quot;virginia&quot;&gt;Virginia&lt;&#x2F;option&gt;
+            &lt;option value=&quot;colorado&quot;&gt;Colorado&lt;&#x2F;option&gt;
+        &lt;&#x2F;select&gt;
+        &lt;span class=&quot;err-msg&quot;&gt;&lt;&#x2F;span&gt;
+    &lt;&#x2F;span&gt;
+    
+    &lt;span class=&quot;field-wrapper zipcode&quot;&gt;
+        &lt;label&gt;Zipcode:&lt;&#x2F;label&gt;
+        &lt;input name=&quot;zipcode&quot; type=&quot;text&quot; value=&quot;&quot;&gt;
+        &lt;span class=&quot;err-msg&quot;&gt;&lt;&#x2F;span&gt;
+    &lt;&#x2F;span&gt;
+    
+    &lt;span class=&quot;field-wrapper agreement&quot;&gt;
+        &lt;label&gt;Accept agreement:&lt;&#x2F;label&gt;
+        &lt;span&gt;
+            &lt;input name=&quot;agreement&quot; type=&quot;checkbox&quot; value=&quot;agreement&quot;&gt;
+        &lt;&#x2F;span&gt;
+        &lt;span class=&quot;err-msg&quot;&gt;&lt;&#x2F;span&gt;
+    &lt;&#x2F;span&gt;
+    &lt;button class=&quot;check-validation&quot;&gt;Are fields valid ?&lt;&#x2F;button&gt;
+&lt;&#x2F;form&gt;</pre>
+
+
+
+<h3 id="javascript">Javascript</h3>
+
+<p>Make validation works is really simple just need to set up the validations rules per each field and then instantiate the class:</p>
+<pre class="code prettyprint">YUI().use(&#x27;gallery-y-common-simple-validator&#x27;, function(Y) {
+       
+  &#x2F;&#x2F; fields configuration with validation rules
+  var validationRules = [
+       {
+           type: [{
+                   type: &#x27;empty&#x27;,
+                   message: &#x27;This field is required &#x27;
+               },{
+                   type: &#x27;text-limit&#x27;,
+                   message: &#x27;This field cannot exceed 10 chars&#x27;,
+                   textLength: 10
+               },{
+                   type: &#x27;follow-pattern&#x27;,
+                   regexPattern: &#x2F;^([A-Za-z])+$&#x2F;,
+                   message: &#x27;Please type only letters&#x27;
+               }
+           ],
+           node: &#x27;.name&#x27;,
+           field: &#x27;input&#x27;
+       },
+       
+       {
+           type: [{
+                   type: &#x27;empty&#x27;,
+                   message: &#x27;This field is required &#x27;
+               },{
+                   type: &#x27;min-text-limit&#x27;,
+                   message: &#x27;This field must contain 4 or more characters&#x27;,
+                   textLength: 4
+               },{
+                   type: &#x27;text-limit&#x27;,
+                   message: &#x27;This field cannot exceed 10 chars&#x27;,
+                   textLength: 10
+               },{
+                   type: &#x27;follow-pattern&#x27;,
+                   regexPattern: &#x2F;^([A-Za-z])+$&#x2F;,
+                   message: &#x27;Please type only letters&#x27;
+               }
+           ],
+           node: &#x27;.nickname&#x27;
+       },
+       
+       {
+           type: [{
+               type: &#x27;empty&#x27;,
+               message: &#x27;This field is required &#x27;
+           }, {
+               type: &#x27;follow-pattern&#x27;,
+               regexPattern:  &#x2F;^[0-9]{4}\&#x2F;(0[1-9]|1[0-2])\&#x2F;(0[1-9]|[1-2][0-9]|3[0-1])$&#x2F;,
+               message: &#x27;Invalid date format&#x27;
+           }, {
+               type: &#x27;custom&#x27;,
+               isValidFn: function(value) {
+                   var birthday = +new Date(value);
+                   var age = ~~((Date.now() - birthday)); 
+                   return (age &gt;= 0);
+               },
+               message: &#x27;Cannot enter future date&#x27;
+           }],
+           node: &#x27;.birthdate&#x27;
+       },
+       
+       {
+           type: [{
+               type: &#x27;empty&#x27;,
+               message: &#x27;This field is required &#x27;
+           }],
+           node: &#x27;.state&#x27;,
+           field: &#x27;select&#x27;
+       },
+       
+       {
+           type: [{
+               type: &#x27;empty&#x27;,
+               message: &#x27;This field is required &#x27;
+           }, {
+               type: &#x27;follow-pattern&#x27;,
+               regexPattern: &#x2F;^\d{5}(?:\d{4})?$&#x2F;,
+               message: &#x27;Zipcode can be 5 or 9 digits only&#x27;
+           }],
+           node: &#x27;.zipcode&#x27;
+       },
+       
+       {
+           type: [{
+               type: &#x27;empty&#x27;,
+               message: &#x27;This field is required &#x27;
+           }],
+           node: &#x27;.gender&#x27;
+       },
+       
+       {
+           type: [{
+               type: &#x27;empty&#x27;,
+               message: &#x27;This field is required &#x27;
+           }],
+           node: &#x27;.agreement&#x27;
+       }
+   ];
+   var config = {
+       container: Y.one(&#x27;#registration&#x27;),
+       rules: validationRules
+   };
+   var validator = new Y.Common.SimpleValidator({
+       configuration: config
+   });
+   &#x2F;&#x2F; fields are validated after change or blur but validations can be triggered manually
+   Y.one(&#x27;#container&#x27;).one(&#x27;.check-validation&#x27;).on(&#x27;click&#x27;, function(e) {
+       e.preventDefault();
+       &#x2F;&#x2F; are fields valid ?
+       alert(validator.areFieldsValid());
+   });
+
+});</pre>
+
+
+<h3 id="css">CSS</h3>
+
+<p>After validation execution the fail or pass class is added on to the field wrapper, the name of this class can be changed, by default this classes are <code>.fail</code> or <code>.pass</code>, check <a href="../../api/classes/Common.SimpleValidator.html#attrs">api documentation</a> to see further details on how to modify this via arguments:</p>
+
+<pre class="code prettyprint">.fail {
+    background: rgb(255, 208, 208);
+}
+.pass {
+    background: rgb(119, 194, 119);
+}</pre>
+
+
+
+
+<p></p>
+
+<script>
+    YUI({base: 'http://yui.yahooapis.com/3.13.0/build/',comboBase: 'http://yui.yahooapis.com/combo?',root: '3.13.0/build/'}).use('gallery-y-common-simple-validator', function(Y) {
+        
+       var validationRules = [
+            {
+                type: [{
+                        type: 'empty',
+                        message: 'This field is required '
+                    },{
+                        type: 'text-limit',
+                        message: 'This field cannot exceed 10 chars',
+                        textLength: 10
+                    },{
+                        type: 'follow-pattern',
+                        regexPattern: /^([A-Za-z])+$/,
+                        message: 'Please type only letters'
+                    }
+                ],
+                node: '.name',
+                field: 'input'
+            },
+            
+            {
+                type: [{
+                        type: 'empty',
+                        message: 'This field is required '
+                    },{
+                        type: 'min-text-limit',
+                        message: 'This field must contain 4 or more characters',
+                        textLength: 4
+                    },{
+                        type: 'text-limit',
+                        message: 'This field cannot exceed 10 chars',
+                        textLength: 10
+                    },{
+                        type: 'follow-pattern',
+                        regexPattern: /^([A-Za-z])+$/,
+                        message: 'Please type only letters'
+                    }
+                ],
+                node: '.nickname'
+            },
+            
+            
+            {
+                type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                }, {
+                    type: 'follow-pattern',
+                    regexPattern:  /^[0-9]{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[1-2][0-9]|3[0-1])$/,
+                    message: 'Invalid date format'
+                }, {
+                    type: 'custom',
+                    isValidFn: function(value) {
+                        var birthday = +new Date(value);
+                        var age = ~~((Date.now() - birthday)); 
+                        return (age >= 0);
+                    },
+                    message: 'Cannot enter future date'
+                }],
+                node: '.birthdate'
+            },
+            
+            {
+                type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                }],
+                node: '.state',
+                field: 'select'
+            },
+            
+            {
+                type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                }, {
+                    type: 'follow-pattern',
+                    regexPattern: /^\d{5}(?:\d{4})?$/,
+                    message: 'Zipcode can be 5 or 9 digits only'
+                }],
+                node: '.zipcode'
+            },
+            
+            {
+                type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                }],
+                node: '.gender'
+            },
+            
+            {
+                type: [{
+                    type: 'empty',
+                    message: 'This field is required '
+                }],
+                node: '.agreement'
+            }
+        ];
+        var config = {
+            container: Y.one('#registration'),
+            rules: validationRules
+        };
+        var validator = new Y.Common.SimpleValidator({
+            configuration: config
+        });
+        Y.one('#container').one('.check-validation').on('click', function(e) {
+            e.preventDefault();
+            // are fields valid ?
+            alert(validator.areFieldsValid());
+        });
+
+    });
+</script></div>
+            </div>
+        </div>
+
+        <div class="yui3-u-1-4">
+            <div class="sidebar">
+                
+                    <div id="toc" class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Table of Contents</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="toc">
+<li>
+<a href="sample.html#html">HTML</a>
+</li>
+<li>
+<a href="sample.html#javascript">Javascript</a>
+</li>
+<li>
+<a href="sample.html#css">CSS</a>
+</li>
+</ul>
+                        </div>
+                    </div>
+                
+
+                
+                    <div class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Examples</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="examples">
+                                
+                                    
+                                        <li data-description="The following examples describes how to use  validations in a form, given the validation rules for each field">
+                                            <a href="sample.html">Validations in Use</a>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </div>
+                    </div>
+                
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+
+</body>
+</html>

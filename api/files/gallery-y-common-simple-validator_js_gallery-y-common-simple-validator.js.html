@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>gallery-y-common-simple-validator/js/gallery-y-common-simple-validator.js - yogi doc server</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="yogi doc server"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 3.11.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="gallery-y-common-simple-validator_js_gallery-y-common-simple-validator.js.html#api-classes">Classes</a></li>
+            <li><a href="gallery-y-common-simple-validator_js_gallery-y-common-simple-validator.js.html#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Common.Accordion.html">Common.Accordion</a></li>
+            
+                <li><a href="../classes/Common.CompoundTextField.html">Common.CompoundTextField</a></li>
+            
+                <li><a href="../classes/Common.DomFieldsModel.html">Common.DomFieldsModel</a></li>
+            
+                <li><a href="../classes/Common.Radios.html">Common.Radios</a></li>
+            
+                <li><a href="../classes/Common.Selects.html">Common.Selects</a></li>
+            
+                <li><a href="../classes/Common.SimpleValidator.html">Common.SimpleValidator</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/gallery-y-common-accordion.html">gallery-y-common-accordion</a></li>
+            
+                <li><a href="../modules/gallery-y-common-compound-textfield.html">gallery-y-common-compound-textfield</a></li>
+            
+                <li><a href="../modules/gallery-y-common-dom-fields-model.html">gallery-y-common-dom-fields-model</a></li>
+            
+                <li><a href="../modules/gallery-y-common-radios.html">gallery-y-common-radios</a></li>
+            
+                <li><a href="../modules/gallery-y-common-selects.html">gallery-y-common-selects</a></li>
+            
+                <li><a href="../modules/gallery-y-common-simple-validator.html">gallery-y-common-simple-validator</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: gallery-y-common-simple-validator/js/gallery-y-common-simple-validator.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * Class that provides fields validation mechanisms that can be easily configured through configuration array
+ * with the set of rules per field
+ *
+ * @class SimpleValidator
+ * @namespace Common
+ * @extends Base
+ * @module gallery-y-common-simple-validator
+ * @constructor
+ */
+
+
+Y.namespace(&#x27;Common&#x27;);
+
+var VALIDATOR_EMPTY = &#x27;empty&#x27;;
+var VALIDATOR_MIN_TEXT_LIMIT = &#x27;min-text-limit&#x27;;
+var VALIDATOR_TEXT_LIMIT = &#x27;text-limit&#x27;;
+var VALIDATOR_FOLLOW_PATTERN = &#x27;follow-pattern&#x27;;
+var VALIDATOR_CUSTOM = &#x27;custom&#x27;;
+
+Y.Common.SimpleValidator = Y.Base.create(&#x27;gallery-y-common-simple-validator&#x27;, Y.Base, [], {
+
+    initializer: function () {
+        var me = this;
+        this.addFieldSet(this.get(&#x27;configuration&#x27;));
+    },
+    
+    /**
+     * Add validations dynamically, validations added with this method will be only triggered with user events
+     * on fields interaction
+     * 
+     * @method addFieldSet
+     * @param Object configuration Object with the validation rules and the container of the fields 
+     *
+     */
+    addFieldSet: function (configuration) {
+        var me = this;
+        var ctner = configuration.container;
+        this.iterateConfig(ctner, configuration, function (validationType, node, field) {
+            /* fix for radio button event delegation bug */
+            if (field.get(&#x27;type&#x27;) == &#x27;radio&#x27;) {
+                node.all(&#x27;input[type=&quot;radio&quot;]&#x27;).each(function (radio) {
+                    radio.on(&#x27;change&#x27;, function (e) {
+                        me.validate(radio, node, validationType);
+                    });
+                });
+            } else {
+                field.on(&#x27;change&#x27;, function (e) {
+                    me.validate(field, node, validationType);
+                });
+                field.on(&#x27;blur&#x27;, function (e) {
+                    me.validate(field, node, validationType);
+                });
+            }
+        });
+    },
+
+    /**
+     * Iterates over configuration array
+     * 
+     * @param Y.Node container Fields container
+     * @param {Object} configuration Object containing the set of fields validations rules
+     * @param {Function} fn Function to apply while iterating each configuration element
+     * 
+     */
+    iterateConfig: function (container, configuration, fn) {
+        Y.Array.each(configuration.rules, function (element) {
+            var validationType = element.type;
+            var node = container.one(element.node);
+            var field = (element.field) ? node.one(element.field) : node.one(&#x27;input&#x27;);
+            fn(validationType, node, field);
+        });
+    },
+
+    /**
+     * Validates field applying the configured rules 
+     *
+     */
+    validate: function (field, wrapper, validationType) {
+        var me = this;
+        var errorNode = wrapper.one(me.get(&#x27;errorNodeSelector&#x27;));
+        errorNode.empty();
+        var hasErrors = false;
+        Y.Array.each(validationType, function (object) {
+
+            if (object.type == VALIDATOR_EMPTY &amp;&amp; field.get(&#x27;value&#x27;).length &lt;= 0) {
+                errorNode.append(object.message);
+                hasErrors = true;
+            }
+
+            if (object.type == VALIDATOR_EMPTY &amp;&amp; (field.get(&#x27;type&#x27;) == &#x27;radio&#x27; || field.get(&#x27;type&#x27;) == &#x27;checkbox&#x27;) &amp;&amp; !field.get(&#x27;checked&#x27;)) {
+                errorNode.append(object.message);
+                hasErrors = true;
+            }
+
+            if (!hasErrors &amp;&amp; object.type == VALIDATOR_TEXT_LIMIT &amp;&amp; field.get(&#x27;value&#x27;).length &gt; object.textLength) {
+                errorNode.append(object.message);
+                hasErrors = true;
+            }
+            
+            if (!hasErrors &amp;&amp; object.type == VALIDATOR_MIN_TEXT_LIMIT &amp;&amp; field.get(&#x27;value&#x27;).length &lt; object.textLength) {
+                errorNode.append(object.message);
+                hasErrors = true;
+            }
+
+            if (!hasErrors &amp;&amp; object.type == VALIDATOR_FOLLOW_PATTERN &amp;&amp; !(field.get(&#x27;value&#x27;).search(object.regexPattern) != -1)) {
+                errorNode.append(object.message);
+                hasErrors = true;
+            }
+
+            if (!hasErrors &amp;&amp; object.type == VALIDATOR_CUSTOM &amp;&amp; typeof object.isValidFn == &#x27;function&#x27;) {
+                if (!object.isValidFn(field.get(&#x27;value&#x27;))) {
+                    errorNode.append(object.message);
+                    hasErrors = true;
+                }
+            }
+
+        });
+        this.toggleWrapper(wrapper, hasErrors);
+        return !hasErrors;
+    },
+
+    /**
+     * Adds the required class to field wrapper after field validation
+     *  
+     */
+    toggleWrapper: function (wrapper, hasErrors) {
+        if (hasErrors) {
+            wrapper.removeClass(this.get(&#x27;passClass&#x27;));
+            wrapper.addClass(this.get(&#x27;failClass&#x27;));
+        } else {
+            wrapper.removeClass(this.get(&#x27;failClass&#x27;));
+            wrapper.addClass(this.get(&#x27;passClass&#x27;));
+        }
+    },
+
+    /**
+     * Executes fields validation, usually this function can be called directly to know if fields are valid or not based
+     * on the rules provided when creating the validation object
+     * 
+     * @method areFieldsValid
+     * @return {Boolean} It returns &lt;code&gt;true&lt;/code&gt; when fields are valid or &lt;code&gt;false&lt;/code&gt; when not
+     *
+     */
+    areFieldsValid: function () {
+        var me = this;
+        var fieldsValid = true;
+        var ctner = this.get(&#x27;configuration&#x27;).container;
+        this.iterateConfig(ctner, this.get(&#x27;configuration&#x27;), function (validationType, node, field) {
+            var fieldValid = true;
+            if (field.get(&#x27;type&#x27;) == &#x27;radio&#x27;) {
+                var radioChecked = node.one(&#x27;input[type=&quot;radio&quot;]:checked&#x27;);
+                var radio = (radioChecked) ? radioChecked : node.one(&#x27;input[type=&quot;radio&quot;]&#x27;);
+                fieldValid = me.validate(radio, node, validationType);
+            } else {
+                fieldValid = me.validate(field, node, validationType);
+            }
+            fieldsValid = fieldValid ? fieldsValid : false;
+        });
+        return fieldsValid;
+    },
+
+    destructor: function () {
+
+    }
+}, {
+    ATTRS: {
+
+        /**
+         * Configuration that needs to be provided for the validations, please see further details of this class on
+         * regular documentation
+         *
+         * @attribute configuration
+         * @type {Object}
+         */
+        /**
+         * {
+         *   container: Y.Node,
+         *   rules: [   ....   ]   // set of fields rules
+         * }
+         */
+        configuration: {
+            value: null
+        },
+        
+        /**
+         * Selector for the error message container for each field
+         *
+         * @attribute errorNodeSelector
+         * @type {String}
+         * @default &#x27;.err-msg&#x27;
+         */
+        errorNodeSelector: {
+            value: &#x27;.err-msg&#x27;
+        },
+
+        
+        /**
+         * Css class added to the field wrapper after validation success
+         *
+         * @attribute passClass
+         * @type {String}
+         * @default &#x27;pass&#x27;
+         */
+        passClass: {
+            value: &#x27;pass&#x27;
+        },
+
+        /**
+         * Css class added to the field wrapper after validation fail
+         *
+         * @attribute failClass
+         * @type {String}
+         * @default &#x27;fail&#x27;
+         */
+        failClass: {
+            value: &#x27;fail&#x27;
+        }
+    }
+});
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

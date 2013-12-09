@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Common.CompoundTextField - yogi doc server</title>
+    <title>Common.SimpleValidator - yogi doc server</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -30,8 +30,8 @@
     <h2 class="off-left">APIs</h2>
     <div id="api-tabview" class="tabview">
         <ul class="tabs">
-            <li><a href="Common.CompoundTextField.html#api-classes">Classes</a></li>
-            <li><a href="Common.CompoundTextField.html#api-modules">Modules</a></li>
+            <li><a href="Common.SimpleValidator.html#api-classes">Classes</a></li>
+            <li><a href="Common.SimpleValidator.html#api-modules">Modules</a></li>
         </ul>
 
         <div id="api-tabview-filter">
@@ -104,25 +104,25 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>Common.CompoundTextField Class</h1>
+                        <h1>Common.SimpleValidator Class</h1>
 <div class="box meta">
     
 
     
         <div class="extends">
-            Extends Widget
+            Extends Base
         </div>
     
 
     
         <div class="foundat">
-            Defined in: <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l1"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:1</code></a>
+            Defined in: <a href="../files/gallery-y-common-simple-validator_js_gallery-y-common-simple-validator.js.html#l1"><code>gallery-y-common-simple-validator&#x2F;js&#x2F;gallery-y-common-simple-validator.js:1</code></a>
         </div>
     
 
     
         
-            Module: <a href="../modules/gallery-y-common-compound-textfield.html">gallery-y-common-compound-textfield</a>
+            Module: <a href="../modules/gallery-y-common-simple-validator.html">gallery-y-common-simple-validator</a>
         
     
 
@@ -132,16 +132,16 @@
 
 
 <div class="box intro">
-    <p>This module is a widget that syncs multiple fields into one field usually a hidden field to store a compound value
-for example a social security number or phone number where usually needs like 3 different fields</p>
+    <p>Class that provides fields validation mechanisms that can be easily configured through configuration array
+with the set of rules per field</p>
 
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_Common.CompoundTextField" class="method item">
-    <h3 class="name"><code>Common.CompoundTextField</code></h3>
+        <div id="method_Common.SimpleValidator" class="method item">
+    <h3 class="name"><code>Common.SimpleValidator</code></h3>
 
     
         <span class="paren">()</span>
@@ -172,7 +172,7 @@ for example a social security number or phone number where usually needs like 3 
             
         
         
-        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l1"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:1</code></a>
+        <a href="../files/gallery-y-common-simple-validator_js_gallery-y-common-simple-validator.js.html#l1"><code>gallery-y-common-simple-validator&#x2F;js&#x2F;gallery-y-common-simple-validator.js:1</code></a>
         
         </p>
 
@@ -198,14 +198,14 @@ for example a social security number or phone number where usually needs like 3 
 
 <div id="classdocs" class="tabview">
     <ul class="api-class-tabs">
-        <li class="api-class-tab index"><a href="Common.CompoundTextField.html#index">Index</a></li>
+        <li class="api-class-tab index"><a href="Common.SimpleValidator.html#index">Index</a></li>
 
         
-            <li class="api-class-tab methods"><a href="Common.CompoundTextField.html#methods">Methods</a></li>
+            <li class="api-class-tab methods"><a href="Common.SimpleValidator.html#methods">Methods</a></li>
         
         
         
-            <li class="api-class-tab attrs"><a href="Common.CompoundTextField.html#attrs">Attributes</a></li>
+            <li class="api-class-tab attrs"><a href="Common.SimpleValidator.html#attrs">Attributes</a></li>
         
         
     </ul>
@@ -221,14 +221,14 @@ for example a social security number or phone number where usually needs like 3 
                     <ul class="index-list methods extends">
                         
                             <li class="index-item method">
-                                <a href="Common.CompoundTextField.html#method_format">format</a>
+                                <a href="Common.SimpleValidator.html#method_addFieldSet">addFieldSet</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
-                                <a href="Common.CompoundTextField.html#method_getCompoundValue">getCompoundValue</a>
+                                <a href="Common.SimpleValidator.html#method_areFieldsValid">areFieldsValid</a>
 
                                 
                                 
@@ -247,19 +247,19 @@ for example a social security number or phone number where usually needs like 3 
                     <ul class="index-list attrs extends">
                         
                             <li class="index-item attr">
-                                <a href="Common.CompoundTextField.html#attr_compoundValue">compoundValue</a>
+                                <a href="Common.SimpleValidator.html#attr_configuration">configuration</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="Common.CompoundTextField.html#attr_fieldsSelector">fieldsSelector</a>
+                                <a href="Common.SimpleValidator.html#attr_errorNodeSelector">errorNodeSelector</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="Common.CompoundTextField.html#attr_mainField">mainField</a>
+                                <a href="Common.SimpleValidator.html#attr_failClass">failClass</a>
                             </li>
                         
                             <li class="index-item attr">
-                                <a href="Common.CompoundTextField.html#attr_separator">separator</a>
+                                <a href="Common.SimpleValidator.html#attr_passClass">passClass</a>
                             </li>
                         
                     </ul>
@@ -274,8 +274,8 @@ for example a social security number or phone number where usually needs like 3 
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_format" class="method item">
-    <h3 class="name"><code>format</code></h3>
+                    <div id="method_addFieldSet" class="method item">
+    <h3 class="name"><code>addFieldSet</code></h3>
 
     
         <div class="args">
@@ -283,13 +283,7 @@ for example a social security number or phone number where usually needs like 3 
             
                 <li class="arg">
                     
-                        <code>text</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>separator</code>
+                        <code>Object</code>
                     
                 </li>
             
@@ -297,10 +291,6 @@ for example a social security number or phone number where usually needs like 3 
         </div>
     
 
-    
-        <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-        </span>
     
 
     
@@ -326,7 +316,7 @@ for example a social security number or phone number where usually needs like 3 
             
         
         
-        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l56"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:56</code></a>
+        <a href="../files/gallery-y-common-simple-validator_js_gallery-y-common-simple-validator.js.html#l28"><code>gallery-y-common-simple-validator&#x2F;js&#x2F;gallery-y-common-simple-validator.js:28</code></a>
         
         </p>
 
@@ -337,7 +327,8 @@ for example a social security number or phone number where usually needs like 3 
     </div>
 
     <div class="description">
-        <p>Format string based on the configured compound text field but using a separator char</p>
+        <p>Add validations dynamically, validations added with this method will be only triggered with user events
+on fields interaction</p>
 
     </div>
 
@@ -349,30 +340,14 @@ for example a social security number or phone number where usually needs like 3 
             
                 <li class="param">
                     
-                        <code class="param-name">text</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                        <code class="param-name">Object</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Text to be formatted</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">separator</code>
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Char that is going to be used as separator e.g: -, _, ...</p>
+                        <p>configuration Object with the validation rules and the container of the fields</p>
 
                     </div>
 
@@ -384,27 +359,13 @@ for example a social security number or phone number where usually needs like 3 
     
 
     
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
-                    
-                    <p>Formatted string</p>
-
-                
-            </div>
-        </div>
-    
 
     
 </div>
 
                 
-                    <div id="method_getCompoundValue" class="method item">
-    <h3 class="name"><code>getCompoundValue</code></h3>
+                    <div id="method_areFieldsValid" class="method item">
+    <h3 class="name"><code>areFieldsValid</code></h3>
 
     
         <span class="paren">()</span>
@@ -412,7 +373,7 @@ for example a social security number or phone number where usually needs like 3 
 
     
         <span class="returns-inline">
-            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
         </span>
     
 
@@ -439,7 +400,7 @@ for example a social security number or phone number where usually needs like 3 
             
         
         
-        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l80"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:80</code></a>
+        <a href="../files/gallery-y-common-simple-validator_js_gallery-y-common-simple-validator.js.html#l137"><code>gallery-y-common-simple-validator&#x2F;js&#x2F;gallery-y-common-simple-validator.js:137</code></a>
         
         </p>
 
@@ -450,7 +411,8 @@ for example a social security number or phone number where usually needs like 3 
     </div>
 
     <div class="description">
-        <p>Gets based on the compounds fields the main field compound value</p>
+        <p>Executes fields validation, usually this function can be called directly to know if fields are valid or not based
+on the rules provided when creating the validation object</p>
 
     </div>
 
@@ -463,9 +425,9 @@ for example a social security number or phone number where usually needs like 3 
             <div class="returns-description">
                 
                     
-                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>:
                     
-                    <p>Compound value</p>
+                    <p>It returns <code>true</code> when fields are valid or <code>false</code> when not</p>
 
                 
             </div>
@@ -486,10 +448,10 @@ for example a social security number or phone number where usually needs like 3 
                 <h2 class="off-left">Attributes</h2>
 
                 
-                    <div id="attr_compoundValue" class="attr item">
-    <a name="config_compoundValue"></a> 
-    <h3 class="name"><code>compoundValue</code></h3>
-    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    <div id="attr_configuration" class="attr item">
+    <a name="config_configuration"></a> 
+    <h3 class="name"><code>configuration</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
 
     
 
@@ -516,7 +478,7 @@ for example a social security number or phone number where usually needs like 3 
             
         
         
-        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l142"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:142</code></a>
+        <a href="../files/gallery-y-common-simple-validator_js_gallery-y-common-simple-validator.js.html#l169"><code>gallery-y-common-simple-validator&#x2F;js&#x2F;gallery-y-common-simple-validator.js:169</code></a>
         
         </p>
 
@@ -526,7 +488,8 @@ for example a social security number or phone number where usually needs like 3 
     </div>
 
     <div class="description">
-        <p>Compound value</p>
+        <p>Configuration that needs to be provided for the validations, please see further details of this class on
+regular documentation</p>
 
     </div>
 
@@ -534,10 +497,10 @@ for example a social security number or phone number where usually needs like 3 
 
     
         <div class="emits box">
-            <h4>Fires event <code>compoundValueChange</code></h4>
+            <h4>Fires event <code>configurationChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>compoundValue</code> is
+            Fires when the value for the configuration attribute <code>configuration</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -589,9 +552,9 @@ for example a social security number or phone number where usually needs like 3 
 </div>
 
                 
-                    <div id="attr_fieldsSelector" class="attr item">
-    <a name="config_fieldsSelector"></a> 
-    <h3 class="name"><code>fieldsSelector</code></h3>
+                    <div id="attr_errorNodeSelector" class="attr item">
+    <a name="config_errorNodeSelector"></a> 
+    <h3 class="name"><code>errorNodeSelector</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
@@ -619,7 +582,7 @@ for example a social security number or phone number where usually needs like 3 
             
         
         
-        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l108"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:108</code></a>
+        <a href="../files/gallery-y-common-simple-validator_js_gallery-y-common-simple-validator.js.html#l186"><code>gallery-y-common-simple-validator&#x2F;js&#x2F;gallery-y-common-simple-validator.js:186</code></a>
         
         </p>
 
@@ -629,20 +592,20 @@ for example a social security number or phone number where usually needs like 3 
     </div>
 
     <div class="description">
-        <p>Compounds fields selector</p>
+        <p>Selector for the error message container for each field</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;.compound-text-field&#x27;</p>
+        <p><strong>Default:</strong> &#x27;.err-msg&#x27;</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>fieldsSelectorChange</code></h4>
+            <h4>Fires event <code>errorNodeSelectorChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>fieldsSelector</code> is
+            Fires when the value for the configuration attribute <code>errorNodeSelector</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -694,9 +657,9 @@ for example a social security number or phone number where usually needs like 3 
 </div>
 
                 
-                    <div id="attr_mainField" class="attr item">
-    <a name="config_mainField"></a> 
-    <h3 class="name"><code>mainField</code></h3>
+                    <div id="attr_failClass" class="attr item">
+    <a name="config_failClass"></a> 
+    <h3 class="name"><code>failClass</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
@@ -724,7 +687,7 @@ for example a social security number or phone number where usually needs like 3 
             
         
         
-        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l131"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:131</code></a>
+        <a href="../files/gallery-y-common-simple-validator_js_gallery-y-common-simple-validator.js.html#l209"><code>gallery-y-common-simple-validator&#x2F;js&#x2F;gallery-y-common-simple-validator.js:209</code></a>
         
         </p>
 
@@ -734,20 +697,20 @@ for example a social security number or phone number where usually needs like 3 
     </div>
 
     <div class="description">
-        <p>Main field selector, this field will contain the compound value</p>
+        <p>Css class added to the field wrapper after validation fail</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;.main-compound-field&#x27;</p>
+        <p><strong>Default:</strong> &#x27;fail&#x27;</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>mainFieldChange</code></h4>
+            <h4>Fires event <code>failClassChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>mainField</code> is
+            Fires when the value for the configuration attribute <code>failClass</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the
@@ -799,9 +762,9 @@ for example a social security number or phone number where usually needs like 3 
 </div>
 
                 
-                    <div id="attr_separator" class="attr item">
-    <a name="config_separator"></a> 
-    <h3 class="name"><code>separator</code></h3>
+                    <div id="attr_passClass" class="attr item">
+    <a name="config_passClass"></a> 
+    <h3 class="name"><code>passClass</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
 
     
@@ -829,7 +792,7 @@ for example a social security number or phone number where usually needs like 3 
             
         
         
-        <a href="../files/gallery-y-common-compound-textfield_js_gallery-y-common-compound-textfield.js.html#l119"><code>gallery-y-common-compound-textfield&#x2F;js&#x2F;gallery-y-common-compound-textfield.js:119</code></a>
+        <a href="../files/gallery-y-common-simple-validator_js_gallery-y-common-simple-validator.js.html#l198"><code>gallery-y-common-simple-validator&#x2F;js&#x2F;gallery-y-common-simple-validator.js:198</code></a>
         
         </p>
 
@@ -839,21 +802,20 @@ for example a social security number or phone number where usually needs like 3 
     </div>
 
     <div class="description">
-        <p>Compound value separator, usual value is &#39;-&#39; as separator, to make hidden field contain compound values such as
-<code>901-234-678</code></p>
+        <p>Css class added to the field wrapper after validation success</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;&#x27;</p>
+        <p><strong>Default:</strong> &#x27;pass&#x27;</p>
     
 
     
         <div class="emits box">
-            <h4>Fires event <code>separatorChange</code></h4>
+            <h4>Fires event <code>passClassChange</code></h4>
 
             <p>
-            Fires when the value for the configuration attribute <code>separator</code> is
+            Fires when the value for the configuration attribute <code>passClass</code> is
             changed. You can listen for the event using the <code>on</code> method if you
             wish to be notified before the attribute's value has changed, or
             using the <code>after</code> method if you wish to be notified after the

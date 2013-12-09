@@ -5,14 +5,16 @@ YUI.add("yuidoc-meta", function(Y) {
         "Common.CompoundTextField",
         "Common.DomFieldsModel",
         "Common.Radios",
-        "Common.Selects"
+        "Common.Selects",
+        "Common.SimpleValidator"
     ],
     "modules": [
         "gallery-y-common-accordion",
         "gallery-y-common-compound-textfield",
         "gallery-y-common-dom-fields-model",
         "gallery-y-common-radios",
-        "gallery-y-common-selects"
+        "gallery-y-common-selects",
+        "gallery-y-common-simple-validator"
     ],
     "allModules": [
         {
@@ -39,6 +41,11 @@ YUI.add("yuidoc-meta", function(Y) {
             "displayName": "gallery-y-common-selects",
             "name": "gallery-y-common-selects",
             "description": "Utility to generate base markup to give a skin or different look and feel to <code>select</code> tags"
+        },
+        {
+            "displayName": "gallery-y-common-simple-validator",
+            "name": "gallery-y-common-simple-validator",
+            "description": "Class that provides fields validation mechanisms that can be easily configured through configuration array\nwith the set of rules per field"
         }
     ]
 } };

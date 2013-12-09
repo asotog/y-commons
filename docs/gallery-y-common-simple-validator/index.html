@@ -24,7 +24,7 @@
             <div id="main">
                 <div class="content"><div class="intro">
     <p>
-    *Summary Goes Here*
+    This validator module provides a way to validate fields based on a configuration object, and provides multiple ways to validate fields
     </p>
 </div>
 
@@ -63,9 +63,187 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
 
 <h2 id="description">Description</h2>
 
-<p>*Module Description Goes Here*</p>
+<p>As described in the summary this module provides a configuration to make the validations work on the fields, in the following code is placed a regular field structure:</p>
 
-<pre class="code prettyprint">&#x2F;&#x2F;Module example code</pre>
+<pre class="code prettyprint">&lt;div id=&quot;container&quot;&gt;
+    ...
+    
+    &lt;span class=&quot;field-wrapper birthdate&quot;&gt;
+        &lt;label&gt;Birth date:&lt;&#x2F;label&gt;
+        &lt;input type=&quot;text&quot; placeholder=&quot;YYYY&#x2F;MM&#x2F;DD&quot; name=&quot;birthdate&quot;&gt;
+        &lt;span class=&quot;err-msg&quot;&gt;&lt;&#x2F;span&gt;
+    &lt;&#x2F;span&gt;
+    
+    ...
+&lt;&#x2F;div&gt;</pre>
+
+
+<p>As shown above the field convention should contain the wrapper which is <code>.birthdate</code>, the field (in this case the <code>input</code> tag) and the error message container (which is the <code>span.err-msg</code>) </p>
+
+
+<h2 id="initialization">Initialization</h2>
+
+<p>The code required to set the validations is simple in terms of configuration and flexibility, the following code shows how is configured, also please see full example: </p>
+
+<pre class="code prettyprint">YUI().use(&#x27;gallery-y-common-simple-validator&#x27;, function(Y) {
+
+    var validationRules = [
+            
+        ...
+    
+        {
+        
+            type: [
+                {
+                    type: &#x27;empty&#x27;,
+                    message: &#x27;This field is required &#x27;
+                }, 
+                {
+                    type: &#x27;follow-pattern&#x27;,
+                    regexPattern:  &#x2F;^[0-9]{4}\&#x2F;(0[1-9]|1[0-2])\&#x2F;(0[1-9]|[1-2][0-9]|3[0-1])$&#x2F;,
+                    message: &#x27;Invalid date format&#x27;
+                }, 
+                {
+                    type: &#x27;custom&#x27;,
+                    isValidFn: function(value) {
+                        var birthday = +new Date(value);
+                        var age = ~~((Date.now() - birthday)); 
+                        return (age &gt;= 0);
+                    },
+                    message: &#x27;Cannot enter future date&#x27;
+                }
+            ],
+            node: &#x27;.birthdate&#x27;
+        }
+       
+       ...
+       
+   ];
+   
+   
+   var config = {
+       container: Y.one(&#x27;#container&#x27;),
+       rules: validationRules
+   };
+    
+   var validator = new Y.Common.SimpleValidator({
+       configuration: config
+   });
+   
+});</pre>
+
+
+<p>The <code>config</code> object will contain the fields wrapper and the fields validations rules</p>
+
+<p>As shown in the code above the <code>validationRules</code> is an array where each item belongs to the validation rules of one field, in this case there is only one entry for the field birthdate, please check full example to see multiple fields in action.</p>
+
+<h2 id="field-validations-configuration">Field validations configuration</h2>
+
+<p>Each field entry can have multiple validations rules, but first, the following table describe the field validation entry configuration:</p>
+
+<table>
+    <tbody>
+        <tr>
+            <th>Property</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Optional?</th>
+        </tr>
+        <tr>
+            <td><code>node</code></td>
+            <td><code>String</code></td>
+            <td>Field wrapper selector, wrapper that contains the field and the error message</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td><code>type</code></td>
+            <td><code>Array</code></td>
+            <td>List of field validation rules, validation rules will be detailed in <a href="index.html#field-validation-rules-available">validation rules available</a></td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td><code>field</code></td>
+            <td><code>String</code></td>
+            <td>Field selector, by default this value will be <code>input</code>, <code>field</code> can be defined for select or other kind of field tag different than <code>input</code></td>
+            <td>Yes</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 id="field-validation-rules-available">Field validation rules available</h2>
+
+<p>This validator module provides 4 types of validation rules. The validation rule structure will be as the following code describes: </p>
+
+<pre class="code prettyprint">{
+    type: &#x27;...&#x27;, &#x2F;&#x2F; type of validation detailed in the following table
+    ...  &#x2F;&#x2F; optional: also depending on the validation type, could be additional rule configuration
+         &#x2F;&#x2F;            property to set it up
+    message: &#x27;...&#x27; &#x2F;&#x2F; message displayed if validation fails
+}</pre>
+
+
+
+
+<p>Each configured validation rule will be followed by an error message for failed validation case, detailed information in the following table:</p>
+
+<table>
+    <tbody>
+        <tr>
+            <th>Type</th>
+            <th>Configuration</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><code>empty</code></td>
+            <td>The <code>empty</code> validation rule does not require additional configuration just need to provide the fail <code>message</code></td>
+            <td>This validation will show up message if field is empty</td>
+        </tr>
+        <tr>
+            <td><code>min-text-limit</code></td>
+            <td>Will require to set up the <code>textLength</code> as a number</td>
+            <td>Will trigger message if field is less than the <code>textLength</code> defined</td>
+        </tr>
+        <tr>
+            <td><code>text-limit</code></td>
+            <td>Will require to set up the <code>textLength</code> as a number</td>
+            <td>Will trigger message if field exceeds the <code>textLength</code> defined</td>
+        </tr>
+        <tr>
+            <td><code>follow-pattern</code></td>
+            <td>The property <code>regexPattern</code> containing the regex expression that need to match the field. e.g: 
+<pre class="code prettyprint">{
+    type: &#x27;follow-pattern&#x27;,
+    regexPattern: &#x2F;^\d{5}(?:\d{4})?$&#x2F;,
+    message: &#x27;Zipcode can be 5 or 9 digits only&#x27;
+}</pre>
+
+            </td>
+            <td>Message will be shown if field does not match the regex pattern</td>
+        </tr>
+        <tr>
+            <td><code>custom</code></td>
+            <td>With <code>custom</code> type, a function can be defined to also validate the field, the function should return                         <code>true</code> if passed or <code>false</code> in case of validation not passed, the following code contains a sample                 rule using <code>custom</code>:
+<pre class="code prettyprint">{
+    type: &#x27;custom&#x27;,
+    isValidFn: function(value) { &#x2F;&#x2F; passes field value
+        var birthday = +new Date(value);
+        var age = ~~((Date.now() - birthday)); 
+        return (age &gt;= 0);  &#x2F;&#x2F; returns true or false
+    },
+    message: &#x27;Cannot enter future date&#x27;
+}</pre>
+
+
+            </td>
+            <td>Validation message displayed when custom function returns <code>false</code></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h2 id="api-docs">API Docs</h2>
+
+<p>For detailed explanation of this component, default values and constructor arguments check <a href="../../api/classes/Common.SimpleValidator.html">api docs</a></p>
 
 
 </div>
@@ -88,6 +266,18 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
 <li>
 <a href="index.html#description">Description</a>
 </li>
+<li>
+<a href="index.html#initialization">Initialization</a>
+</li>
+<li>
+<a href="index.html#field-validations-configuration">Field validations configuration</a>
+</li>
+<li>
+<a href="index.html#field-validation-rules-available">Field validation rules available</a>
+</li>
+<li>
+<a href="index.html#api-docs">API Docs</a>
+</li>
 </ul>
                         </div>
                     </div>
@@ -101,6 +291,12 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
 
                         <div class="bd">
                             <ul class="examples">
+                                
+                                    
+                                        <li data-description="The following examples describes how to use  validations in a form, given the validation rules for each field">
+                                            <a href="sample.html">Validations in Use</a>
+                                        </li>
+                                    
                                 
                             </ul>
                         </div>
