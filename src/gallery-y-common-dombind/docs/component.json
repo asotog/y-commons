@@ -1,0 +1,11 @@
+{
+    "name"       : "gallery-y-common-dombind",
+    "displayName": "Gallery: gallery-y-common-dombind",
+    "description": "*Summary Goes Here*",
+    "author"     : [ "asotog88" ],
+    "use"        : [ "gallery-y-common-dombind" ],
+
+    "tags": [ "gallery" ],
+
+    "examples": []
+}

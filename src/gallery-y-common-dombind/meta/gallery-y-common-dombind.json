@@ -1,0 +1,7 @@
+{
+    "gallery-y-common-dombind": {
+        "requires": [
+            "yui-base"
+        ]
+    }
+}
