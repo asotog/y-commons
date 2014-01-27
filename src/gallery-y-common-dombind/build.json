@@ -3,7 +3,8 @@
     "builds": {
         "gallery-y-common-dombind": {
             "jsfiles": [
-                "js/gallery-y-common-dombind.js"
+                "js/gallery-y-common-dombind.js",
+                "js/gallery-y-common-dombind-directives.js"
             ]
         }
     }
