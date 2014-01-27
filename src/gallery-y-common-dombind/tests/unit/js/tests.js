@@ -38,7 +38,9 @@ YUI.add('module-tests', function (Y) {
 
     var dombind = new Y.Common.DomBind({
         container: Y.one('.activities-list'),
-        iterableTemplate: Y.one('#task-list-item-template').get('innerHTML'),
+        templates: {
+            'task-template': Y.one('#task-list-item-template').get('innerHTML')
+        },
         controller: {
             deleteTask: function(task) {
                 Y.log('delete button clicked');
@@ -98,7 +100,8 @@ YUI.add('module-tests', function (Y) {
         
         },
         
-        'Simulate value change of iterable input and check values according to main data object'
+        'Simulate value change of iterable input and check values according to main data object': function() {
+        }
     }));
 
     Y.Test.Runner.add(suite);

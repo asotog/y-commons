@@ -4,19 +4,23 @@ Y.Common.DomBind.Directives = {
 
     '-bind': {
         directiveExecFn: function (directiveName, el, scopeData) {
-            var val = el.getAttribute(this.get('dataPrefix') + directiveName);
+            var val = el.getAttribute(this._getDirectiveName(directiveName));
             var scope = Y.clone(scopeData);
             /* check if element was already bind */
-            if (typeof el.getData(this.get('dataPrefix') + DATA_IS_BINDED) == 'undefined') {
+            if (typeof el.getData(this.get('prefix') + DATA_IS_BINDED) == 'undefined') {
                 var me = this;
                 /* if element bind is inside of an array as an array item, it'll add the index as part of the key */
                
                 var uniqueKey = this._generateUniqueKey(val, scopeData);
                 Y.log(LOG_PREFIX + 'Processing ' + directiveName + ' : ' + val, 'info');
                 /* listen field changes  */
+                var previousValue = null;
                 el.on(['keyup', 'change'], function () {
-                    /* TODO: avoid re-set value if value does not change, for example after pressing select all text shortcuts */
-                    me.setData(val, me._getElementValue(el), scope);
+                    /* if value is different than previous sets the data */
+                    if (me._getElementValue(el) != previousValue) {
+                        me.setData(val, me._getElementValue(el), scope);
+                        previousValue = me._getElementValue(el);
+                    }
                 });
                 /* listen the data changes by using custom event */
                 this.listen(uniqueKey, function(data) {
@@ -24,7 +28,7 @@ Y.Common.DomBind.Directives = {
                 });
                 
                 /* sets initial flag to avoid add multiple events to the same element */
-                el.setData(this.get('dataPrefix') + DATA_IS_BINDED, true)
+                el.setData(this.get('prefix') + DATA_IS_BINDED, true)
             }
             /* inializes with the current data */
             this.setData(val, this._getData(val, scopeData), scope);
@@ -34,7 +38,7 @@ Y.Common.DomBind.Directives = {
     '-onclick': {
         directiveExecFn: function (directiveName, el, scopeData) {
             var me = this;
-            var val = el.getAttribute(this.get('dataPrefix') + directiveName);
+            var val = el.getAttribute(this._getDirectiveName(directiveName));
             var methodName = val.split('(')[0];
             eval(me._generateScopeVarsCode(Y.clone(scopeData)));
             el.on('click', function (e) {
@@ -49,9 +53,10 @@ Y.Common.DomBind.Directives = {
     '-container-loop-data': {
         directiveExecFn: function (directiveName, el, scopeData) {
             el.empty();
+            /* TODO: listen list changes */
             var me = this;
             var data = this.get('data');
-            var val = el.getAttribute(this.get('dataPrefix') + directiveName);
+            var val = el.getAttribute(this._getDirectiveName(directiveName));
             Y.log(LOG_PREFIX + 'Processing ' + directiveName + ' : ' + val);
             /* separates list iteration from list filters*/
             val = val.split(LOOP_DATA_FILTER);
@@ -61,11 +66,12 @@ Y.Common.DomBind.Directives = {
             /* tokenize the list iteration by item looped and list e.g "item in itemList" will be tokenized into ['item', 'in', 'itemList'] */
             val = val.match(/[^ ]+/g);
             var dataList = (data[val[2]] && data[val[2]].length > 0) ? data[val[2]] : [];
+            var listItemTemplate = this.get('templates')[el.getAttribute(me._getDirectiveName(TEMPLATE))];
             Y.Array.each(dataList, function(item, index) {
                 /* execute before each item filter */
                 var dataItem = me._doBeforeEachDataItem(filters, item);
                 /* creates the new node */
-                var node = Y.Node.create(Y.Lang.sub(me.get('iterableTemplate'), dataItem));
+                var node = Y.Node.create(Y.Lang.sub(listItemTemplate, dataItem));
                 var scopeObject = {
                     containerNode: node,
                     scopeData: scopeData

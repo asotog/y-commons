@@ -8,6 +8,7 @@ var COMMA_SEPARATOR = ',';
 
 var DATA_BIND_CHANGE_EVENT = 'data-{property}-changed';
 var DATA_IS_BINDED = '-isbinded';
+var TEMPLATE = '-template';
 var LOG_PREFIX = '[Y.Common.DomBind] ';
 var FIELD_TYPES = {
     'checkbox': 0,
@@ -83,7 +84,7 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
         var c = (scopeObject && scopeObject.containerNode) ? scopeObject.containerNode : this.get('container');
         var scopeData = (scopeObject && scopeObject.scopeData) ? scopeObject.scopeData : {};
         var elements = c.all(Y.Lang.sub(ATTRIBUTE_SELECTOR, {
-            attributeName: this.get('dataPrefix') + directiveName
+            attributeName: this._getDirectiveName(directiveName)
         }));
         var directiveExecFn = Y.bind(config.directiveExecFn, this);
         elements.each(function (el) {
@@ -247,6 +248,10 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
             code += Y.Lang.sub('["{property}"]', {property: item});
         });
         return (code + ' = value');
+    },
+    
+    _getDirectiveName: function(directiveName) {
+        return this.get('prefix') + directiveName;
     }
 
 }, {
@@ -280,15 +285,19 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
         filters: {
             value: {}
         },
-        // TODO: better use a map of templates to easily use multiple templates
-        iterableTemplate: {
-            value: ''
+        
+        /**
+         * Map of templates each item should contain template markup, then each item can be referenced by using the template key
+         * 
+         */ 
+        templates: {
+            value: {}
         },
         
         /**
          * prefix to be used in the directives
          */ 
-        dataPrefix: {
+        prefix: {
             value: 'data-db'
         }
     }
