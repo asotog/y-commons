@@ -89,8 +89,6 @@ Y.Common.DomBind.Directives = {
                 me._compileDirectives(scopeObject);
                 el.append(node);
                 me._doAfterEachItem(filters, item, node);
-                /* TODO: after node is ready call AfterEachDataItem filters or like it */
-            
             });
             
         }

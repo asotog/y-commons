@@ -116,7 +116,12 @@ YUI.add('module-tests', function (Y) {
         },
         
         'Simulate value change of iterable input and check values according to main data object': function() {
+            var lis = Y.all('.today li');
+            lis.item(0).one('.edit-title').set('value', 'JS Conf Las Vegas 2014');
+            lis.item(0).one('.edit-title').simulate('change');
+            Y.Assert.areEqual('JS Conf Las Vegas 2014', TASKS_LIST.todayTasks[0].name, 'Are not containing same task id');
         }
+        
     }));
 
     Y.Test.Runner.add(suite);
