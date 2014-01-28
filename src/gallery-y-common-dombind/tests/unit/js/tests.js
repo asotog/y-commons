@@ -35,7 +35,9 @@ YUI.add('module-tests', function (Y) {
                 "isCompleted": false
             }]
     };
-
+    
+    var currentTask = null;
+    
     var dombind = new Y.Common.DomBind({
         container: Y.one('.activities-list'),
         templates: {
@@ -43,6 +45,7 @@ YUI.add('module-tests', function (Y) {
         },
         controller: {
             deleteTask: function(task) {
+                currentTask = task;
                 Y.log('delete button clicked');
             }
         },
@@ -52,6 +55,7 @@ YUI.add('module-tests', function (Y) {
                 return dataItem;
             },
             initTaskComponents: function(dataItem, node) {
+                node.setAttribute('data-custom-test', 'unit test');
                 Y.log(dataItem);
             }
         }
@@ -99,8 +103,16 @@ YUI.add('module-tests', function (Y) {
             Y.Assert.areEqual(newval, Y.one('.activities-list span[data-db-bind="name"]').get('innerHTML'), 'Values binded are not matching');
         },
         
-        'Simulate click on iterable item button and retrieve the item data': function() {
+        'After each item rendered in the list, is executing filter defined': function() {
+            var li = Y.all('.today li');
+            var customAttributeLi = Y.all('.today li[data-custom-test]');
+            Y.Assert.areEqual(li.size(), customAttributeLi.size(), 'Items listed not matching');
+        },
         
+        'Simulate click on iterable item button and retrieve the item data': function() {
+            var lis = Y.all('.today li');
+            lis.item(0).one('.activity-delete').simulate('click');
+            Y.Assert.areEqual(currentTask.taskId, TASKS_LIST.todayTasks[0].taskId, 'Are not containing same task id');
         },
         
         'Simulate value change of iterable input and check values according to main data object': function() {
