@@ -31,7 +31,7 @@
     </div>
     <div>
         <span class="subtitle toggler-header toggler-header-expanded">Today's Tasks</span>
-        <ul class="tasks today toggler-content toggler-content-expanded" data-db-template="task-template"  data-db-container-loop-data="task in todayTasks|onBeforeEach:processTask">
+        <ul class="tasks today toggler-content toggler-content-expanded" data-db-template="task-template"  data-db-container-loop-data="task in todayTasks|onBeforeEach:processTask,onAfterEach:initTaskComponents">
         </ul>
     </div>
     <div>

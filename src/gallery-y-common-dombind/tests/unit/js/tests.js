@@ -50,6 +50,9 @@ YUI.add('module-tests', function (Y) {
             processTask: function(dataItem) {
                 dataItem.done = (dataItem.isCompleted) ? "done" : "";
                 return dataItem;
+            },
+            initTaskComponents: function(dataItem, node) {
+                Y.log(dataItem);
             }
         }
     });

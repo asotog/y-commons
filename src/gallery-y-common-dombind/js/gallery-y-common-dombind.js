@@ -55,23 +55,23 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
         var me = this;
         this.after('dataChange', function () {
             Y.log(LOG_PREFIX + 'Data changed');
-            me._processDirectives({});
+            me._compileDirectives({});
         });
     },
     
     /**
      * 
-     * Iterates over the available list of directives to start looking one by one
+     * Iterates over the available list of directives to start looking one by one in the dom
      * 
      * @param {Object} scopeObject Scope unit of data and dom information basically contains the following structure 
      *                 <code>{ scopeData: Object, containerNode: Y.Node }</code>
      * 
      */ 
-    _processDirectives: function (scopeObject) {
+    _compileDirectives: function (scopeObject) {
         for (var directive in Y.Common.DomBind.Directives) {
             if (Y.Common.DomBind.Directives.hasOwnProperty(directive)) {
                 var directiveCfg = Y.Common.DomBind.Directives[directive];
-                this._executeDirective(scopeObject, directive, directiveCfg);
+                this._compileAndExecuteDirective(scopeObject, directive, directiveCfg);
             }
         }
     },
@@ -79,7 +79,7 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
     /**
      * Looks for specific directive in the dom and executes it
      */ 
-    _executeDirective: function (scopeObject, directiveName, config) {
+    _compileAndExecuteDirective: function (scopeObject, directiveName, config) {
         var me = this;
         var c = (scopeObject && scopeObject.containerNode) ? scopeObject.containerNode : this.get('container');
         var scopeData = (scopeObject && scopeObject.scopeData) ? scopeObject.scopeData : {};
@@ -109,9 +109,9 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
     },
 
     /**
-     * Applies filters that are going to be executed before each item
+     * Applies filters that are going to be executed before each item inside of a list iteration
      */ 
-    _doBeforeEachDataItem: function (filters, dataItem) {
+    _doBeforeEachItem: function (filters, dataItem) {
         for (var i = 0; i < filters.length; i++) {
             if (filters[i].name == 'onBeforeEach') {
                 var filterFunction = this.get('filters')[filters[i].executeFn];
@@ -119,6 +119,18 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
             }
         }
         return dataItem;
+    },
+    
+    /**
+     * Applies filters that are going to be executed after each itemn iside of a list iteration, also passes the node created
+     */ 
+    _doAfterEachItem: function (filters, dataItem, node) {
+        for (var i = 0; i < filters.length; i++) {
+            if (filters[i].name == 'onAfterEach') {
+                var filterFunction = this.get('filters')[filters[i].executeFn];
+                dataItem = filterFunction(dataItem, node);
+            }
+        }
     },
 
     /**
@@ -300,5 +312,9 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
         prefix: {
             value: 'data-db'
         }
+        
+        
     }
 });
+
+/* TODO: static method to create custom directives */
