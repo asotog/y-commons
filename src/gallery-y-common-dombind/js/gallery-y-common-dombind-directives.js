@@ -1,4 +1,3 @@
-
 /* TODO: directives priorities int to control execution order and sorting mechanism based on that value */
 
 Y.Common.DomBind.Directives = {
@@ -25,7 +24,8 @@ Y.Common.DomBind.Directives = {
                 /* listen the data changes by using custom event */
                 /* TODO: Bugfix, fix value re-set of the same element by avoiding set the value if its the same element which triggered the event */
                 this.listen(uniqueKey, function(data) {
-                    /* BUGFIX: needs to set previous value of current element on every radio button bind  to the same data */
+                    /* BUGFIX: needs to set previous value of current element on every 
+                      radio button bind  to the same data, so when element change pass element yui id on the set data to verify if its same element */
                     el.setData('previousValue', data.newValue);
                     /* sets element value */
                     me._setElementValue(el, data.newValue);
