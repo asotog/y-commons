@@ -336,7 +336,7 @@ Y.Common.DomBind.Directives = {
                
                 var uniqueKey = this._generateUniqueKey(val, scopeData);
                 /* listen field changes  */
-                el.on(['keyup', 'change'], function () {
+                el.on(['keyup', 'change', 'click'], function () {
                     /* if value is different than previous sets the data */
                     if (me._getElementValue(el) != el.getData('previousValue')) {
                         el.setData('previousValue', me._getElementValue(el));

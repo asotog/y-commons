@@ -15,7 +15,7 @@ Y.Common.DomBind.Directives = {
                 var uniqueKey = this._generateUniqueKey(val, scopeData);
                 Y.log(LOG_PREFIX + 'Processing ' + directiveName + ' : ' + val, 'info');
                 /* listen field changes  */
-                el.on(['keyup', 'change'], function () {
+                el.on(['keyup', 'change', 'click'], function () {
                     /* if value is different than previous sets the data */
                     if (me._getElementValue(el) != el.getData('previousValue')) {
                         el.setData('previousValue', me._getElementValue(el));
@@ -23,6 +23,7 @@ Y.Common.DomBind.Directives = {
                     }
                 });
                 /* listen the data changes by using custom event */
+                /* TODO: Bugfix, fix value re-set of the same element by avoiding set the value if its the same element which triggered the event */
                 this.listen(uniqueKey, function(data) {
                     /* BUGFIX: needs to set previous value of current element on every radio button bind  to the same data */
                     el.setData('previousValue', data.newValue);
