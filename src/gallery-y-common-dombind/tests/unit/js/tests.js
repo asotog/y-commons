@@ -66,8 +66,6 @@ YUI.add('module-tests', function (Y) {
             dombind.on('dataChange', function () {
                 Y.log('Data has been changed');
             });
-            //dombind.set('data', TASKS_LIST);
-            //Y.Assert.pass('No Tests Provided For This Module');
         },
         
         'Verify number of items created in the list after data load': function() {
@@ -77,7 +75,6 @@ YUI.add('module-tests', function (Y) {
         },
         
         'Change input that is using bind directive': function() {
-            /* TODO: verify after value change that data has been changed too listening the custom event and accessing data directly */
             dombind.listen('name', function(data) {
                 Y.log('name bind has been updated: ' + dombind.get('data').name);
             });
@@ -126,7 +123,6 @@ YUI.add('module-tests', function (Y) {
 
     Y.Test.Runner.add(suite);
 
-
 }, '', {
-    requires: ['test', 'gallery-y-common-dombind', 'node', 'node-event-simulate']
+    requires: [ 'gallery-y-common-dombind', 'node', 'node-event-simulate']
 });

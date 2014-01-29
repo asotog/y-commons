@@ -145,7 +145,8 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
      * 
      */
     _setElementValue: function (el, value) {
-        if (el.get('localName') == 'input' || el.get('localName') == 'textarea' || el.get('localName') == 'select') {
+        var nodeName = el.get('nodeName').toLowerCase();
+        if (nodeName == 'input' || nodeName == 'textarea' || nodeName == 'select') {
             var fieldType = (typeof FIELD_TYPES[el.get('type')] == 'number') ? FIELD_TYPES[el.get('type')] : el.get('type');
             switch (fieldType) {
             case FIELD_TYPES['checkbox']:
@@ -167,7 +168,8 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
      * 
      */
     _getElementValue: function (el) {
-        if (el.get('localName') == 'input' || el.get('localName') == 'textarea' || el.get('localName') == 'select') {
+        var nodeName = el.get('nodeName').toLowerCase();
+        if (nodeName == 'input' || nodeName == 'textarea' || nodeName == 'select') {
             var fieldType = (typeof FIELD_TYPES[el.get('type')] == 'number') ? FIELD_TYPES[el.get('type')] : el.get('type');
             switch (fieldType) {
                 case FIELD_TYPES['checkbox']:
@@ -410,8 +412,6 @@ Y.Common.DomBind.Directives = {
                 me._compileDirectives(scopeObject);
                 el.append(node);
                 me._doAfterEachItem(filters, item, node);
-                /* TODO: after node is ready call AfterEachDataItem filters or like it */
-            
             });
             
         }
