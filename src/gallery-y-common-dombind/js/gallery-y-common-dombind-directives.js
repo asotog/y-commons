@@ -18,17 +18,17 @@ Y.Common.DomBind.Directives = {
                     /* if value is different than previous sets the data */
                     if (me._getElementValue(el) != el.getData('previousValue')) {
                         el.setData('previousValue', me._getElementValue(el));
-                        me.setData(val, me._getElementValue(el), scope);
+                        me.setData(val, me._getElementValue(el), scope, el);
                     }
                 });
                 /* listen the data changes by using custom event */
-                /* TODO: Bugfix, fix value re-set of the same element by avoiding set the value if its the same element which triggered the event */
                 this.listen(uniqueKey, function(data) {
-                    /* BUGFIX: needs to set previous value of current element on every 
-                      radio button bind  to the same data, so when element change pass element yui id on the set data to verify if its same element */
-                    el.setData('previousValue', data.newValue);
-                    /* sets element value */
-                    me._setElementValue(el, data.newValue);
+					/* avoid reset same element */
+					if (typeof data.triggerElement == 'undefined' || !data.triggerElement.compareTo(el)) {
+						el.setData('previousValue', data.newValue);
+						/* sets element value */
+						me._setElementValue(el, data.newValue);
+					}
                 });
                 
                 /* sets initial flag to avoid add multiple events to the same element */

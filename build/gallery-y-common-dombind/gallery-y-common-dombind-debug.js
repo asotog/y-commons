@@ -35,12 +35,13 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
      * @param {String} key The data key, often used in the html to define which data will be bind
      * @param {String} value New value that is going to be set in the data
      * @param {Object} scopeData Scope object and additional info, used in cases like, to set list elements when they are bind
+     * @param {Y.Node} triggerElement Element that triggered the setData on field change
      *  
      */ 
-    setData: function (key, value, scopeData) {
+    setData: function (key, value, scopeData, triggerElement) {
         this._setData(key, value, scopeData);
         var uniqueKey = this._generateUniqueKey(key, scopeData);
-        this.fire(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {property: uniqueKey}), {newValue: value});
+        this.fire(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {property: uniqueKey}), {newValue: value, triggerElement: triggerElement});
     },
     
     /**
@@ -321,8 +322,7 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
     }
 });
 
-/* TODO: static method to create custom directives */
-/* TODO: directives priorities int to control execution order and sorting mechanism based on that value */
+/* TODO: static method to create custom directives *//* TODO: directives priorities int to control execution order and sorting mechanism based on that value */
 
 Y.Common.DomBind.Directives = {
 
@@ -342,15 +342,17 @@ Y.Common.DomBind.Directives = {
                     /* if value is different than previous sets the data */
                     if (me._getElementValue(el) != el.getData('previousValue')) {
                         el.setData('previousValue', me._getElementValue(el));
-                        me.setData(val, me._getElementValue(el), scope);
+                        me.setData(val, me._getElementValue(el), scope, el);
                     }
                 });
                 /* listen the data changes by using custom event */
                 this.listen(uniqueKey, function(data) {
-                    /* BUGFIX: needs to set previous value of current element on every radio button bind  to the same data */
-                    el.setData('previousValue', data.newValue);
-                    /* sets element value */
-                    me._setElementValue(el, data.newValue);
+					/* avoid reset same element */
+					if (typeof data.triggerElement == 'undefined' || !data.triggerElement.compareTo(el)) {
+						el.setData('previousValue', data.newValue);
+						/* sets element value */
+						me._setElementValue(el, data.newValue);
+					}
                 });
                 
                 /* sets initial flag to avoid add multiple events to the same element */
@@ -418,5 +420,6 @@ Y.Common.DomBind.Directives = {
     }
 
 };
+
 
 }, '@VERSION@', {"requires": ["yui-base", "base-build", "node"]});

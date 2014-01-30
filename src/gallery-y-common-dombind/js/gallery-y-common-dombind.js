@@ -33,12 +33,13 @@ Y.Common.DomBind = Y.Base.create('y-common-dombind', Y.Base, [], {
      * @param {String} key The data key, often used in the html to define which data will be bind
      * @param {String} value New value that is going to be set in the data
      * @param {Object} scopeData Scope object and additional info, used in cases like, to set list elements when they are bind
+     * @param {Y.Node} triggerElement Element that triggered the setData on field change
      *  
      */ 
-    setData: function (key, value, scopeData) {
+    setData: function (key, value, scopeData, triggerElement) {
         this._setData(key, value, scopeData);
         var uniqueKey = this._generateUniqueKey(key, scopeData);
-        this.fire(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {property: uniqueKey}), {newValue: value});
+        this.fire(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {property: uniqueKey}), {newValue: value, triggerElement: triggerElement});
     },
     
     /**
