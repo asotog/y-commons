@@ -119,7 +119,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
         }));
         var directiveExecFn = Y.bind(config.directiveExecFn, this);
         elements.each(function (el) {
-            Y.clone(directiveExecFn)(directiveName, el, scopeModel);
+            Y.clone(directiveExecFn)(directiveName, el, Y.clone(scopeModel));
         });
     },
 
@@ -374,7 +374,6 @@ Y.Common.DomBind.Directives = {
     '-bind': {
         directiveExecFn: function (directiveName, el, scopeModel) {
             var val = el.getAttribute(this._getDirectiveName(directiveName));
-            var scope = Y.clone(scopeModel);
             /* check if element was already bind */
             if (typeof el.getData(this.get('prefix') + DATA_IS_BINDED) == 'undefined') {
                 var me = this;
@@ -386,7 +385,7 @@ Y.Common.DomBind.Directives = {
                     /* if value is different than previous sets the model */
                     if (me._getElementValue(el) != el.getData('previousValue')) {
                         el.setData('previousValue', me._getElementValue(el));
-                        me.setModel(val, me._getElementValue(el), scope, el);
+                        me.setModel(val, me._getElementValue(el), scopeModel, el);
                     }
                 });
                 /* listen the model changes by using custom event */
@@ -403,7 +402,7 @@ Y.Common.DomBind.Directives = {
                 el.setData(this.get('prefix') + DATA_IS_BINDED, true)
             }
             /* inializes with the current model */
-            this.setModel(val, this._getModel(val, scopeModel), scope);
+            this.setModel(val, this._getModel(val, scopeModel), scopeModel);
         }
     },
 
@@ -411,11 +410,10 @@ Y.Common.DomBind.Directives = {
         directiveExecFn: function (directiveName, el, scopeModel) {
             var me = this;
             var val = el.getAttribute(this._getDirectiveName(directiveName));
-			var model = Y.clone(scopeModel);
             el.on('click', function (e) {
                 // TODO: be able to call multiple methods from the same directive
                 e.preventDefault();
-				me.execControllerMethodExpression(val, model, el);
+				me.execControllerMethodExpression(val, scopeModel, el);
             });
         }
     },

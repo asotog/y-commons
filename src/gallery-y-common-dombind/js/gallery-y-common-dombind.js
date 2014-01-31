@@ -118,7 +118,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
         }));
         var directiveExecFn = Y.bind(config.directiveExecFn, this);
         elements.each(function (el) {
-            Y.clone(directiveExecFn)(directiveName, el, scopeModel);
+            Y.clone(directiveExecFn)(directiveName, el, Y.clone(scopeModel));
         });
     },
 
