@@ -1,5 +1,3 @@
- 
-
  Y.Common.DomBind.Directives = {};
 
  /**
@@ -42,12 +40,16 @@
              }
          });
          /* listen the model changes by using custom event */
-         this.listen(uniqueKey, function (model) {
-             /* avoid reset same element */
-             if (typeof model.triggerElement == 'undefined' || !model.triggerElement.compareTo(el)) {
-                 el.setData('previousValue', model.newValue);
-                 /* sets element value */
-                 me._setElementValue(el, model.newValue);
+         var modelEventHandler = this.listen(uniqueKey, function (model) {
+             if (el._node != null) {
+                 /* avoid reset same element */
+                 if (typeof model.triggerElement == 'undefined' || !model.triggerElement.compareTo(el)) {
+                     el.setData('previousValue', model.newValue);
+                     /* sets element value */
+                     me._setElementValue(el, model.newValue);
+                 }
+             } else {
+                 modelEventHandler.detach();
              }
          });
 
@@ -56,7 +58,7 @@
      }
      /* inializes with the current model if value in model is there and not undefined */
      if (this._getModel(attribute, scopeModel)) {
-        this.setModel(attribute, this._getModel(attribute, scopeModel), scopeModel);
+         this.setModel(attribute, this._getModel(attribute, scopeModel), scopeModel);
      }
  });
 
@@ -85,8 +87,6 @@
   * @static
   */
  Y.Common.DomBind.createDirective('container-loop-model', function (directiveName, el, attribute, scopeModel) {
-     el.empty();
-     /* TODO: listen list changes */
      var me = this;
      var model = this.get('model');
      Y.log(LOG_PREFIX + 'Processing ' + directiveName + ' : ' + attribute);
@@ -97,10 +97,12 @@
      attribute = attribute[0];
      /* tokenize the list iteration by item looped and list e.g "item in itemList" will be tokenized into ['item', 'in', 'itemList'] */
      attribute = attribute.match(/[^ ]+/g);
-     var modelList = (model[attribute[2]] && model[attribute[2]].length > 0) ? model[attribute[2]] : [];
+     var listProperty = attribute[2];
+     var modelList = (model[listProperty] && model[listProperty].length > 0) ? model[listProperty] : [];
      var listItemTemplate = this.get('templates')[el.getAttribute(me._getDirectiveName(TEMPLATE))];
      /* iterates with the given list */
-     var iterateList = function(list) {
+     var iterateList = function (list) {
+         el.empty();
          Y.Array.each(list, function (item, index) {
              /* execute before each item filter */
              var modelItem = me._doBeforeEachItem(filters, item);
@@ -123,7 +125,10 @@
          });
      };
      iterateList(modelList);
-     
+     /* listens list property changes */
+     this.listen(listProperty, function () {
+         iterateList(me.get('model')[listProperty]);
+     });
  });
 
  /* TODO: directives priorities int to control execution order and sorting mechanism based on that value */

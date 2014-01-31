@@ -65,9 +65,10 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      * @param {String} key The model property key of the property that is going to be listened
      * @param {Function} value The callback to execute on model property change
      * 
+     * @return EventHandle
      */
     listen: function (key, callback) {
-        this.on(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {
+        return this.on(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {
             property: key
         }), function (model) {
             callback(model);

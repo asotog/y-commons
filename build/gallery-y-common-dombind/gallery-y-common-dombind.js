@@ -67,9 +67,10 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      * @param {String} key The model property key of the property that is going to be listened
      * @param {Function} value The callback to execute on model property change
      * 
+     * @return EventHandle
      */
     listen: function (key, callback) {
-        this.on(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {
+        return this.on(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {
             property: key
         }), function (model) {
             callback(model);
@@ -390,9 +391,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 
 
     }
-}); 
-
- Y.Common.DomBind.Directives = {};
+}); Y.Common.DomBind.Directives = {};
 
  /**
   * Creates a directive, by adding it to Y.Common.DomBind.Directives object, on directives compilation phase, this object will be retrieved in order to start 
@@ -433,12 +432,16 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
              }
          });
          /* listen the model changes by using custom event */
-         this.listen(uniqueKey, function (model) {
-             /* avoid reset same element */
-             if (typeof model.triggerElement == 'undefined' || !model.triggerElement.compareTo(el)) {
-                 el.setData('previousValue', model.newValue);
-                 /* sets element value */
-                 me._setElementValue(el, model.newValue);
+         var modelEventHandler = this.listen(uniqueKey, function (model) {
+             if (el._node != null) {
+                 /* avoid reset same element */
+                 if (typeof model.triggerElement == 'undefined' || !model.triggerElement.compareTo(el)) {
+                     el.setData('previousValue', model.newValue);
+                     /* sets element value */
+                     me._setElementValue(el, model.newValue);
+                 }
+             } else {
+                 modelEventHandler.detach();
              }
          });
 
@@ -447,7 +450,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      }
      /* inializes with the current model if value in model is there and not undefined */
      if (this._getModel(attribute, scopeModel)) {
-        this.setModel(attribute, this._getModel(attribute, scopeModel), scopeModel);
+         this.setModel(attribute, this._getModel(attribute, scopeModel), scopeModel);
      }
  });
 
@@ -476,11 +479,6 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   * @static
   */
  Y.Common.DomBind.createDirective('container-loop-model', function (directiveName, el, attribute, scopeModel) {
-     el.empty();
-     
-     
-     
-     /* TODO: listen list changes */
      var me = this;
      var model = this.get('model');
      /* separates list iteration from list filters*/
@@ -490,10 +488,12 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      attribute = attribute[0];
      /* tokenize the list iteration by item looped and list e.g "item in itemList" will be tokenized into ['item', 'in', 'itemList'] */
      attribute = attribute.match(/[^ ]+/g);
-     var modelList = (model[attribute[2]] && model[attribute[2]].length > 0) ? model[attribute[2]] : [];
+     var listProperty = attribute[2];
+     var modelList = (model[listProperty] && model[listProperty].length > 0) ? model[listProperty] : [];
      var listItemTemplate = this.get('templates')[el.getAttribute(me._getDirectiveName(TEMPLATE))];
      /* iterates with the given list */
-     var iterateList = function(list) {
+     var iterateList = function (list) {
+         el.empty();
          Y.Array.each(list, function (item, index) {
              /* execute before each item filter */
              var modelItem = me._doBeforeEachItem(filters, item);
@@ -516,7 +516,10 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
          });
      };
      iterateList(modelList);
-     
+     /* listens list property changes */
+     this.listen(listProperty, function () {
+         iterateList(me.get('model')[listProperty]);
+     });
  });
 
  /* TODO: directives priorities int to control execution order and sorting mechanism based on that value */

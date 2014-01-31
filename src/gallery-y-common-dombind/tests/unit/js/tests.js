@@ -117,6 +117,12 @@ YUI.add('module-tests', function (Y) {
             lis.item(0).one('.edit-title').set('value', 'JS Conf Las Vegas 2014');
             lis.item(0).one('.edit-title').simulate('change');
             Y.Assert.areEqual('JS Conf Las Vegas 2014', TASKS_LIST.todayTasks[0].name, 'Are not containing same task id');
+        }, 
+        
+        'List ui updated when list property from model is also updated': function() {
+            var tasks = dombind.get('model').previousTasks;
+            tasks.shift();
+            dombind.setModel('previousTasks', tasks);
         }
         
     }));
