@@ -38,12 +38,14 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 
     /**
      *
-     * Sets the current bind model and triggers events to refresh the ui elements related
+     * Sets model property
      *
-     * @param {String} key The model key, often used in the html to define which model will be bind
-     * @param {String} value New value that is going to be set in the model
-     * @param {Object} scopeModel Scope object and additional info, used in cases like, to set list elements when they are bind
-     * @param {Y.Node} triggerElement Element that triggered the setModel on field change
+     * @method setModel
+     * 
+     * @param {String} key The model property key, often used in the html to define which model property will be bind
+     * @param {Any} value New value that is going to be set in the model property
+     * @param {Object} [scopeModel] Scope model and additional info, used in cases like, to set list elements when they are bind
+     * @param  {Y.Node} [triggerElement] Element that triggered the setModel on field change
      *
      */
     setModel: function (key, value, scopeModel, triggerElement) {
@@ -58,8 +60,13 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
     },
 
     /**
-     * Listens specific model item changes by passing the given key
-     *
+     * Listens specific model changes
+     * 
+     * @method listen
+     * 
+     * @param {String} key The model property key of the property that is going to be listened
+     * @param {Function} value The callback to execute on model property change
+     * 
      */
     listen: function (key, callback) {
         this.on(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {
@@ -70,9 +77,14 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
     },
 
     /**
-     * Executes a controller method code expression e.g testFunc(test)
+     * Executes a controller method code expression 
      *
-     *
+     * @method execControllerMethodExpression
+     * 
+     * @param {String} code Controller's method code to be executed e.g testFunc(test);
+     * @param {Object} scopeModel The current scope model
+     * @param {Y.Node} el Element which is where is defined the method call expression
+     * 
      */
     execControllerMethodExpression: function (code, scopeModel, el) {
         var methodName = code.split('(')[0];
@@ -119,7 +131,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
         }));
         var directiveExecFn = Y.bind(config.directiveExecFn, this);
         elements.each(function (el) {
-            Y.clone(directiveExecFn)(directiveName, el, Y.clone(scopeModel));
+            Y.clone(directiveExecFn)(directiveName, el,  el.getAttribute(me._getDirectiveName(directiveName)), Y.clone(scopeModel));
         });
     },
 
@@ -311,7 +323,9 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 }, {
     ATTRS: {
         /**
-         * Main container
+         * Main container where Y.Common.DomBind is going to look
+         *
+         * @attribute container
          * @type Y.Node
          */
         container: {
@@ -319,22 +333,32 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
         },
 
         /**
-         * Model that will be bind
+         * Model that will be bind, every change will be reflected and centralized on this data unit
          *
+         * @attribute model
+         * @type {Object}
          */
         model: {
             value: null
         },
+        
         /**
-         * controller methods
+         * Controller methods
+         * 
+         * @attribute controller
+         * @type {Object}
+         * @default {}
          */
         controller: {
             value: {}
         },
 
         /**
-         * list of filter methods
-         *
+         * Filter methods to be used on list/array iteration
+         * 
+         * @attribute filters
+         * @type {Object}
+         * @default {}
          */
         filters: {
             value: {}
@@ -342,14 +366,21 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 
         /**
          * Map of templates each item should contain template markup, then each item can be referenced by using the template key
-         *
+         * 
+         * @attribute templates
+         * @type {Object}
+         * @default {}
          */
         templates: {
             value: {}
         },
 
         /**
-         * prefix to be used in the directives
+         * Prefix to be used in the directives
+         * 
+         * @attribute prefix
+         * @type {String}
+         * @default 'data-db'
          */
         prefix: {
             value: 'data-db'
@@ -357,108 +388,126 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 
 
     }
-});
+}); 
 
-/* TODO: static method to create custom directives */
-/* TODO: directives priorities int to control execution order and sorting mechanism based on that value */
-Y.Common.DomBind.Directives = {
-	
-	/**
-	* Definition for '-bind' directive, model can be associated to dom element or viceversa, reflecting changes on both sides,
-	* meaning that it will provide two way binding
-	* 
-	* @property Directives['-bind']
-	* @type {Object}
-	* @static
-	*/
-    '-bind': {
-        directiveExecFn: function (directiveName, el, scopeModel) {
-            var val = el.getAttribute(this._getDirectiveName(directiveName));
-            /* check if element was already bind */
-            if (typeof el.getData(this.get('prefix') + DATA_IS_BINDED) == 'undefined') {
-                var me = this;
-                /* if element bind is inside of an array as an array item, it'll add the index as part of the key */
-               
-                var uniqueKey = this._generateUniqueKey(val, scopeModel);
-                /* listen field changes  */
-                el.on(['keyup', 'change', 'click'], function () {
-                    /* if value is different than previous sets the model */
-                    if (me._getElementValue(el) != el.getData('previousValue')) {
-                        el.setData('previousValue', me._getElementValue(el));
-                        me.setModel(val, me._getElementValue(el), scopeModel, el);
-                    }
-                });
-                /* listen the model changes by using custom event */
-                this.listen(uniqueKey, function(model) {
-					/* avoid reset same element */
-					if (typeof model.triggerElement == 'undefined' || !model.triggerElement.compareTo(el)) {
-						el.setData('previousValue', model.newValue);
-						/* sets element value */
-						me._setElementValue(el, model.newValue);
-					}
-                });
-                
-                /* sets initial flag to avoid add multiple events to the same element */
-                el.setData(this.get('prefix') + DATA_IS_BINDED, true)
-            }
-            /* inializes with the current model */
-            this.setModel(val, this._getModel(val, scopeModel), scopeModel);
-        }
-    },
+ Y.Common.DomBind.Directives = {};
 
-    '-onclick': {
-        directiveExecFn: function (directiveName, el, scopeModel) {
-            var me = this;
-            var val = el.getAttribute(this._getDirectiveName(directiveName));
-            el.on('click', function (e) {
-                // TODO: be able to call multiple methods from the same directive
-                e.preventDefault();
-				me.execControllerMethodExpression(val, scopeModel, el);
-            });
-        }
-    },
+ /**
+  * Creates a directive, by adding it to Y.Common.DomBind.Directives object, on directives compilation phase, this object will be retrieved in order to start 
+  * the initialization of all the directives difined in the dom
+  * 
+  * @method createDirective 
+  * 
+  * @param {String} keyName Attribute name that will be used on directive declaration in the html
+  * @param {Function} directiveExecFn Callback function that will be executed on directive compilation e.g <code>function(directiveName, el, attribute, scopeModel) { }</code>
+  * @static
+  */
+ Y.Common.DomBind.createDirective = function (keyName, directiveExecFn) {
+     keyName = '-' + keyName;
+     Y.Common.DomBind.Directives[keyName] = {
+         directiveExecFn: directiveExecFn
+     };
+ }
 
-    '-container-loop-model': {
-        directiveExecFn: function (directiveName, el, scopeModel) {
-            el.empty();
-            /* TODO: listen list changes */
-            var me = this;
-            var model = this.get('model');
-            var val = el.getAttribute(this._getDirectiveName(directiveName));
-            /* separates list iteration from list filters*/
-            val = val.split(LOOP_DATA_FILTER);
-            var filters = (val.length > 1) ? this._tokenizeFilters(val[1].split(COMMA_SEPARATOR)) : [];
-            /* retrieve list iteration */
-            val = val[0];
-            /* tokenize the list iteration by item looped and list e.g "item in itemList" will be tokenized into ['item', 'in', 'itemList'] */
-            val = val.match(/[^ ]+/g);
-            var modelList = (model[val[2]] && model[val[2]].length > 0) ? model[val[2]] : [];
-            var listItemTemplate = this.get('templates')[el.getAttribute(me._getDirectiveName(TEMPLATE))];
-            Y.Array.each(modelList, function(item, index) {
-                /* execute before each item filter */
-                var modelItem = me._doBeforeEachItem(filters, item);
-                /* creates the new node */
-                var node = Y.Node.create(Y.Lang.sub(listItemTemplate, modelItem));
-                var scopeObject = {
-                    containerNode: node,
-                    scopeModel: scopeModel
-                };
-                /* passes additional information in the model item */
-                modelItem._info = {
-                    parent: val[2],
-                    parentType: DATA_ARRAY,
-                    index: index
-                };
-                scopeObject.scopeModel[val[0]] =  modelItem;
-                me._compileDirectives(scopeObject);
-                el.append(node);
-                me._doAfterEachItem(filters, item, node);
-            });
-            
-        }
-    }
+ /**
+  * Definition for <code>-bind</code> directive, model properties can be associated to dom element or viceversa, reflecting changes on both sides,
+  * meaning that it will provide two-way binding
+  * 
+  * @property Directives['-bind']
+  * @type {Object}
+  */
+ Y.Common.DomBind.createDirective('bind', function (directiveName, el, attribute, scopeModel) {
+     /* check if element was already bind */
+     if (typeof el.getData(this.get('prefix') + DATA_IS_BINDED) == 'undefined') {
+         var me = this;
+         /* if element bind is inside of an array as an array item, it'll add the index as part of the key */
+         var uniqueKey = this._generateUniqueKey(attribute, scopeModel);
+         /* listen field changes  */
+         el.on(['keyup', 'change', 'click'], function () {
+             /* if value is different than previous sets the model */
+             if (me._getElementValue(el) != el.getData('previousValue')) {
+                 el.setData('previousValue', me._getElementValue(el));
+                 me.setModel(attribute, me._getElementValue(el), scopeModel, el);
+             }
+         });
+         /* listen the model changes by using custom event */
+         this.listen(uniqueKey, function (model) {
+             /* avoid reset same element */
+             if (typeof model.triggerElement == 'undefined' || !model.triggerElement.compareTo(el)) {
+                 el.setData('previousValue', model.newValue);
+                 /* sets element value */
+                 me._setElementValue(el, model.newValue);
+             }
+         });
 
-};
+         /* sets initial flag to avoid add multiple events to the same element */
+         el.setData(this.get('prefix') + DATA_IS_BINDED, true)
+     }
+     /* inializes with the current model */
+     this.setModel(attribute, this._getModel(attribute, scopeModel), scopeModel);
+ });
 
+ /**
+  * Definition for <code>-onclick</code> directive, provides click event that can be defined from markup and call methods defined in the controller
+  * 
+  * @property Directives['-onclick']
+  * @type {Object}
+  * @static
+  */
+ Y.Common.DomBind.createDirective('onclick', function (directiveName, el, attribute, scopeModel) {
+     var me = this;
+     el.on('click', function (e) {
+         // TODO: be able to call multiple methods from the same directive
+         e.preventDefault();
+         me.execControllerMethodExpression(attribute, scopeModel, el);
+     });
+ });
+
+ /**
+  * Definition for <code>-container-loop-model</code> directive, array list iterator, each element iterated has its own scope so this item can be passed through
+  * controller methods, the iteration elements will be shown according to the template provided by the directive <code>-template</code>
+  * 
+  * @property Directives['-container-loop-model']
+  * @type {Object}
+  * @static
+  */
+ Y.Common.DomBind.createDirective('container-loop-model', function (directiveName, el, attribute, scopeModel) {
+     el.empty();
+     /* TODO: listen list changes */
+     var me = this;
+     var model = this.get('model');
+     /* separates list iteration from list filters*/
+     attribute = attribute.split(LOOP_DATA_FILTER);
+     var filters = (attribute.length > 1) ? this._tokenizeFilters(attribute[1].split(COMMA_SEPARATOR)) : [];
+     /* retrieve list iteration */
+     attribute = attribute[0];
+     /* tokenize the list iteration by item looped and list e.g "item in itemList" will be tokenized into ['item', 'in', 'itemList'] */
+     attribute = attribute.match(/[^ ]+/g);
+     var modelList = (model[attribute[2]] && model[attribute[2]].length > 0) ? model[attribute[2]] : [];
+     var listItemTemplate = this.get('templates')[el.getAttribute(me._getDirectiveName(TEMPLATE))];
+     Y.Array.each(modelList, function (item, index) {
+         /* execute before each item filter */
+         var modelItem = me._doBeforeEachItem(filters, item);
+         /* creates the new node */
+         var node = Y.Node.create(Y.Lang.sub(listItemTemplate, modelItem));
+         var scopeObject = {
+             containerNode: node,
+             scopeModel: scopeModel
+         };
+         /* passes additional information in the model item */
+         modelItem._info = {
+             parent: attribute[2],
+             parentType: DATA_ARRAY,
+             index: index
+         };
+         scopeObject.scopeModel[attribute[0]] = modelItem;
+         me._compileDirectives(scopeObject);
+         el.append(node);
+         me._doAfterEachItem(filters, item, node);
+     });
+ });
+
+ /* TODO: directives priorities int to control execution order and sorting mechanism based on that value */
+ /* TODO: add more directive for example for blur, focus, etc */
 
 }, '@VERSION@', {"requires": ["yui-base", "base-build", "node"]});

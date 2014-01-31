@@ -130,7 +130,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
         }));
         var directiveExecFn = Y.bind(config.directiveExecFn, this);
         elements.each(function (el) {
-            Y.clone(directiveExecFn)(directiveName, el, Y.clone(scopeModel));
+            Y.clone(directiveExecFn)(directiveName, el,  el.getAttribute(me._getDirectiveName(directiveName)), Y.clone(scopeModel));
         });
     },
 
@@ -388,5 +388,3 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 
     }
 });
-
-/* TODO: static method to create custom directives */
