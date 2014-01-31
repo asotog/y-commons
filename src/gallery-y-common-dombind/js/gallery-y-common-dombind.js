@@ -36,12 +36,14 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 
     /**
      *
-     * Sets the current bind model and triggers events to refresh the ui elements related
+     * Sets model property
      *
-     * @param {String} key The model key, often used in the html to define which model will be bind
-     * @param {String} value New value that is going to be set in the model
-     * @param {Object} scopeModel Scope object and additional info, used in cases like, to set list elements when they are bind
-     * @param {Y.Node} triggerElement Element that triggered the setModel on field change
+     * @method setModel
+     * 
+     * @param {String} key The model property key, often used in the html to define which model property will be bind
+     * @param {Any} value New value that is going to be set in the model property
+     * @param {Object} [scopeModel] Scope model and additional info, used in cases like, to set list elements when they are bind
+     * @param  {Y.Node} [triggerElement] Element that triggered the setModel on field change
      *
      */
     setModel: function (key, value, scopeModel, triggerElement) {
@@ -56,8 +58,13 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
     },
 
     /**
-     * Listens specific model item changes by passing the given key
-     *
+     * Listens specific model changes
+     * 
+     * @method listen
+     * 
+     * @param {String} key The model property key of the property that is going to be listened
+     * @param {Function} value The callback to execute on model property change
+     * 
      */
     listen: function (key, callback) {
         this.on(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {
@@ -68,9 +75,14 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
     },
 
     /**
-     * Executes a controller method code expression e.g testFunc(test)
+     * Executes a controller method code expression 
      *
-     *
+     * @method execControllerMethodExpression
+     * 
+     * @param {String} code Controller's method code to be executed e.g testFunc(test);
+     * @param {Object} scopeModel The current scope model
+     * @param {Y.Node} el Element which is where is defined the method call expression
+     * 
      */
     execControllerMethodExpression: function (code, scopeModel, el) {
         var methodName = code.split('(')[0];
@@ -310,7 +322,9 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 }, {
     ATTRS: {
         /**
-         * Main container
+         * Main container where Y.Common.DomBind is going to look
+         *
+         * @attribute container
          * @type Y.Node
          */
         container: {
@@ -318,22 +332,32 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
         },
 
         /**
-         * Model that will be bind
+         * Model that will be bind, every change will be reflected and centralized on this data unit
          *
+         * @attribute model
+         * @type {Object}
          */
         model: {
             value: null
         },
+        
         /**
-         * controller methods
+         * Controller methods
+         * 
+         * @attribute controller
+         * @type {Object}
+         * @default {}
          */
         controller: {
             value: {}
         },
 
         /**
-         * list of filter methods
-         *
+         * Filter methods to be used on list/array iteration
+         * 
+         * @attribute filters
+         * @type {Object}
+         * @default {}
          */
         filters: {
             value: {}
@@ -341,14 +365,21 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 
         /**
          * Map of templates each item should contain template markup, then each item can be referenced by using the template key
-         *
+         * 
+         * @attribute templates
+         * @type {Object}
+         * @default {}
          */
         templates: {
             value: {}
         },
 
         /**
-         * prefix to be used in the directives
+         * Prefix to be used in the directives
+         * 
+         * @attribute prefix
+         * @type {String}
+         * @default 'data-db'
          */
         prefix: {
             value: 'data-db'
