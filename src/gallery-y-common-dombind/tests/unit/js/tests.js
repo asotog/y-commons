@@ -50,53 +50,53 @@ YUI.add('module-tests', function (Y) {
             }
         },
         filters: {
-            processTask: function(dataItem) {
-                dataItem.done = (dataItem.isCompleted) ? "done" : "";
-                return dataItem;
+            processTask: function(modelItem) {
+                modelItem.done = (modelItem.isCompleted) ? "done" : "";
+                return modelItem;
             },
-            initTaskComponents: function(dataItem, node) {
+            initTaskComponents: function(modelItem, node) {
                 node.setAttribute('data-custom-test', 'unit test');
-                Y.log(dataItem);
+                Y.log(modelItem);
             }
         }
     });
     suite.add(new Y.Test.Case({
         name: 'Automated Tests',
-        'Set data': function () {
-            dombind.on('dataChange', function () {
-                Y.log('Data has been changed');
+        'Set model': function () {
+            dombind.on('modelChange', function () {
+                Y.log('Model has been changed');
             });
         },
         
-        'Verify number of items created in the list after data load': function() {
-            dombind.set('data', TASKS_LIST);
+        'Verify number of items created in the list after model load': function() {
+            dombind.set('model', TASKS_LIST);
             var n = Y.one('.activities-list').all('li').size();
             Y.Assert.areNotEqual (0, n, 'Items are empty');
         },
         
         'Change input that is using bind directive': function() {
-            dombind.listen('name', function(data) {
-                Y.log('name bind has been updated: ' + dombind.get('data').name);
+            dombind.listen('name', function(model) {
+                Y.log('name bind has been updated: ' + dombind.get('model').name);
             });
         },
         
-        'Radio button data listener': function() {
-            dombind.listen('gender', function(data) {
-                Y.log('gender bind has been updated: ' + dombind.get('data').gender);
+        'Radio button model listener': function() {
+            dombind.listen('gender', function(model) {
+                Y.log('gender bind has been updated: ' + dombind.get('model').gender);
             });
         },
         
-        'Checkbox button data listener': function() {
-            dombind.listen('married', function(data) {
-                Y.log('married bind has been updated: ' + dombind.get('data').married);
+        'Checkbox button model listener': function() {
+            dombind.listen('married', function(model) {
+                Y.log('married bind has been updated: ' + dombind.get('model').married);
             });
         },
         
-        'Simulate bind input field value change also on data bind': function() {
+        'Simulate bind input field value change also on model bind': function() {
             var newval = 'Mrs Doe';
             Y.one('.activities-list').one('.name').set('value', newval);
             Y.one('.activities-list').one('.name').simulate('change');
-            Y.Assert.areEqual(newval, dombind.get('data').name, 'Values binded are not matching');//
+            Y.Assert.areEqual(newval, dombind.get('model').name, 'Values binded are not matching');//
             Y.Assert.areEqual(newval, Y.one('.activities-list span[data-db-bind="name"]').get('innerHTML'), 'Values binded are not matching');
         },
         
@@ -106,13 +106,13 @@ YUI.add('module-tests', function (Y) {
             Y.Assert.areEqual(li.size(), customAttributeLi.size(), 'Items listed not matching');
         },
         
-        'Simulate click on iterable item button and retrieve the item data': function() {
+        'Simulate click on iterable item button and retrieve the item model': function() {
             var lis = Y.all('.today li');
             lis.item(0).one('.activity-delete').simulate('click');
             Y.Assert.areEqual(currentTask.taskId, TASKS_LIST.todayTasks[0].taskId, 'Are not containing same task id');
         },
         
-        'Simulate value change of iterable input and check values according to main data object': function() {
+        'Simulate value change of iterable input and check values according to main model object': function() {
             var lis = Y.all('.today li');
             lis.item(0).one('.edit-title').set('value', 'JS Conf Las Vegas 2014');
             lis.item(0).one('.edit-title').simulate('change');
