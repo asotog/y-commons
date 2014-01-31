@@ -11,10 +11,15 @@
 
 <h2>Description</h2>
 
-<p>*Module Description Goes Here*</p>
+<p>This component is focused on decrease the events and dom lookup attaching mainly on ajax or events based javascript applications, by taking care internally of the 
+model updates from view to model and viceversa</p>
 
+
+<p>Following code shows how is configured the component and for detailed explanation of what is each constructor's attribute please look <a href="#api-docs">api docs</a>:</p>
 ```
-//Module example code
+var dombind = new Y.Common.DomBind({
+    container: Y.one('.simple-form')
+});
 ```
 
 <h2>Two way data bind</h2>
@@ -23,8 +28,13 @@
 
 <h2>Events directives</h2>
 
-<h2>Lists: iteration, binding and filtering</h2>
-
-<h2>Templating</h2>
+<h2>Lists: template, iteration, binding and filtering</h2>
 
 <h2>Directives creation</h2>
+
+<h2>Limitations</h2>
+
+
+<h2>API Docs</h2>
+
+<p>For detailed explanation of this component, default values and constructor arguments check <a href="{{{apiDocsUrl}}">api docs</a></p>

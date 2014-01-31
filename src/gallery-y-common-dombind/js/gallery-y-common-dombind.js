@@ -95,6 +95,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 
     _init: function () {
         var me = this;
+        me._compileDirectives({});
         this.after('modelChange', function () {
             Y.log(LOG_PREFIX + 'Model changed');
             me._compileDirectives({});
@@ -336,9 +337,10 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
          *
          * @attribute model
          * @type {Object}
+         * @optional
          */
         model: {
-            value: null
+            value: {}
         },
         
         /**

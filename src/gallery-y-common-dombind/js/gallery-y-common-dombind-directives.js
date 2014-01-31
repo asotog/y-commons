@@ -54,8 +54,10 @@
          /* sets initial flag to avoid add multiple events to the same element */
          el.setData(this.get('prefix') + DATA_IS_BINDED, true)
      }
-     /* inializes with the current model */
-     this.setModel(attribute, this._getModel(attribute, scopeModel), scopeModel);
+     /* inializes with the current model if value in model is there and not undefined */
+     if (this._getModel(attribute, scopeModel)) {
+        this.setModel(attribute, this._getModel(attribute, scopeModel), scopeModel);
+     }
  });
 
  /**
@@ -97,26 +99,31 @@
      attribute = attribute.match(/[^ ]+/g);
      var modelList = (model[attribute[2]] && model[attribute[2]].length > 0) ? model[attribute[2]] : [];
      var listItemTemplate = this.get('templates')[el.getAttribute(me._getDirectiveName(TEMPLATE))];
-     Y.Array.each(modelList, function (item, index) {
-         /* execute before each item filter */
-         var modelItem = me._doBeforeEachItem(filters, item);
-         /* creates the new node */
-         var node = Y.Node.create(Y.Lang.sub(listItemTemplate, modelItem));
-         var scopeObject = {
-             containerNode: node,
-             scopeModel: scopeModel
-         };
-         /* passes additional information in the model item */
-         modelItem._info = {
-             parent: attribute[2],
-             parentType: DATA_ARRAY,
-             index: index
-         };
-         scopeObject.scopeModel[attribute[0]] = modelItem;
-         me._compileDirectives(scopeObject);
-         el.append(node);
-         me._doAfterEachItem(filters, item, node);
-     });
+     /* iterates with the given list */
+     var iterateList = function(list) {
+         Y.Array.each(list, function (item, index) {
+             /* execute before each item filter */
+             var modelItem = me._doBeforeEachItem(filters, item);
+             /* creates the new node */
+             var node = Y.Node.create(Y.Lang.sub(listItemTemplate, modelItem));
+             var scopeObject = {
+                 containerNode: node,
+                 scopeModel: scopeModel
+             };
+             /* passes additional information in the model item */
+             modelItem._info = {
+                 parent: attribute[2],
+                 parentType: DATA_ARRAY,
+                 index: index
+             };
+             scopeObject.scopeModel[attribute[0]] = modelItem;
+             me._compileDirectives(scopeObject);
+             el.append(node);
+             me._doAfterEachItem(filters, item, node);
+         });
+     };
+     iterateList(modelList);
+     
  });
 
  /* TODO: directives priorities int to control execution order and sorting mechanism based on that value */
