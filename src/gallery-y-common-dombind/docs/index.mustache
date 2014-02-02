@@ -24,13 +24,91 @@ var dombind = new Y.Common.DomBind({
 
 <h2>Two way data bind</h2>
 
+<p>Sometimes when working with extensive  applications in javascript, attaching events and set data models can be really cumbersome, two way data binding is an approach to reflect model changes into dom and viceversa, this module provides an easy way to achieve this by just setting the declarations of the model bind in the markup:</p>
+
+```
+<div id="container">
+    <form>
+        <div>
+        Name:
+        <input type="text" data-db-bind="name"/>
+        </div>
+        <div>
+        Last Name:
+        <input type="text" data-db-bind="lastName"/>
+        </div>
+        <div>
+        Married:
+        <input type="checkbox" data-db-bind="married"/>
+        </div>
+        <button data-db-onclick="submitPerson();">submit</button>
+    </form>
+</div>
+```
+
+<p>The two way data binding makes easier the way of how is updated the model as can be seen in <a href="simple-binding.html">simple binding example</a></p>
+
+
 <h2>Controller methods</h2>
 
+<p>Controller methods/actions comes to support the events attaching functionality of the application, for example on click do something or on focus do another thing, controller methods are specified on the contructor of the DomBind instance, on controller methods, <code>this</code> will refer to the Node element that is triggering the controller's method, given the following example, <code>this</code> will be the <code>button</code> Node:</p>
+
+
+```
+<div id="container">
+    <form>
+        <div>
+        Name:
+        <input type="text" data-db-bind="name"/>
+        </div>
+        <div>
+        Last Name:
+        <input type="text" data-db-bind="lastName"/>
+        </div>
+        <div>
+        Married:
+        <input type="checkbox" data-db-bind="married"/>
+        </div>
+        <button data-db-onclick="submitPerson();">submit</button>
+    </form>
+</div>
+```
+
+```
+var dombind = new Y.Common.DomBind({
+    container: Y.one('#container'),
+    controller: {
+        submitPerson: function() {
+            alert('Person submitted:' + Y.JSON.stringify(dombind.get('model')))
+        }
+    }
+});
+```
+
 <h2>Events directives</h2>
+
+<p>On previous section, was shown that events directives such as <code>data-db-onclick</code> can be defined directly in the markup and it will be possible to execute controller's methods, currenly there is a list of predefined directives that be used:</p>
+
+
+<table>
+    <tbody>
+        <tr>
+            <th>Directive</th>
+            <th>Description</th>
+        </tr>
+        
+        <tr>
+            <td><code>-onclick</code></td>
+            <td><code>click</code> event</td>
+        </tr>
+    </tbody>
+</table>
 
 <h2>Lists: template, iteration, binding and filtering</h2>
 
 <h2>Directives creation</h2>
+
+<h2>Prefix</h2>
 
 <h2>Limitations</h2>
 

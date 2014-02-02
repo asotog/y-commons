@@ -63,7 +63,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      * @method listen
      * 
      * @param {String} key The model property key of the property that is going to be listened
-     * @param {Function} value The callback to execute on model property change
+     * @param {Function} callback The callback to execute on model property change
      * 
      * @return EventHandle
      */

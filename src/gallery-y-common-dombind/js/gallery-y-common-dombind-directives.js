@@ -40,7 +40,7 @@
              }
          });
          /* listen the model changes by using custom event */
-         var modelEventHandler = this.listen(uniqueKey, function (model) {
+         var modelEventHandle = this.listen(uniqueKey, function (model) {
              if (el._node != null) {
                  /* avoid reset same element */
                  if (typeof model.triggerElement == 'undefined' || !model.triggerElement.compareTo(el)) {
@@ -49,7 +49,8 @@
                      me._setElementValue(el, model.newValue);
                  }
              } else {
-                 modelEventHandler.detach();
+                 /* stop listening if node was removed */
+                 modelEventHandle.detach();
              }
          });
 
@@ -67,7 +68,6 @@
   * 
   * @property Directives['-onclick']
   * @type {Object}
-  * @static
   */
  Y.Common.DomBind.createDirective('onclick', function (directiveName, el, attribute, scopeModel) {
      var me = this;
@@ -84,7 +84,6 @@
   * 
   * @property Directives['-container-loop-model']
   * @type {Object}
-  * @static
   */
  Y.Common.DomBind.createDirective('container-loop-model', function (directiveName, el, attribute, scopeModel) {
      var me = this;
