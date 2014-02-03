@@ -76,7 +76,7 @@ YUI({
         <button class="btn activity-undo icon-check">Undo</button>
         <span class="activity-title">{{name}}</span> <span
             class="activity-date">{{date}}</span>
-        <button class="btn activity-delete icon-remove-sign" data-db-onclick="deleteTask(task);">Delete</button>
+        <button class="btn activity-delete icon-remove-sign" data-db-onclick="deleteTask($event, task);">Delete</button>
         <input type="hidden" value="{{taskId}}" />
     </div>
     <div class="edit">

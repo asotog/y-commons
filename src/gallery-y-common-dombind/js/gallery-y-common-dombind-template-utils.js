@@ -20,6 +20,7 @@
 
  });
 
+ /* Templates compiled functions registry as caching mechanism */
  TemplateHandler._registry = {};
 
  /** 

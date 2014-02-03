@@ -108,13 +108,15 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      * @param {Node} element Element where the event is going to be attached
      * @param {String} type YUI event type that is going to be attached
      * @param {Function} callback Callback function to be executed after event triggers
+     * @param {Object} scopeModel The current scope model
      * 
      */ 
-    attachEvent: function(element, type, callback) {
+    attachEvent: function(element, type, callback, scopeModel) {
         if (typeof element.getData(type) == 'undefined') {
             element.on(type, function(e) {
                 e.preventDefault();
-                callback(e);
+                scopeModel.$event = e;
+                callback(scopeModel);
             });
             element.setData(type, true);
         }
@@ -282,9 +284,9 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 				var scopeItem = scopeModel[scopeVarName];
 				if (scopeItem && scopeItem._info && scopeItem._info.parentType == DATA_ARRAY) {
 					scopeModel[scopeVarName] = this.get('model')[scopeItem._info.parent][scopeItem._info.index];
-				} else {
-					scopeModel[scopeVarName] = this.get('model')[scopeVarName];
-				}
+				} else if (this.get('model')[scopeVarName] != null) {
+                    scopeModel[scopeVarName] = this.get('model')[scopeVarName];
+                }
 				varsString += Y.Lang.sub(SCOPE_VAR_TEMPLATE, {scopeVarName: scopeVarName});
             }
         }
@@ -475,10 +477,10 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   */
  Y.Common.DomBind.createDirective('onclick', function (directiveName, el, attribute, scopeModel) {
      var me = this;
-     this.attachEvent(el, 'click', function(e) {
+     this.attachEvent(el, 'click', function(scopeModel) {
          // TODO: be able to call multiple methods from the same directive
          me.execControllerMethodExpression(attribute, scopeModel, el);
-     });
+     }, scopeModel);
  });
 
  /**
@@ -489,9 +491,9 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   */
  Y.Common.DomBind.createDirective('onchange', function (directiveName, el, attribute, scopeModel) {
      var me = this;
-     this.attachEvent(el, 'change', function(e) {
+     this.attachEvent(el, 'change', function(scopeModel) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
-     });
+     }, scopeModel);
  });
 
  /**
@@ -502,9 +504,9 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   */
  Y.Common.DomBind.createDirective('onfocus', function (directiveName, el, attribute, scopeModel) {
      var me = this;
-     this.attachEvent(el, 'focus', function(e) {
+     this.attachEvent(el, 'focus', function(scopeModel) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
-     });
+     }, scopeModel);
  });
 
  /**
@@ -517,7 +519,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      var me = this;
      this.attachEvent(el, 'blur', function(e) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
-     });
+     }, scopeModel);
  });
 
  /**
@@ -619,7 +621,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
  });
 
  /* TODO: directives priorities int to control execution order and sorting mechanism based on that value */
- /* TODO: add more directive for example for blur, focus, etc */
+ /* TODO: can receive event object on controller methods */
 
 /*!
 
@@ -669,6 +671,7 @@ THE SOFTWARE.
 
  });
 
+ /* Templates compiled functions registry as caching mechanism */
  TemplateHandler._registry = {};
 
  /** 

@@ -27,10 +27,10 @@
   */
  Y.Common.DomBind.createDirective('onclick', function (directiveName, el, attribute, scopeModel) {
      var me = this;
-     this.attachEvent(el, 'click', function(e) {
+     this.attachEvent(el, 'click', function(scopeModel) {
          // TODO: be able to call multiple methods from the same directive
          me.execControllerMethodExpression(attribute, scopeModel, el);
-     });
+     }, scopeModel);
  });
 
  /**
@@ -41,9 +41,9 @@
   */
  Y.Common.DomBind.createDirective('onchange', function (directiveName, el, attribute, scopeModel) {
      var me = this;
-     this.attachEvent(el, 'change', function(e) {
+     this.attachEvent(el, 'change', function(scopeModel) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
-     });
+     }, scopeModel);
  });
 
  /**
@@ -54,9 +54,9 @@
   */
  Y.Common.DomBind.createDirective('onfocus', function (directiveName, el, attribute, scopeModel) {
      var me = this;
-     this.attachEvent(el, 'focus', function(e) {
+     this.attachEvent(el, 'focus', function(scopeModel) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
-     });
+     }, scopeModel);
  });
 
  /**
@@ -69,7 +69,7 @@
      var me = this;
      this.attachEvent(el, 'blur', function(e) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
-     });
+     }, scopeModel);
  });
 
  /**

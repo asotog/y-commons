@@ -45,7 +45,7 @@ YUI.add('module-tests', function (Y) {
             'task-template': Y.one('#task-list-item-template').get('innerHTML')
         },
         controller: {
-            deleteTask: function(task) {
+            deleteTask: function($event, task) {
                 currentTask = task;
                 Y.log('delete button clicked');
             },

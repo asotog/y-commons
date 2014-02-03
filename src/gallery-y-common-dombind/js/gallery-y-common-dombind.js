@@ -106,13 +106,15 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      * @param {Node} element Element where the event is going to be attached
      * @param {String} type YUI event type that is going to be attached
      * @param {Function} callback Callback function to be executed after event triggers
+     * @param {Object} scopeModel The current scope model
      * 
      */ 
-    attachEvent: function(element, type, callback) {
+    attachEvent: function(element, type, callback, scopeModel) {
         if (typeof element.getData(type) == 'undefined') {
             element.on(type, function(e) {
                 e.preventDefault();
-                callback(e);
+                scopeModel.$event = e;
+                callback(scopeModel);
             });
             element.setData(type, true);
         }
@@ -280,9 +282,9 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 				var scopeItem = scopeModel[scopeVarName];
 				if (scopeItem && scopeItem._info && scopeItem._info.parentType == DATA_ARRAY) {
 					scopeModel[scopeVarName] = this.get('model')[scopeItem._info.parent][scopeItem._info.index];
-				} else {
-					scopeModel[scopeVarName] = this.get('model')[scopeVarName];
-				}
+				} else if (this.get('model')[scopeVarName] != null) {
+                    scopeModel[scopeVarName] = this.get('model')[scopeVarName];
+                }
 				varsString += Y.Lang.sub(SCOPE_VAR_TEMPLATE, {scopeVarName: scopeVarName});
             }
         }
