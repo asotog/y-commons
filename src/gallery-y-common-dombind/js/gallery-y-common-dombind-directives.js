@@ -171,5 +171,4 @@
  });
 
  /* TODO: directives priorities int to control execution order and sorting mechanism based on that value */
- /* TODO: can receive event object on controller methods */
 
