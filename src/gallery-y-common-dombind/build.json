@@ -4,7 +4,9 @@
         "gallery-y-common-dombind": {
             "jsfiles": [
                 "js/gallery-y-common-dombind.js",
-                "js/gallery-y-common-dombind-directives.js"
+                "js/gallery-y-common-dombind-directives.js",
+                "js/gallery-y-common-dombind-handlebars.js",
+                "js/gallery-y-common-dombind-template-utils.js"
             ]
         }
     }

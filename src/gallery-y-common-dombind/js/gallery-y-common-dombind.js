@@ -31,6 +31,9 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      * Initializer
      */
     initializer: function () {
+        if (this.get('templateEngine') == null) {
+            this.set('templateEngine', Y.Common.DomBind.HandleBars);
+        }
         this._init();
     },
 
@@ -117,6 +120,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 
     _init: function () {
         var me = this;
+        this._preprocessTemplates();
         me._compileDirectives({});
         this.after('modelChange', function () {
             Y.log(LOG_PREFIX + 'Model changed');
@@ -124,6 +128,23 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
         });
     },
 
+    /**
+     * 
+     * Compiles and registers templates with the given template engine, optimizing the rendering time,
+     * because template at that moment will be already processed and cached
+     * 
+     */ 
+    _preprocessTemplates: function() {
+        var templateEngineHandler = new Y.Common.TemplateHandler(this.get('templateEngine'));
+        var templates = this.get('templates');
+        for (var templateId in templates) {
+            if (templates.hasOwnProperty(templateId)) {
+                var compiled = templateEngineHandler.compile(templates[templateId]);
+                Y.Common.TemplateHandler.register(templateId, compiled);
+            }
+        }
+    },
+    
     /**
      *
      * Iterates over the available list of directives to start looking one by one in the dom
@@ -397,7 +418,19 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
         templates: {
             value: {}
         },
-
+        
+        /**
+         * By default will use handlebars with Y.Template to process templates but custom engine can be used, please follow the description
+         * about how to use custom template engine http://yuilibrary.com/yui/docs/template/
+         * 
+         * @attribute templateEngine
+         * @type {Object}
+         * @default Handlebars
+         */ 
+        templateEngine: {
+            value: null
+        },
+        
         /**
          * Prefix to be used in the directives
          * 

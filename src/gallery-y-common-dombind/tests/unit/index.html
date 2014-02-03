@@ -70,22 +70,22 @@ YUI({
 });
 </script>
 <script id="task-list-item-template" type="text/x-html-template">
-<li id="task-{taskId}" class="{done}">
+<li id="task-{{taskId}}" class="{{done}}">
     <div class="activity">
         <button class="btn activity-finished icon-check-empty">Finish</button>
         <button class="btn activity-undo icon-check">Undo</button>
-        <span class="activity-title">{name}</span> <span
-            class="activity-date">{date}</span>
+        <span class="activity-title">{{name}}</span> <span
+            class="activity-date">{{date}}</span>
         <button class="btn activity-delete icon-remove-sign" data-db-onclick="deleteTask(task);">Delete</button>
-        <input type="hidden" value="{taskId}" />
+        <input type="hidden" value="{{taskId}}" />
     </div>
     <div class="edit">
         <form>
-            <input type="hidden" value="{taskId}" />
+            <input type="hidden" value="{{taskId}}" />
             <div class="control-group">
                 <label class="control-label" for="title">Title</label>
                 <div class="controls">
-                     <input name="title" data-db-bind="task.name" type="text" class="edit-title field-required" value="{name}"></input>
+                     <input name="title" data-db-bind="task.name" type="text" class="edit-title field-required" value="{{name}}"></input>
                     <span data-db-bind="task.name"></span>
                 </div>
             </div>
@@ -93,14 +93,14 @@ YUI({
             <div class="control-group">
                 <label class="control-label" for="description">Description</label>
                 <div class="controls">
-                    <textarea name="description" class="edit-description field-required" placeholder="Event Description">{description}</textarea>
+                    <textarea name="description" class="edit-description field-required" placeholder="Event Description">{{description}}</textarea>
                 </div>
             </div>
             
             <div class="control-group">
                 <label class="control-label" for="time">Day</label>
                 <div class="lfr-input-date controls">
-                    <input id="taskCal{taskId}" name="time" type="{dateFieldType}" class="edit-time field-required" value="{date}"></input>
+                    <input id="taskCal{{taskId}}" name="time" type="{{dateFieldType}}" class="edit-time field-required" value="{{date}}"></input>
                 </div>
             </div>
 

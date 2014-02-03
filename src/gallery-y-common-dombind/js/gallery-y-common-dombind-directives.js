@@ -1,3 +1,4 @@
+ 
  Y.Common.DomBind.Directives = {};
 
  /**
@@ -9,6 +10,7 @@
   * @param {String} keyName Attribute name that will be used on directive declaration in the html
   * @param {Function} directiveExecFn Callback function that will be executed on directive compilation e.g <code>function(directiveName, el, attribute, scopeModel) { }</code>
   * @static
+  * @for Common.DomBind
   */
  Y.Common.DomBind.createDirective = function (keyName, directiveExecFn) {
      keyName = '-' + keyName;
@@ -136,7 +138,6 @@
      attribute = attribute.match(/[^ ]+/g);
      var listProperty = attribute[2];
      var modelList = (model[listProperty] && model[listProperty].length > 0) ? model[listProperty] : [];
-     var listItemTemplate = this.get('templates')[el.getAttribute(me._getDirectiveName(TEMPLATE))];
      /* iterates with the given list */
      var iterateList = function (list) {
          el.empty();
@@ -144,7 +145,8 @@
              /* execute before each item filter */
              var modelItem = me._doBeforeEachItem(filters, item);
              /* creates the new node */
-             var node = Y.Node.create(Y.Lang.sub(listItemTemplate, modelItem));
+             var renderedMarkup = Y.Common.TemplateHandler.render(el.getAttribute(me._getDirectiveName(TEMPLATE)), modelItem);
+             var node = Y.Node.create(renderedMarkup);
              var scopeObject = {
                  containerNode: node,
                  scopeModel: scopeModel
@@ -169,4 +171,5 @@
  });
 
  /* TODO: directives priorities int to control execution order and sorting mechanism based on that value */
- /* TODO: add more directive for example for blur, focus, etc */
+ /* TODO: can receive event object on controller methods */
+

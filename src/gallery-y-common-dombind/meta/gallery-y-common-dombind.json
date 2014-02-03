@@ -3,7 +3,8 @@
         "requires": [
             "yui-base",
             "base-build",
-            "node"
+            "node",
+            "template-base"
         ]
     }
 }
