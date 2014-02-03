@@ -18,6 +18,63 @@
  }
 
  /**
+  * Definition for <code>-onclick</code> directive, provides click event that can be defined from markup and call methods defined in the controller
+  * 
+  * @property Directives['-onclick']
+  * @type {Object}
+  */
+ Y.Common.DomBind.createDirective('onclick', function (directiveName, el, attribute, scopeModel) {
+     var me = this;
+     this.attachEvent(el, 'click', function(e) {
+         // TODO: be able to call multiple methods from the same directive
+         e.preventDefault();
+         me.execControllerMethodExpression(attribute, scopeModel, el);
+     });
+ });
+
+ /**
+  * Definition for <code>-onchange</code> directive, provides change event that can be defined from markup and call methods defined in the controller
+  * 
+  * @property Directives['-onchange']
+  * @type {Object}
+  */
+ Y.Common.DomBind.createDirective('onchange', function (directiveName, el, attribute, scopeModel) {
+     var me = this;
+     this.attachEvent(el, 'change', function(e) {
+         e.preventDefault();
+         me.execControllerMethodExpression(attribute, scopeModel, el);
+     });
+ });
+
+ /**
+  * Definition for <code>-onfocus</code> directive, provides focus event that can be defined from markup and call methods defined in the controller
+  * 
+  * @property Directives['-onfocus']
+  * @type {Object}
+  */
+ Y.Common.DomBind.createDirective('onfocus', function (directiveName, el, attribute, scopeModel) {
+     var me = this;
+     this.attachEvent(el, 'focus', function(e) {
+         e.preventDefault();
+         me.execControllerMethodExpression(attribute, scopeModel, el);
+     });
+ });
+
+ /**
+  * Definition for <code>-onblur</code> directive, provides blur event that can be defined from markup and call methods defined in the controller
+  * 
+  * @property Directives['-onblur']
+  * @type {Object}
+  */
+ Y.Common.DomBind.createDirective('onblur', function (directiveName, el, attribute, scopeModel) {
+     var me = this;
+     this.attachEvent(el, 'blur', function(e) {
+         e.preventDefault();
+         me.execControllerMethodExpression(attribute, scopeModel, el);
+     });
+ });
+
+ /**
   * Definition for <code>-bind</code> directive, model properties can be associated to dom element or viceversa, reflecting changes on both sides,
   * meaning that it will provide two-way binding
   * 
@@ -61,21 +118,6 @@
      if (this._getModel(attribute, scopeModel)) {
          this.setModel(attribute, this._getModel(attribute, scopeModel), scopeModel);
      }
- });
-
- /**
-  * Definition for <code>-onclick</code> directive, provides click event that can be defined from markup and call methods defined in the controller
-  * 
-  * @property Directives['-onclick']
-  * @type {Object}
-  */
- Y.Common.DomBind.createDirective('onclick', function (directiveName, el, attribute, scopeModel) {
-     var me = this;
-     el.on('click', function (e) {
-         // TODO: be able to call multiple methods from the same directive
-         e.preventDefault();
-         me.execControllerMethodExpression(attribute, scopeModel, el);
-     });
  });
 
  /**

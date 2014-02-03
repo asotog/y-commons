@@ -10,7 +10,7 @@
 <body class="yui3-skin-sam">
 <div class="activities-list" id="h">
     Name:
-    <input class="name" data-db-bind="name" type="text" value=""/>
+    <input class="name" data-db-bind="name" data-db-onblur="afterBlur();" data-db-onfocus="afterFocus();" type="text" value=""/>
     <span data-db-bind="name"></span>
     <br>
     Married:
@@ -24,6 +24,14 @@
     <div class="add-reminder">
         <button class="btn-primary btn add-submit icon-plus-sign">Add</button>
     </div>
+    <br>
+    Tasks type:
+    <select name="type" data-db-bind="type" data-db-onchange="tasksTypeChange();" class="type">
+        <option value="personal">Personal</option>
+        <option value="enterprise">Enterprise</option>
+    </select>
+    <span data-db-bind="type"></span>
+    
     <div>
         <span class="subtitle">Previous tasks</span>
         <ul class="tasks previous" data-db-template="task-template"  data-db-container-loop-model="task in previousTasks|onBeforeEach:processTask">

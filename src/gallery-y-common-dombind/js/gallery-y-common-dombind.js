@@ -93,6 +93,26 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
         }));
         eval('this.get("controller").' + code);
     },
+    
+    /**
+     * Attaches event and sets a flag to know if the event was already attached or not, avoids to add same event multiple times on the same
+     * dom element
+     * 
+     * @method attachEvent
+     * 
+     * @param {Node} element Element where the event is going to be attached
+     * @param {String} type YUI event type that is going to be attached
+     * @param {Function} callback Callback function to be executed after event triggers
+     * 
+     */ 
+    attachEvent: function(element, type, callback) {
+        if (typeof element.getData(type) == 'undefined') {
+            element.on(type, function(e) {
+                callback(e);
+            });
+            element.setData(type, true);
+        }
+    },
 
     _init: function () {
         var me = this;

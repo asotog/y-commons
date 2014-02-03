@@ -65,7 +65,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      * @method listen
      * 
      * @param {String} key The model property key of the property that is going to be listened
-     * @param {Function} value The callback to execute on model property change
+     * @param {Function} callback The callback to execute on model property change
      * 
      * @return EventHandle
      */
@@ -94,6 +94,26 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
             methodName: methodName
         }));
         eval('this.get("controller").' + code);
+    },
+    
+    /**
+     * Attaches event and sets a flag to know if the event was already attached or not, avoids to add same event multiple times on the same
+     * dom element
+     * 
+     * @method attachEvent
+     * 
+     * @param {Node} element Element where the event is going to be attached
+     * @param {String} type YUI event type that is going to be attached
+     * @param {Function} callback Callback function to be executed after event triggers
+     * 
+     */ 
+    attachEvent: function(element, type, callback) {
+        if (typeof element.getData(type) == 'undefined') {
+            element.on(type, function(e) {
+                callback(e);
+            });
+            element.setData(type, true);
+        }
     },
 
     _init: function () {
@@ -411,6 +431,63 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
  }
 
  /**
+  * Definition for <code>-onclick</code> directive, provides click event that can be defined from markup and call methods defined in the controller
+  * 
+  * @property Directives['-onclick']
+  * @type {Object}
+  */
+ Y.Common.DomBind.createDirective('onclick', function (directiveName, el, attribute, scopeModel) {
+     var me = this;
+     this.attachEvent(el, 'click', function(e) {
+         // TODO: be able to call multiple methods from the same directive
+         e.preventDefault();
+         me.execControllerMethodExpression(attribute, scopeModel, el);
+     });
+ });
+
+ /**
+  * Definition for <code>-onchange</code> directive, provides change event that can be defined from markup and call methods defined in the controller
+  * 
+  * @property Directives['-onchange']
+  * @type {Object}
+  */
+ Y.Common.DomBind.createDirective('onchange', function (directiveName, el, attribute, scopeModel) {
+     var me = this;
+     this.attachEvent(el, 'change', function(e) {
+         e.preventDefault();
+         me.execControllerMethodExpression(attribute, scopeModel, el);
+     });
+ });
+
+ /**
+  * Definition for <code>-onfocus</code> directive, provides focus event that can be defined from markup and call methods defined in the controller
+  * 
+  * @property Directives['-onfocus']
+  * @type {Object}
+  */
+ Y.Common.DomBind.createDirective('onfocus', function (directiveName, el, attribute, scopeModel) {
+     var me = this;
+     this.attachEvent(el, 'focus', function(e) {
+         e.preventDefault();
+         me.execControllerMethodExpression(attribute, scopeModel, el);
+     });
+ });
+
+ /**
+  * Definition for <code>-onblur</code> directive, provides blur event that can be defined from markup and call methods defined in the controller
+  * 
+  * @property Directives['-onblur']
+  * @type {Object}
+  */
+ Y.Common.DomBind.createDirective('onblur', function (directiveName, el, attribute, scopeModel) {
+     var me = this;
+     this.attachEvent(el, 'blur', function(e) {
+         e.preventDefault();
+         me.execControllerMethodExpression(attribute, scopeModel, el);
+     });
+ });
+
+ /**
   * Definition for <code>-bind</code> directive, model properties can be associated to dom element or viceversa, reflecting changes on both sides,
   * meaning that it will provide two-way binding
   * 
@@ -432,7 +509,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
              }
          });
          /* listen the model changes by using custom event */
-         var modelEventHandler = this.listen(uniqueKey, function (model) {
+         var modelEventHandle = this.listen(uniqueKey, function (model) {
              if (el._node != null) {
                  /* avoid reset same element */
                  if (typeof model.triggerElement == 'undefined' || !model.triggerElement.compareTo(el)) {
@@ -441,7 +518,8 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
                      me._setElementValue(el, model.newValue);
                  }
              } else {
-                 modelEventHandler.detach();
+                 /* stop listening if node was removed */
+                 modelEventHandle.detach();
              }
          });
 
@@ -455,28 +533,11 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
  });
 
  /**
-  * Definition for <code>-onclick</code> directive, provides click event that can be defined from markup and call methods defined in the controller
-  * 
-  * @property Directives['-onclick']
-  * @type {Object}
-  * @static
-  */
- Y.Common.DomBind.createDirective('onclick', function (directiveName, el, attribute, scopeModel) {
-     var me = this;
-     el.on('click', function (e) {
-         // TODO: be able to call multiple methods from the same directive
-         e.preventDefault();
-         me.execControllerMethodExpression(attribute, scopeModel, el);
-     });
- });
-
- /**
   * Definition for <code>-container-loop-model</code> directive, array list iterator, each element iterated has its own scope so this item can be passed through
   * controller methods, the iteration elements will be shown according to the template provided by the directive <code>-template</code>
   * 
   * @property Directives['-container-loop-model']
   * @type {Object}
-  * @static
   */
  Y.Common.DomBind.createDirective('container-loop-model', function (directiveName, el, attribute, scopeModel) {
      var me = this;

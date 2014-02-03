@@ -6,6 +6,7 @@ YUI.add('module-tests', function (Y) {
         "name": "John Doe",
         "married": true,
         "gender": "male",
+        "type": "personal",
         "futureTasks": [],
         "tomorrowTasks": [],
         "todayTasks": [{
@@ -47,6 +48,15 @@ YUI.add('module-tests', function (Y) {
             deleteTask: function(task) {
                 currentTask = task;
                 Y.log('delete button clicked');
+            },
+            tasksTypeChange: function() {
+                console.info(this);
+            },
+            afterFocus: function() {
+                console.info(this);
+            },
+            afterBlur: function() {
+                console.info(this);
             }
         },
         filters: {
@@ -84,6 +94,10 @@ YUI.add('module-tests', function (Y) {
             dombind.listen('gender', function(model) {
                 Y.log('gender bind has been updated: ' + dombind.get('model').gender);
             });
+        },
+        
+        'Simulate change directive using directive': function() {
+            
         },
         
         'Checkbox button model listener': function() {
