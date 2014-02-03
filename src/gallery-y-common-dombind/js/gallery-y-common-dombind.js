@@ -108,6 +108,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
     attachEvent: function(element, type, callback) {
         if (typeof element.getData(type) == 'undefined') {
             element.on(type, function(e) {
+                e.preventDefault();
                 callback(e);
             });
             element.setData(type, true);

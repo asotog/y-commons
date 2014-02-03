@@ -110,6 +110,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
     attachEvent: function(element, type, callback) {
         if (typeof element.getData(type) == 'undefined') {
             element.on(type, function(e) {
+                e.preventDefault();
                 callback(e);
             });
             element.setData(type, true);
@@ -440,7 +441,6 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      var me = this;
      this.attachEvent(el, 'click', function(e) {
          // TODO: be able to call multiple methods from the same directive
-         e.preventDefault();
          me.execControllerMethodExpression(attribute, scopeModel, el);
      });
  });
@@ -454,7 +454,6 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
  Y.Common.DomBind.createDirective('onchange', function (directiveName, el, attribute, scopeModel) {
      var me = this;
      this.attachEvent(el, 'change', function(e) {
-         e.preventDefault();
          me.execControllerMethodExpression(attribute, scopeModel, el);
      });
  });
@@ -468,7 +467,6 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
  Y.Common.DomBind.createDirective('onfocus', function (directiveName, el, attribute, scopeModel) {
      var me = this;
      this.attachEvent(el, 'focus', function(e) {
-         e.preventDefault();
          me.execControllerMethodExpression(attribute, scopeModel, el);
      });
  });
@@ -482,7 +480,6 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
  Y.Common.DomBind.createDirective('onblur', function (directiveName, el, attribute, scopeModel) {
      var me = this;
      this.attachEvent(el, 'blur', function(e) {
-         e.preventDefault();
          me.execControllerMethodExpression(attribute, scopeModel, el);
      });
  });
