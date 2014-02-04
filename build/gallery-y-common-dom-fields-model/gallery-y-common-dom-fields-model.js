@@ -263,7 +263,7 @@ Y.Common.DomFieldsModel = Y.Base.create('gallery-y-common-dom-fields-model', Y.B
 
         
         /**
-         * Selector to retrieve the types of fields that are going to processed
+         * Selector to retrieve the fields that are going to processed
          * 
          * @attribute formFieldsSelector
          * @type String

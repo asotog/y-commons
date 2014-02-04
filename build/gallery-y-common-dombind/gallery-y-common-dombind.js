@@ -486,6 +486,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   * @method createDirective 
   * 
   * @param {String} keyName Attribute name that will be used on directive declaration in the html
+  * @param {Number} priority Number that defines the directive priority in terms of processing higher value will be processed first than lower values
   * @param {Function} directiveExecFn Callback function that will be executed on directive compilation e.g <code>function(directiveName, el, attribute, scopeModel) { }</code>
   * @static
   * @for Common.DomBind
@@ -648,7 +649,6 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      });
  });
 
- /* TODO: directives priorities int to control execution order and sorting mechanism based on that value */
 
 /*!
 
