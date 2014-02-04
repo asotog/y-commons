@@ -27,6 +27,7 @@
         "archiver": "0.4.10"
     },
     "scripts": {
+        "postinstall": "grunt test",
         "test": "grunt test"
     },
     "repository": {
