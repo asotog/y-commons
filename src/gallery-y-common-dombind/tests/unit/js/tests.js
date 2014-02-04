@@ -117,7 +117,7 @@ YUI.add('module-tests', function (Y) {
         'After each item rendered in the list, is executing filter defined': function() {
             var li = Y.all('.today li');
             var customAttributeLi = Y.all('.today li[data-custom-test]');
-            Y.Assert.areEqual(li.size(), customAttributeLi.size(), 'Items listed not matching');
+            Y.Assert.areEqual(li.size(), 2, 'Items listed not matching');
         },
         
         'Simulate click on iterable item button and retrieve the item model': function() {
