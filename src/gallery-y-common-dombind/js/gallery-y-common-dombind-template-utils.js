@@ -3,7 +3,7 @@
 
  /**
   * Its a Y.Template class wrapper, also provides some functionality that was not added on versions previous to YUI 3.12, such as
-  * register and render methods
+  * register and render methods, this class is a helper to process templates from DomBind
   *
   * @class TemplateHandler
   * @namespace Common

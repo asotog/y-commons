@@ -22,6 +22,7 @@ var FIELD_TYPES = {
     'checkbox': 0,
     'radio': 1
 };
+
 var DATA_ARRAY = 'Array';
 var SCOPE_VAR_TEMPLATE = 'var {scopeVarName} = scopeModel["{scopeVarName}"];';
 
@@ -149,18 +150,30 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
     
     /**
      *
-     * Iterates over the available list of directives to start looking one by one in the dom
+     * Iterates over the available list of directives, sorts them by priority  and then  starts looking one by one in the dom
      *
      * @param {Object} scopeObject Scope unit of model and dom information basically contains the following structure
      *                 <code>{ scopeModel: Object, containerNode: Y.Node }</code>
      *
      */
     _compileDirectives: function (scopeObject) {
+        var directives = [];
         for (var directive in Y.Common.DomBind.Directives) {
             if (Y.Common.DomBind.Directives.hasOwnProperty(directive)) {
-                var directiveCfg = Y.Common.DomBind.Directives[directive];
-                this._compileAndExecuteDirective(scopeObject, directive, directiveCfg);
+                directives.push(Y.Common.DomBind.Directives[directive])
             }
+        }
+        /* sorts by priority */
+        directives.sort(function(a, b) {
+            if (a.priority < b.priority)
+                return 1;
+            if (a.priority > b.priority)
+                return -1;
+            return 0;
+        });
+        for(var i = 0; i < directives.length; i++) {
+            var directiveCfg = directives[i];
+            this._compileAndExecuteDirective(scopeObject, directiveCfg.keyName, directiveCfg);
         }
     },
 

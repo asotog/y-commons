@@ -1,6 +1,22 @@
  
  Y.Common.DomBind.Directives = {};
 
+
+ /**
+  * Priorities weight for directives definition, higher priorities means that those directives are going to be processed first
+  * where <code>HIGH: 10, MEDIUM: 5, LOW: 1</code>
+  * 
+  * @property DIRECTIVES_PRIORITIES
+  * @type {Object}
+  * @static
+  * @for Common.DomBind
+  */
+ Y.Common.DomBind.DIRECTIVES_PRIORITIES = {
+    HIGH: 10,
+    MEDIUM: 5,
+    LOW: 1,
+ };
+ 
  /**
   * Creates a directive, by adding it to Y.Common.DomBind.Directives object, on directives compilation phase, this object will be retrieved in order to start 
   * the initialization of all the directives difined in the dom
@@ -12,9 +28,11 @@
   * @static
   * @for Common.DomBind
   */
- Y.Common.DomBind.createDirective = function (keyName, directiveExecFn) {
+ Y.Common.DomBind.createDirective = function (keyName, priority, directiveExecFn) {
      keyName = '-' + keyName;
      Y.Common.DomBind.Directives[keyName] = {
+         keyName: keyName,
+         priority: priority,
          directiveExecFn: directiveExecFn
      };
  }
@@ -25,7 +43,7 @@
   * @property Directives['-onclick']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('onclick', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('onclick',  Y.Common.DomBind.DIRECTIVES_PRIORITIES.HIGH, function (directiveName, el, attribute, scopeModel) {
      var me = this;
      this.attachEvent(el, 'click', function(scopeModel) {
          // TODO: be able to call multiple methods from the same directive
@@ -39,7 +57,7 @@
   * @property Directives['-onchange']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('onchange', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('onchange', Y.Common.DomBind.DIRECTIVES_PRIORITIES.HIGH, function (directiveName, el, attribute, scopeModel) {
      var me = this;
      this.attachEvent(el, 'change', function(scopeModel) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
@@ -52,7 +70,7 @@
   * @property Directives['-onfocus']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('onfocus', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('onfocus', Y.Common.DomBind.DIRECTIVES_PRIORITIES.HIGH, function (directiveName, el, attribute, scopeModel) {
      var me = this;
      this.attachEvent(el, 'focus', function(scopeModel) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
@@ -65,7 +83,7 @@
   * @property Directives['-onblur']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('onblur', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('onblur', Y.Common.DomBind.DIRECTIVES_PRIORITIES.HIGH, function (directiveName, el, attribute, scopeModel) {
      var me = this;
      this.attachEvent(el, 'blur', function(e) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
@@ -79,7 +97,7 @@
   * @property Directives['-bind']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('bind', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('bind', Y.Common.DomBind.DIRECTIVES_PRIORITIES.MEDIUM, function (directiveName, el, attribute, scopeModel) {
      /* check if element was already bind */
      if (typeof el.getData(this.get('prefix') + DATA_IS_BINDED) == 'undefined') {
          var me = this;
@@ -125,7 +143,7 @@
   * @property Directives['-container-loop-model']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('container-loop-model', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('container-loop-model', Y.Common.DomBind.DIRECTIVES_PRIORITIES.LOW, function (directiveName, el, attribute, scopeModel) {
      var me = this;
      var model = this.get('model');
      Y.log(LOG_PREFIX + 'Processing ' + directiveName + ' : ' + attribute);

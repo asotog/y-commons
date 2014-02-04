@@ -24,6 +24,7 @@ var FIELD_TYPES = {
     'checkbox': 0,
     'radio': 1
 };
+
 var DATA_ARRAY = 'Array';
 var SCOPE_VAR_TEMPLATE = 'var {scopeVarName} = scopeModel["{scopeVarName}"];';
 
@@ -151,18 +152,30 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
     
     /**
      *
-     * Iterates over the available list of directives to start looking one by one in the dom
+     * Iterates over the available list of directives, sorts them by priority  and then  starts looking one by one in the dom
      *
      * @param {Object} scopeObject Scope unit of model and dom information basically contains the following structure
      *                 <code>{ scopeModel: Object, containerNode: Y.Node }</code>
      *
      */
     _compileDirectives: function (scopeObject) {
+        var directives = [];
         for (var directive in Y.Common.DomBind.Directives) {
             if (Y.Common.DomBind.Directives.hasOwnProperty(directive)) {
-                var directiveCfg = Y.Common.DomBind.Directives[directive];
-                this._compileAndExecuteDirective(scopeObject, directive, directiveCfg);
+                directives.push(Y.Common.DomBind.Directives[directive])
             }
+        }
+        /* sorts by priority */
+        directives.sort(function(a, b) {
+            if (a.priority < b.priority)
+                return 1;
+            if (a.priority > b.priority)
+                return -1;
+            return 0;
+        });
+        for(var i = 0; i < directives.length; i++) {
+            var directiveCfg = directives[i];
+            this._compileAndExecuteDirective(scopeObject, directiveCfg.keyName, directiveCfg);
         }
     },
 
@@ -451,6 +464,22 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
 }); 
  Y.Common.DomBind.Directives = {};
 
+
+ /**
+  * Priorities weight for directives definition, higher priorities means that those directives are going to be processed first
+  * where <code>HIGH: 10, MEDIUM: 5, LOW: 1</code>
+  * 
+  * @property DIRECTIVES_PRIORITIES
+  * @type {Object}
+  * @static
+  * @for Common.DomBind
+  */
+ Y.Common.DomBind.DIRECTIVES_PRIORITIES = {
+    HIGH: 10,
+    MEDIUM: 5,
+    LOW: 1,
+ };
+ 
  /**
   * Creates a directive, by adding it to Y.Common.DomBind.Directives object, on directives compilation phase, this object will be retrieved in order to start 
   * the initialization of all the directives difined in the dom
@@ -462,9 +491,11 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   * @static
   * @for Common.DomBind
   */
- Y.Common.DomBind.createDirective = function (keyName, directiveExecFn) {
+ Y.Common.DomBind.createDirective = function (keyName, priority, directiveExecFn) {
      keyName = '-' + keyName;
      Y.Common.DomBind.Directives[keyName] = {
+         keyName: keyName,
+         priority: priority,
          directiveExecFn: directiveExecFn
      };
  }
@@ -475,7 +506,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   * @property Directives['-onclick']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('onclick', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('onclick',  Y.Common.DomBind.DIRECTIVES_PRIORITIES.HIGH, function (directiveName, el, attribute, scopeModel) {
      var me = this;
      this.attachEvent(el, 'click', function(scopeModel) {
          // TODO: be able to call multiple methods from the same directive
@@ -489,7 +520,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   * @property Directives['-onchange']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('onchange', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('onchange', Y.Common.DomBind.DIRECTIVES_PRIORITIES.HIGH, function (directiveName, el, attribute, scopeModel) {
      var me = this;
      this.attachEvent(el, 'change', function(scopeModel) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
@@ -502,7 +533,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   * @property Directives['-onfocus']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('onfocus', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('onfocus', Y.Common.DomBind.DIRECTIVES_PRIORITIES.HIGH, function (directiveName, el, attribute, scopeModel) {
      var me = this;
      this.attachEvent(el, 'focus', function(scopeModel) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
@@ -515,7 +546,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   * @property Directives['-onblur']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('onblur', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('onblur', Y.Common.DomBind.DIRECTIVES_PRIORITIES.HIGH, function (directiveName, el, attribute, scopeModel) {
      var me = this;
      this.attachEvent(el, 'blur', function(e) {
          me.execControllerMethodExpression(attribute, scopeModel, el);
@@ -529,7 +560,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   * @property Directives['-bind']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('bind', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('bind', Y.Common.DomBind.DIRECTIVES_PRIORITIES.MEDIUM, function (directiveName, el, attribute, scopeModel) {
      /* check if element was already bind */
      if (typeof el.getData(this.get('prefix') + DATA_IS_BINDED) == 'undefined') {
          var me = this;
@@ -575,7 +606,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
   * @property Directives['-container-loop-model']
   * @type {Object}
   */
- Y.Common.DomBind.createDirective('container-loop-model', function (directiveName, el, attribute, scopeModel) {
+ Y.Common.DomBind.createDirective('container-loop-model', Y.Common.DomBind.DIRECTIVES_PRIORITIES.LOW, function (directiveName, el, attribute, scopeModel) {
      var me = this;
      var model = this.get('model');
      Y.log(LOG_PREFIX + 'Processing ' + directiveName + ' : ' + attribute);
@@ -621,7 +652,6 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
  });
 
  /* TODO: directives priorities int to control execution order and sorting mechanism based on that value */
- /* TODO: can receive event object on controller methods */
 
 /*!
 
@@ -654,7 +684,7 @@ THE SOFTWARE.
 
  /**
   * Its a Y.Template class wrapper, also provides some functionality that was not added on versions previous to YUI 3.12, such as
-  * register and render methods
+  * register and render methods, this class is a helper to process templates from DomBind
   *
   * @class TemplateHandler
   * @namespace Common
