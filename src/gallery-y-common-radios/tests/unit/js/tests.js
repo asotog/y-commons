@@ -4,8 +4,8 @@ YUI.add('module-tests', function(Y) {
 
     suite.add(new Y.Test.Case({
         name: 'Automated Tests',
-        'test is empty': function() {
-            Y.Assert.fail('No Tests Provided For This Module');
+        'verify generated dom': function() {
+            Y.Assert.areEqual(2, Y.all('.radio-mask').size(), 'required html not generated');
         }
     }));
 
