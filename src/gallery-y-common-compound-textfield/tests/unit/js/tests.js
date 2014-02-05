@@ -4,8 +4,13 @@ YUI.add('module-tests', function(Y) {
 
     suite.add(new Y.Test.Case({
         name: 'Automated Tests',
-        'test is empty': function() {
-            Y.Assert.fail('No Tests Provided For This Module');
+        'value is loaded properly on each field': function() {
+            var c = Y.one('#phone-container1');
+            var compoundValue = '';
+            c.all('input[type="text"]').each(function(node) {
+            	compoundValue += node.get('value');
+            });
+            Y.Assert.areEqual(c.one('input[type="hidden"]').get('value'), compoundValue, 'compound value matches with was is loaded in separate fields');
         }
     }));
 
