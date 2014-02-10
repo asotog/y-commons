@@ -6,9 +6,6 @@
 
 {{>getting-started}}
 
-
-
-
 <h2>Description</h2>
 
 <p>This component is focused on decrease the events and dom lookup attaching mainly on ajax or events based javascript applications, by taking care internally of the 
@@ -24,85 +21,19 @@ var dombind = new Y.Common.DomBind({
 
 <h2>Two way data bind</h2>
 
-<p>Sometimes when working with extensive  applications in javascript, attaching events and set data models can be really cumbersome, two way data binding is an approach to reflect model changes into dom and viceversa, this module provides an easy way to achieve this by just setting the declarations of the model bind in the markup:</p>
-
-```
-<div id="container">
-    <form>
-        <div>
-        Name:
-        <input type="text" data-db-bind="name"/>
-        </div>
-        <div>
-        Last Name:
-        <input type="text" data-db-bind="lastName"/>
-        </div>
-        <div>
-        Married:
-        <input type="checkbox" data-db-bind="married"/>
-        </div>
-        <button data-db-onclick="submitPerson();">submit</button>
-    </form>
-</div>
-```
-
-<p>The two way data binding makes easier the way of how is updated the model as can be seen in <a href="simple-binding.html">simple binding example</a></p>
-
+{{>two-way-databinding}}
 
 <h2>Controller methods</h2>
 
-<p>Controller methods/actions comes to support the events attaching functionality of the application, for example on click do something or on focus do another thing, controller methods are specified on the contructor of the DomBind instance, on controller methods, <code>this</code> will refer to the Node element that is triggering the controller's method, given the following example, <code>this</code> will be the <code>button</code> Node:</p>
-
-
-```
-<div id="container">
-    <form>
-        <div>
-        Name:
-        <input type="text" data-db-bind="name"/>
-        </div>
-        <div>
-        Last Name:
-        <input type="text" data-db-bind="lastName"/>
-        </div>
-        <div>
-        Married:
-        <input type="checkbox" data-db-bind="married"/>
-        </div>
-        <button data-db-onclick="submitPerson();">submit</button>
-    </form>
-</div>
-```
-
-```
-var dombind = new Y.Common.DomBind({
-    container: Y.one('#container'),
-    controller: {
-        submitPerson: function() {
-            alert('Person submitted:' + Y.JSON.stringify(dombind.get('model')))
-        }
-    }
-});
-```
+{{>controller}}
 
 <h2>Events directives</h2>
 
-<p>On previous section, was shown that events directives such as <code>data-db-onclick</code> can be defined directly in the markup and it will be possible to execute controller's methods, currenly there is a list of predefined directives that be used:</p>
+{{>events-directives}}
 
+<h2>Template Engine</h2>
 
-<table>
-    <tbody>
-        <tr>
-            <th>Directive</th>
-            <th>Description</th>
-        </tr>
-        
-        <tr>
-            <td><code>-onclick</code></td>
-            <td><code>click</code> event</td>
-        </tr>
-    </tbody>
-</table>
+<p>Templates are commonly used on <code>-loop-model</code> directive to render each item while iterating the data, by default uses handlebars v1.3.0, which can be seen in the source code at <a href="https://github.com/asotog/y-commons/blob/master/src/gallery-y-common-dombind/js/gallery-y-common-dombind-handlebars.js">gallery-y-common-dombind-handlebars.js </a> file, but template engine can be easily changed to use another one by setting the attribute <a href="/api/classes/Common.DomBind.html#attr_templateEngine">templateEngine</a> in the constructor</p>
 
 <h2>Lists: template, iteration, binding and filtering</h2>
 
@@ -115,63 +46,7 @@ that this attribute can have conflicts with other functionality that also uses <
 
 <h2>Important limitations</h2>
 
-<h3>Model depth</h3>
-
-<p>Currently only can use one level model and model object can not be accessed in depth, for example can only defined model objects as :</p>
-```
-{
-    "userId": 1243,
-    "name": "John Doe",
-    "married": true,
-    "gender": "male",
-    "futureTasks": [],
-    "tomorrowTasks": [],
-    "todayTasks": [{
-            "taskId": 2501,
-            "description": "js trends and frontend",
-            "name": "JS Conf 2014",
-            "date": "2014-01-21",
-            "isCompleted": false
-        }, {
-            "taskId": 2301,
-            "description": "js conf",
-            "name": "NodeJS Conffff 54545",
-            "date": "2014-01-21",
-            "isCompleted": true
-    }]
-}
-```
-
-And can not be for example : 
-```
-{
-    "userId": 1243,
-    "name": "John Doe",
-    "married": true,
-    "gender": "male",
-    "phone": {
-        "area": "(2392)",
-        "number": "21313-231"
-    },
-    "futureTasks": [],
-    "tomorrowTasks": [],
-    "todayTasks": [{
-            "taskId": 2501,
-            "description": "js trends and frontend",
-            "name": "JS Conf 2014",
-            "date": "2014-01-21",
-            "isCompleted": false
-        }, {
-            "taskId": 2301,
-            "description": "js conf",
-            "name": "NodeJS Conffff 54545",
-            "date": "2014-01-21",
-            "isCompleted": true
-    }]
-}
-```
-
-<p>Where <code>phone</code> is a compound object which has a second level, cases like this also applies for array lists, so are not currently supported, only single leveled model.</p>
+{{>limitations}}
 
 
 <h2>API Docs</h2>

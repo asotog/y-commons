@@ -32,9 +32,6 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
      * Initializer
      */
     initializer: function () {
-        if (this.get('templateEngine') == null) {
-            this.set('templateEngine', Y.Common.DomBind.HandleBars);
-        }
         this._init();
     },
 
@@ -443,7 +440,9 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
          * @default Handlebars
          */ 
         templateEngine: {
-            value: null
+            valueFn: function() {
+                return Y.Common.DomBind.HandleBars;
+            }
         },
         
         /**
