@@ -7,6 +7,10 @@ YUI.add('module-tests', function (Y) {
         "married": true,
         "gender": "male",
         "type": "personal",
+        "phone": {
+            "code": "5023",
+            "number": "2022-2020-22"
+        },
         "futureTasks": [],
         "tomorrowTasks": [],
         "todayTasks": [{
@@ -106,12 +110,20 @@ YUI.add('module-tests', function (Y) {
             });
         },
         
-        'Simulate bind input field value change also on model bind': function() {
+        'Simulate bind input field value changes also on model bind': function() {
             var newval = 'Mrs Doe';
             Y.one('.activities-list').one('.name').set('value', newval);
             Y.one('.activities-list').one('.name').simulate('change');
             Y.Assert.areEqual(newval, dombind.get('model').name, 'Values binded are not matching');//
             Y.Assert.areEqual(newval, Y.one('.activities-list span[data-db-bind="name"]').get('innerHTML'), 'Values binded are not matching');
+        },
+        
+        'Simulate bind input field value  using nested model property changes also on model bind': function() {
+            var newval = '911';
+            Y.one('.activities-list').one('.phone').set('value', newval);
+            Y.one('.activities-list').one('.phone').simulate('change');
+            Y.Assert.areEqual(newval, dombind.get('model').phone.number, 'Values binded are not matching');//
+            Y.Assert.areEqual(newval, Y.one('.activities-list span[data-db-bind="phone.number"]').get('innerHTML'), 'Values binded are not matching');
         },
         
         'After each item rendered in the list, is executing filter defined': function() {

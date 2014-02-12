@@ -333,16 +333,9 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
                 return;
             }
         }
-        // look at main model object scope
-        if (tokenizedKeys.length > 1 && typeof this.get('model')[tokenizedKeys[0]] != 'undefined') {
-            var scopeItem = scopeModel[tokenizedKeys[0]];
-            //bindKey = ((scopeItem._info && scopeItem._info.parentType == DATA_ARRAY) ? scopeItem._info.index : '') + bindKey;
-            return;
-        }
-        // single key model setting
-        this.get('model')[bindKey] = value;
+        this._setModelProperty(tokenizedKeys, value);
     },
-
+    
     /**
      * Retrieves model values using dot notation e.g person.name
      *
@@ -356,7 +349,7 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
             }
             return property;
         }
-        return this.get('model')[bindKey];
+        return this._getModelProperty(tokenizedKeys);
     },
 
     /**
@@ -372,7 +365,42 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
         });
         return (code + ' = value');
     },
-
+    
+    /**
+     * Sets a property in the model by passing the access expression separating by . to access the nested properties
+     * 
+     * @param {Array} tokenizedProperties List of properties to access the property or nested property
+     * @param {Any} value Value to be set
+     */ 
+    _setModelProperty: function(tokenizedProperties, value) {
+        var code = 'this.get("model")';
+        Y.Array.each(tokenizedProperties, function (item) {
+            code += Y.Lang.sub('["{property}"]', {
+                property: item
+            });
+        });
+        eval(code + ' = value;');
+    },
+    
+    /**
+     * Gets a property from the model by passing the access expression separating by . to access the nested properties
+     * 
+     * @param {Array} tokenizedProperties List of properties to access the property or nested property
+     */ 
+    _getModelProperty: function(tokenizedProperties) {
+        var code = 'this.get("model")';
+        Y.Array.each(tokenizedProperties, function (item) {
+            code += Y.Lang.sub('["{property}"]', {
+                property: item
+            });
+        });
+        try {
+            return eval(code);
+        } catch(err) {
+            return null;
+        }
+    },
+    
     _getDirectiveName: function (directiveName) {
         return this.get('prefix') + directiveName;
     }
