@@ -288,14 +288,16 @@ Y.Common.DomBind = Y.Base.create('gallery-y-common-dombind', Y.Base, [], {
         var varsString = '';
         for (var scopeVarName in scopeModel) {
             if (scopeModel.hasOwnProperty(scopeVarName)) {
-				/* verify if its array item or plain model item, then set with the current model data */
-				var scopeItem = scopeModel[scopeVarName];
-				if (scopeItem && scopeItem._info && scopeItem._info.parentType == DATA_ARRAY) {
-					scopeModel[scopeVarName] = this.get('model')[scopeItem._info.parent][scopeItem._info.index];
-				} else if (this.get('model')[scopeVarName] != null) {
+                /* verify if its array item or plain model item, then set with the current model data */
+                var scopeItem = scopeModel[scopeVarName];
+                if (scopeItem && scopeItem._info && scopeItem._info.parentType == DATA_ARRAY) {
+                    scopeModel[scopeVarName] = this.get('model')[scopeItem._info.parent][scopeItem._info.index];
+                } else if (this.get('model')[scopeVarName] != null) {
                     scopeModel[scopeVarName] = this.get('model')[scopeVarName];
                 }
-				varsString += Y.Lang.sub(SCOPE_VAR_TEMPLATE, {scopeVarName: scopeVarName});
+                varsString += Y.Lang.sub(SCOPE_VAR_TEMPLATE, {
+                    scopeVarName: scopeVarName
+                });
             }
         }
         return varsString;
