@@ -1,6 +1,6 @@
 <div class="intro">
     <p>
-    *Summary Goes Here*
+    {{description}}
     </p>
 </div>
 
@@ -8,9 +8,67 @@
 
 <h2>Description</h2>
 
-<p>*Module Description Goes Here*</p>
+<p>The following snippet shows how the accordion can be used:</p>
+
+<h4>Javascript</h4>
+```
+var acc = new Y.Common.Accordion({
+    srcNode: '#sample-accordion1'
+}).render();
+```
+
+<h4>HTML</h4>
 
 ```
-//Module example code
+<div id="sample-accordion1">
+    <div class="accordion-item">
+        <a href="#" class="accordion-item-link">Item 1</a>
+        <div class="accordion-item-content show">
+            Porttitor dolor, dignissim! Tristique pulvinar elementum in purus turpis mus
+            et nec diam lacus penatibus amet ut pulvinar, enim velit, non,
+            in, velit integer, odio et adipiscing digni
+        </div>
+    </div>
+    <div class="accordion-item">
+        <a href="#" class="accordion-item-link">Item 2</a>
+         <div class="accordion-item-content">
+            Lacus risus enim ut ut elementum amet elementum nisi! Aenean duis nec
+            non, risus magna ut augue placerat, pellentesque tristique, turpis, 
+            elementum elementum placer
+        </div>
+    </div>
+    <div class="accordion-item">
+        <a href="#" class="accordion-item-link">Item 3</a>
+        <div class="accordion-item-content"></div>
+    </div>
+    <div class="accordion-item">
+        <a href="#" class="accordion-item-link">Item 4</a>
+        <div class="accordion-item-content">
+            Nisi scelerisque vel elit integer ridiculus, nisi? Sed. Velit cursus
+            adipiscing, tortor dis ultrices odio odio dignissim non,
+            aliquet tincidunt montes auctor turpis! Elementum est s
+        </div>
+    </div>
+</div>
 ```
 
+
+<h4>CSS</h4>
+
+```
+.accordion-item-content, .accordion-item-content.hide {
+    display: none;
+}
+.accordion-item-content.show {
+    display: block;
+}
+```
+
+<h2>Item initially shown</h2>
+
+<p>An item can be initially displayed from the beginning by adding the class <code>show</code> to the <a href="#html">element</a> that contains the class <code>accordion-item-content</code>.</p>
+
+
+<h2>API Docs</h2>
+
+<p>For detailed explanation of this component, default values and constructor arguments check <a href="{{{apiDocsUrl}}">api docs</a></p>

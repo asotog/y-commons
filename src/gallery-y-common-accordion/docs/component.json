@@ -1,11 +1,22 @@
 {
     "name"       : "gallery-y-common-accordion",
     "displayName": "Gallery: gallery-y-common-accordion",
-    "description": "*Summary Goes Here*",
+    "description": "Generates an accordion based on the markup provided",
     "author"     : [ "asotog88" ],
     "use"        : [ "gallery-y-common-accordion" ],
 
     "tags": [ "gallery" ],
 
-    "examples": []
+    "examples": [{
+        "name": "example-accordion",
+        "displayName": "Accordion sample",
+        "description": "Generates the accordion based on the markup provided"
+    }, {
+        "name": "example-accordion-animated",
+        "displayName": "Accordion sample with slide animation",
+        "description": "Generates the accordion based on the markup provided adding slide animation when items gets collapsed or expanded"
+    }],
+    
+    "apiDocsUrl": "/api/classes/Common.Accordion.html",
+    "yuiConfig": "{base: 'http://yui.yahooapis.com/3.13.0/build/',comboBase: 'http://yui.yahooapis.com/combo?',root: '3.13.0/build/'}"
 }

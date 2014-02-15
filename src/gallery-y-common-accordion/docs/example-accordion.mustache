@@ -1,0 +1,131 @@
+<script src="/build/gallery-y-common-accordion/gallery-y-common-accordion.js"></script>
+
+<style>
+    #container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    .accordion-item-content, .accordion-item-content.hide {
+        display: none;
+    }
+    .accordion-item-content.show {
+        display: block;
+    }
+</style>
+<div class="intro">
+    <p>
+    {{description}}
+    </p>
+</div>
+
+<div id="container">
+    <div id="sample-accordion1">
+        <div class="accordion-item">
+            <a href="#" class="accordion-item-link">Item 1</a>
+            <div class="accordion-item-content show">
+                Porttitor dolor, dignissim! Tristique pulvinar elementum in purus turpis mus
+                et nec diam lacus penatibus amet ut pulvinar, enim velit, non,
+                in, velit integer, odio et adipiscing digni
+            </div>
+        </div>
+        <div class="accordion-item">
+            <a href="#" class="accordion-item-link">Item 2</a>
+            <div class="accordion-item-content">
+                Lacus risus enim ut ut elementum amet elementum nisi! Aenean duis nec
+                non, risus magna ut augue placerat, pellentesque tristique, turpis, 
+                elementum elementum placer
+            </div>
+        </div>
+        <div class="accordion-item">
+            <a href="#" class="accordion-item-link">Item 3</a>
+            <div class="accordion-item-content"></div>
+        </div>
+        <div class="accordion-item">
+            <a href="#" class="accordion-item-link">Item 4</a>
+            <div class="accordion-item-content">
+                Nisi scelerisque vel elit integer ridiculus, nisi? Sed. Velit cursus
+                adipiscing, tortor dis ultrices odio odio dignissim non,
+                aliquet tincidunt montes auctor turpis! Elementum est s
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<h2>Example</h2>
+
+<h3>HTML</h3>
+```
+<!-- component include  -->
+<script src="/build/gallery-y-common-accordion/gallery-y-common-accordion.js"></script>
+
+<!-- example  -->
+
+
+<div id="sample-accordion1">
+    <div class="accordion-item">
+        <a href="#" class="accordion-item-link">Item 1</a>
+        <div class="accordion-item-content show">
+            Porttitor dolor, dignissim! Tristique pulvinar elementum in purus turpis mus
+            et nec diam lacus penatibus amet ut pulvinar, enim velit, non,
+            in, velit integer, odio et adipiscing digni
+        </div>
+    </div>
+    <div class="accordion-item">
+        <a href="#" class="accordion-item-link">Item 2</a>
+        <div class="accordion-item-content">
+            Lacus risus enim ut ut elementum amet elementum nisi! Aenean duis nec
+            non, risus magna ut augue placerat, pellentesque tristique, turpis, 
+            elementum elementum placer
+        </div>
+    </div>
+    <div class="accordion-item">
+        <a href="#" class="accordion-item-link">Item 3</a>
+        <div class="accordion-item-content"></div>
+    </div>
+    <div class="accordion-item">
+        <a href="#" class="accordion-item-link">Item 4</a>
+        <div class="accordion-item-content">
+            Nisi scelerisque vel elit integer ridiculus, nisi? Sed. Velit cursus
+            adipiscing, tortor dis ultrices odio odio dignissim non,
+            aliquet tincidunt montes auctor turpis! Elementum est s
+        </div>
+    </div>
+</div>
+
+
+
+```
+
+
+<h3>Javascript</h3>
+```
+YUI().use('gallery-y-common-accordion', function(Y) {
+    var acc = new Y.Common.Accordion({
+        srcNode: '#sample-accordion1',
+        animated: false // by default animation is true
+    }).render();
+
+});
+```
+<h3>CSS</h3>
+
+```
+.accordion-item-content, .accordion-item-content.hide {
+    display: none;
+}
+.accordion-item-content.show {
+    display: block;
+}
+
+```
+
+<script>
+YUI({{{yuiConfig}}}).use('gallery-y-common-accordion', function(Y) {
+    var acc = new Y.Common.Accordion({
+        srcNode: '#sample-accordion1',
+        animated: false
+    }).render();
+ 
+});
+</script>
