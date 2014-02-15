@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Example: Multiple elements binding</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Maven+Pro:400,700">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <script src="../../build/yui/yui-min.js"></script>
+    
+</head>
+<body>
+
+<div id="doc">
+    <h1>Example: Multiple elements binding</h1>
+
+    
+        <a href="example-more-binding.html#toc" class="jump">Jump to Table of Contents</a>
+    
+
+    <div class="yui3-g">
+        <div class="yui3-u-3-4">
+            <div id="main">
+                <div class="content"><script src="../../build/gallery-y-common-dombind/gallery-y-common-dombind.js"></script>
+<style>
+    #container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    
+</style>
+<div class="intro">
+    <p>
+    Multiple elements can be bind to same model property, reflecting the model updates to every element bind
+    </p>
+</div>
+
+<div id="container">
+    <form>
+        <div>
+        Name:
+        <input type="text" data-db-bind="name"/>
+        So your name is <span data-db-bind="name"></span> ?
+        </div>
+    </form>
+</div>
+
+<h2 id="example">Example</h2>
+
+<h3 id="html">HTML</h3>
+<pre class="code prettyprint">&lt;!-- component include  --&gt;
+&lt;script src=&quot;&#x2F;build&#x2F;gallery-y-common-dombind&#x2F;gallery-y-common-dombind.js&quot;&gt;&lt;&#x2F;script&gt;
+
+&lt;!-- example  --&gt;
+&lt;div id=&quot;container&quot;&gt;
+    &lt;form&gt;
+        &lt;div&gt;
+        Name:
+        &lt;input type=&quot;text&quot; data-db-bind=&quot;name&quot;&#x2F;&gt;
+        So your name is &lt;span data-db-bind=&quot;name&quot;&gt;&lt;&#x2F;span&gt; ?
+        &lt;&#x2F;div&gt;
+    &lt;&#x2F;form&gt;
+&lt;&#x2F;div&gt;</pre>
+
+
+
+<h3 id="javascript">Javascript</h3>
+<pre class="code prettyprint">YUI().use(&#x27;gallery-y-common-dombind&#x27;, function(Y) {
+
+    var dombind = new Y.Common.DomBind({
+        container: Y.one(&#x27;#container&#x27;),
+        model: {
+            name: &#x27;john doe&#x27;
+        }
+    });
+    
+});</pre>
+
+
+
+<script>
+YUI({base: 'http://yui.yahooapis.com/3.13.0/build/',comboBase: 'http://yui.yahooapis.com/combo?',root: '3.13.0/build/'}).use('gallery-y-common-dombind', 'json-stringify', function(Y) {
+
+    var dombind = new Y.Common.DomBind({
+        container: Y.one('#container'),
+        model: {
+            name: 'john doe'
+        }
+    });
+});
+</script></div>
+            </div>
+        </div>
+
+        <div class="yui3-u-1-4">
+            <div class="sidebar">
+                
+                    <div id="toc" class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Table of Contents</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="toc">
+<li>
+<a href="example-more-binding.html#example">Example</a>
+<ul class="toc">
+<li>
+<a href="example-more-binding.html#html">HTML</a>
+</li>
+<li>
+<a href="example-more-binding.html#javascript">Javascript</a>
+</li>
+</ul>
+</li>
+</ul>
+                        </div>
+                    </div>
+                
+
+                
+                    <div class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Examples</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="examples">
+                                
+                                    
+                                        <li data-description="This component provides a simple way to bind the dom to model and viceversa without any configuration, only by defining the model properties to be bind inside of the html">
+                                            <a href="example-simple-binding.html">Simple binding</a>
+                                        </li>
+                                    
+                                
+                                    
+                                        <li data-description="Multiple elements can be bind to same model property, reflecting the model updates to every element bind">
+                                            <a href="example-more-binding.html">Multiple elements binding</a>
+                                        </li>
+                                    
+                                
+                                    
+                                        <li data-description="The model also can be updated from the code directly and changes are going to be reflected in the ui">
+                                            <a href="example-setting-model-from-code.html">Set model from code</a>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </div>
+                    </div>
+                
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+
+</body>
+</html>

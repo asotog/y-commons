@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Gallery: gallery-y-common-accordion</title>
+    <title>Example: Accordion sample with slide animation</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Maven+Pro:400,700">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css">
     <link rel="stylesheet" href="../assets/css/main.css">
@@ -13,67 +13,79 @@
 <body>
 
 <div id="doc">
-    <h1>Gallery: gallery-y-common-accordion</h1>
+    <h1>Example: Accordion sample with slide animation</h1>
 
     
-        <a href="index.html#toc" class="jump">Jump to Table of Contents</a>
+        <a href="example-accordion-animated.html#toc" class="jump">Jump to Table of Contents</a>
     
 
     <div class="yui3-g">
         <div class="yui3-u-3-4">
             <div id="main">
-                <div class="content"><div class="intro">
+                <div class="content"><script src="../../build/gallery-y-common-accordion/gallery-y-common-accordion.js"></script>
+
+<style>
+    #container {
+        padding: 20px;
+        background: #CDF2FF;
+    }
+    .accordion-item-content, .accordion-item-content.hide {
+        display: none;
+    }
+    .accordion-item-content.show {
+        display: block;
+    }
+</style>
+<div class="intro">
     <p>
-    Generates an accordion based on the markup provided
+    Generates the accordion based on the markup provided adding slide animation when items gets collapsed or expanded
     </p>
 </div>
 
-<h2 id="getting-started">Getting Started</h2>
+<div id="container">
+    <div id="sample-accordion1">
+        <div class="accordion-item">
+            <a href="example-accordion-animated.html#" class="accordion-item-link">Item 1</a>
+            <div class="accordion-item-content show">
+                Porttitor dolor, dignissim! Tristique pulvinar elementum in purus turpis mus
+                et nec diam lacus penatibus amet ut pulvinar, enim velit, non,
+                in, velit integer, odio et adipiscing digni
+            </div>
+        </div>
+        <div class="accordion-item">
+            <a href="example-accordion-animated.html#" class="accordion-item-link">Item 2</a>
+            <div class="accordion-item-content">
+                Lacus risus enim ut ut elementum amet elementum nisi! Aenean duis nec
+                non, risus magna ut augue placerat, pellentesque tristique, turpis, 
+                elementum elementum placer
+            </div>
+        </div>
+        <div class="accordion-item">
+            <a href="example-accordion-animated.html#" class="accordion-item-link">Item 3</a>
+            <div class="accordion-item-content"></div>
+        </div>
+        <div class="accordion-item">
+            <a href="example-accordion-animated.html#" class="accordion-item-link">Item 4</a>
+            <div class="accordion-item-content">
+                Nisi scelerisque vel elit integer ridiculus, nisi? Sed. Velit cursus
+                adipiscing, tortor dis ultrices odio odio dignissim non,
+                aliquet tincidunt montes auctor turpis! Elementum est s
+            </div>
+        </div>
+    </div>
 
-<p>
-To include the source files for Gallery: gallery-y-common-accordion and its dependencies, first load
-the YUI seed file if you haven't already loaded it.
-</p>
+</div>
 
-<pre class="code prettyprint">&lt;script src=&quot;http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.11.0&#x2F;build&#x2F;yui&#x2F;yui-min.js&quot;&gt;&lt;&#x2F;script&gt;</pre>
+<h2 id="example">Example</h2>
 
+<h3 id="html">HTML</h3>
+<pre class="code prettyprint">&lt;!-- component include  --&gt;
+&lt;script src=&quot;&#x2F;build&#x2F;gallery-y-common-accordion&#x2F;gallery-y-common-accordion.js&quot;&gt;&lt;&#x2F;script&gt;
 
-<p>
-Next, create a new YUI instance for your application and populate it with the
-modules you need by specifying them as arguments to the <code>YUI().use()</code> method.
-YUI will automatically load any dependencies required by the modules you
-specify.
-</p>
-
-<pre class="code prettyprint">&lt;script&gt;
-&#x2F;&#x2F; Create a new YUI instance and populate it with the required modules.
-YUI().use(&#x27;gallery-y-common-accordion&#x27;, function (Y) {
-    &#x2F;&#x2F; Gallery: gallery-y-common-accordion is available and ready for use. Add implementation
-    &#x2F;&#x2F; code here.
-});
-&lt;&#x2F;script&gt;</pre>
+&lt;!-- example  --&gt;
 
 
-<p>
-For more information on creating YUI instances and on the
-<a href="http://yuilibrary.com/yui/docs/api/classes/YUI.html#method_use"><code>use()</code> method</a>, see the
-documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Global Object</a>.
-</p>
-
-
-<h2 id="description">Description</h2>
-
-<p>The following snippet shows how the accordion can be used:</p>
-
-<h4 id="javascript">Javascript</h4>
-<pre class="code prettyprint">var acc = new Y.Common.Accordion({
-    srcNode: &#x27;#sample-accordion1&#x27;
-}).render();</pre>
-
-
-<h4 id="html">HTML</h4>
-
-<pre class="code prettyprint">&lt;div id=&quot;sample-accordion1&quot;&gt;
+&lt;div id=&quot;sample-accordion1&quot;&gt;
     &lt;div class=&quot;accordion-item&quot;&gt;
         &lt;a href=&quot;#&quot; class=&quot;accordion-item-link&quot;&gt;Item 1&lt;&#x2F;a&gt;
         &lt;div class=&quot;accordion-item-content show&quot;&gt;
@@ -84,7 +96,7 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
     &lt;&#x2F;div&gt;
     &lt;div class=&quot;accordion-item&quot;&gt;
         &lt;a href=&quot;#&quot; class=&quot;accordion-item-link&quot;&gt;Item 2&lt;&#x2F;a&gt;
-         &lt;div class=&quot;accordion-item-content&quot;&gt;
+        &lt;div class=&quot;accordion-item-content&quot;&gt;
             Lacus risus enim ut ut elementum amet elementum nisi! Aenean duis nec
             non, risus magna ut augue placerat, pellentesque tristique, turpis, 
             elementum elementum placer
@@ -106,7 +118,15 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
 
 
 
-<h4 id="css">CSS</h4>
+<h3 id="javascript">Javascript</h3>
+<pre class="code prettyprint">YUI().use(&#x27;gallery-y-common-accordion&#x27;, function(Y) {
+    var acc = new Y.Common.Accordion({
+        srcNode: &#x27;#sample-accordion1&#x27;
+    }).render();
+
+});</pre>
+
+<h3 id="css">CSS</h3>
 
 <pre class="code prettyprint">.accordion-item-content, .accordion-item-content.hide {
     display: none;
@@ -116,15 +136,14 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
 }</pre>
 
 
-<h2 id="item-initially-shown">Item initially shown</h2>
-
-<p>An item can be initially displayed from the beginning by adding the class <code>show</code> to the <a href="index.html#html">element</a> that contains the class <code>accordion-item-content</code>.</p>
-
-
-<h2 id="api-docs">API Docs</h2>
-
-<p>For detailed explanation of this component, default values and constructor arguments check <a href="../../api/classes/Common.Accordion.html">api docs</a></p>
-</div>
+<script>
+YUI({base: 'http://yui.yahooapis.com/3.13.0/build/',comboBase: 'http://yui.yahooapis.com/combo?',root: '3.13.0/build/'}).use('gallery-y-common-accordion', function(Y) {
+    var acc = new Y.Common.Accordion({
+        srcNode: '#sample-accordion1'
+    }).render();
+ 
+});
+</script></div>
             </div>
         </div>
 
@@ -139,27 +158,18 @@ documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Gl
                         <div class="bd">
                             <ul class="toc">
 <li>
-<a href="index.html#getting-started">Getting Started</a>
-</li>
-<li>
-<a href="index.html#description">Description</a>
+<a href="example-accordion-animated.html#example">Example</a>
 <ul class="toc">
 <li>
-<a href="index.html#javascript">Javascript</a>
+<a href="example-accordion-animated.html#html">HTML</a>
 </li>
 <li>
-<a href="index.html#html">HTML</a>
+<a href="example-accordion-animated.html#javascript">Javascript</a>
 </li>
 <li>
-<a href="index.html#css">CSS</a>
+<a href="example-accordion-animated.html#css">CSS</a>
 </li>
 </ul>
-</li>
-<li>
-<a href="index.html#item-initially-shown">Item initially shown</a>
-</li>
-<li>
-<a href="index.html#api-docs">API Docs</a>
 </li>
 </ul>
                         </div>

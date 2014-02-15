@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>gallery-y-common-dombind/js/gallery-y-common-dombind.js - yogi doc server</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="yogi doc server"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 3.11.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="gallery-y-common-dombind_js_gallery-y-common-dombind.js.html#api-classes">Classes</a></li>
+            <li><a href="gallery-y-common-dombind_js_gallery-y-common-dombind.js.html#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Common.Accordion.html">Common.Accordion</a></li>
+            
+                <li><a href="../classes/Common.CompoundTextField.html">Common.CompoundTextField</a></li>
+            
+                <li><a href="../classes/Common.DomBind.html">Common.DomBind</a></li>
+            
+                <li><a href="../classes/Common.DomFieldsModel.html">Common.DomFieldsModel</a></li>
+            
+                <li><a href="../classes/Common.Radios.html">Common.Radios</a></li>
+            
+                <li><a href="../classes/Common.Selects.html">Common.Selects</a></li>
+            
+                <li><a href="../classes/Common.SimpleValidator.html">Common.SimpleValidator</a></li>
+            
+                <li><a href="../classes/Common.TemplateHandler.html">Common.TemplateHandler</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/gallery-y-common-accordion.html">gallery-y-common-accordion</a></li>
+            
+                <li><a href="../modules/gallery-y-common-compound-textfield.html">gallery-y-common-compound-textfield</a></li>
+            
+                <li><a href="../modules/gallery-y-common-dom-fields-model.html">gallery-y-common-dom-fields-model</a></li>
+            
+                <li><a href="../modules/gallery-y-common-dombind.html">gallery-y-common-dombind</a></li>
+            
+                <li><a href="../modules/gallery-y-common-radios.html">gallery-y-common-radios</a></li>
+            
+                <li><a href="../modules/gallery-y-common-selects.html">gallery-y-common-selects</a></li>
+            
+                <li><a href="../modules/gallery-y-common-simple-validator.html">gallery-y-common-simple-validator</a></li>
+            
+                <li><a href="../modules/loader.html">loader</a></li>
+            
+                <li><a href="../modules/loader-yui3.html">loader-yui3</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: gallery-y-common-dombind/js/gallery-y-common-dombind.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * Utility to bind dom with javascript and viceversa, helping to avoid events attaching and data updates directly
+ *
+ * @class DomBind
+ * @namespace Common
+ * @extends Base
+ * @module gallery-y-common-dombind
+ * @constructor
+ */
+Y.namespace(&#x27;Common&#x27;);
+
+var ATTRIBUTE_SELECTOR = &#x27;[{attributeName}]&#x27;;
+var LOOP_DATA_FILTER = &#x27;|&#x27;;
+var FILTER = &#x27;:&#x27;;
+var COMMA_SEPARATOR = &#x27;,&#x27;;
+
+var DATA_BIND_CHANGE_EVENT = &#x27;data-{property}-changed&#x27;;
+var DATA_IS_BINDED = &#x27;-isbinded&#x27;;
+var TEMPLATE = &#x27;-template&#x27;;
+var LOG_PREFIX = &#x27;[Y.Common.DomBind] &#x27;;
+var FIELD_TYPES = {
+    &#x27;checkbox&#x27;: 0,
+    &#x27;radio&#x27;: 1
+};
+
+var DATA_ARRAY = &#x27;Array&#x27;;
+var SCOPE_VAR_TEMPLATE = &#x27;var {scopeVarName} = scopeModel[&quot;{scopeVarName}&quot;];&#x27;;
+
+Y.Common.DomBind = Y.Base.create(&#x27;gallery-y-common-dombind&#x27;, Y.Base, [], {
+
+    /**
+     * Initializer
+     */
+    initializer: function () {
+        this._init();
+    },
+
+    /**
+     *
+     * Sets model property
+     *
+     * @method setModel
+     * 
+     * @param {String} key The model property key, often used in the html to define which model property will be bind
+     * @param {Any} value New value that is going to be set in the model property
+     * @param {Object} [scopeModel] Scope model and additional info, used in cases like, to set list elements when they are bind
+     * @param  {Y.Node} [triggerElement] Element that triggered the setModel on field change
+     *
+     */
+    setModel: function (key, value, scopeModel, triggerElement) {
+        this._setModel(key, value, scopeModel);
+        var uniqueKey = this._generateUniqueKey(key, scopeModel);
+        this.fire(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {
+            property: uniqueKey
+        }), {
+            newValue: value,
+            triggerElement: triggerElement
+        });
+    },
+
+    /**
+     * Listens specific model changes
+     * 
+     * @method listen
+     * 
+     * @param {String} key The model property key of the property that is going to be listened
+     * @param {Function} callback The callback to execute on model property change
+     * 
+     * @return EventHandle
+     */
+    listen: function (key, callback) {
+        return this.on(Y.Lang.sub(DATA_BIND_CHANGE_EVENT, {
+            property: key
+        }), function (model) {
+            callback(model);
+        });
+    },
+
+    /**
+     * Executes a controller method code expression 
+     *
+     * @method execControllerMethodExpression
+     * 
+     * @param {String} code Controller&#x27;s method code to be executed e.g testFunc(test);
+     * @param {Object} scopeModel The current scope model
+     * @param {Y.Node} el Element which is where is defined the method call expression
+     * 
+     */
+    execControllerMethodExpression: function (code, scopeModel, el) {
+        var methodName = code.split(&#x27;(&#x27;)[0];
+        eval(this._generateScopeVarsCode(scopeModel));
+        eval(Y.Lang.sub(&#x27;this.get(&quot;controller&quot;).{methodName} = Y.bind(this.get(&quot;controller&quot;).{methodName}, el);&#x27;, {
+            methodName: methodName
+        }));
+        eval(&#x27;this.get(&quot;controller&quot;).&#x27; + code);
+    },
+    
+    /**
+     * Attaches event and sets a flag to know if the event was already attached or not, avoids to add same event multiple times on the same
+     * dom element
+     * 
+     * @method attachEvent
+     * 
+     * @param {Node} element Element where the event is going to be attached
+     * @param {String} type YUI event type that is going to be attached
+     * @param {Function} callback Callback function to be executed after event triggers
+     * @param {Object} scopeModel The current scope model
+     * 
+     */ 
+    attachEvent: function(element, type, callback, scopeModel) {
+        if (typeof element.getData(type) == &#x27;undefined&#x27;) {
+            element.on(type, function(e) {
+                e.preventDefault();
+                scopeModel.$event = e;
+                callback(scopeModel);
+            });
+            element.setData(type, true);
+        }
+    },
+
+    _init: function () {
+        var me = this;
+        this._preprocessTemplates();
+        me._compileDirectives({});
+        this.after(&#x27;modelChange&#x27;, function () {
+            Y.log(LOG_PREFIX + &#x27;Model changed&#x27;);
+            me._compileDirectives({});
+        });
+    },
+
+    /**
+     * 
+     * Compiles and registers templates with the given template engine, optimizing the rendering time,
+     * because template at that moment will be already processed and cached
+     * 
+     */ 
+    _preprocessTemplates: function() {
+        var templateEngineHandler = new Y.Common.TemplateHandler(this.get(&#x27;templateEngine&#x27;));
+        var templates = this.get(&#x27;templates&#x27;);
+        for (var templateId in templates) {
+            if (templates.hasOwnProperty(templateId)) {
+                var compiled = templateEngineHandler.compile(templates[templateId]);
+                Y.Common.TemplateHandler.register(templateId, compiled);
+            }
+        }
+    },
+    
+    /**
+     *
+     * Iterates over the available list of directives, sorts them by priority  and then  starts looking one by one in the dom
+     *
+     * @param {Object} scopeObject Scope unit of model and dom information basically contains the following structure
+     *                 &lt;code&gt;{ scopeModel: Object, containerNode: Y.Node }&lt;/code&gt;
+     *
+     */
+    _compileDirectives: function (scopeObject) {
+        var directives = [];
+        for (var directive in Y.Common.DomBind.Directives) {
+            if (Y.Common.DomBind.Directives.hasOwnProperty(directive)) {
+                directives.push(Y.Common.DomBind.Directives[directive])
+            }
+        }
+        /* sorts by priority */
+        directives.sort(function(a, b) {
+            if (a.priority &lt; b.priority)
+                return 1;
+            if (a.priority &gt; b.priority)
+                return -1;
+            return 0;
+        });
+        for(var i = 0; i &lt; directives.length; i++) {
+            var directiveCfg = directives[i];
+            this._compileAndExecuteDirective(scopeObject, directiveCfg.keyName, directiveCfg);
+        }
+    },
+
+    /**
+     * Looks for specific directive in the dom and executes it
+     */
+    _compileAndExecuteDirective: function (scopeObject, directiveName, config) {
+        var me = this;
+        var c = (scopeObject &amp;&amp; scopeObject.containerNode) ? scopeObject.containerNode : this.get(&#x27;container&#x27;);
+        var scopeModel = (scopeObject &amp;&amp; scopeObject.scopeModel) ? scopeObject.scopeModel : {};
+        var elements = c.all(Y.Lang.sub(ATTRIBUTE_SELECTOR, {
+            attributeName: this._getDirectiveName(directiveName)
+        }));
+        var directiveExecFn = Y.bind(config.directiveExecFn, this);
+        elements.each(function (el) {
+            Y.clone(directiveExecFn)(directiveName, el,  el.getAttribute(me._getDirectiveName(directiveName)), Y.clone(scopeModel));
+        });
+    },
+
+
+    /**
+     * Retrieves the list of filters to be applied to the list directive iteration
+     */
+    _tokenizeFilters: function (filters) {
+        var tokenizedFilters = [];
+        for (var i = 0; i &lt; filters.length; i++) {
+            var filter = filters[i].split(FILTER);
+            tokenizedFilters.push({
+                name: filter[0],
+                executeFn: filter[1]
+            });
+        }
+        return tokenizedFilters;
+    },
+
+    /**
+     * Applies filters that are going to be executed before each item inside of a list iteration
+     */
+    _doBeforeEachItem: function (filters, modelItem) {
+        for (var i = 0; i &lt; filters.length; i++) {
+            if (filters[i].name == &#x27;onBeforeEach&#x27;) {
+                var filterFunction = this.get(&#x27;filters&#x27;)[filters[i].executeFn];
+                modelItem = filterFunction(modelItem);
+            }
+        }
+        return modelItem;
+    },
+
+    /**
+     * Applies filters that are going to be executed after each itemn iside of a list iteration, also passes the node created
+     */
+    _doAfterEachItem: function (filters, modelItem, node) {
+        for (var i = 0; i &lt; filters.length; i++) {
+            if (filters[i].name == &#x27;onAfterEach&#x27;) {
+                var filterFunction = this.get(&#x27;filters&#x27;)[filters[i].executeFn];
+                modelItem = filterFunction(modelItem, node);
+            }
+        }
+    },
+
+    /**
+     *
+     * Sets the element value, takes care of the type of the element if its a form element sets its value if not, it sets the
+     * inner html
+     *
+     * @param {Y.Node} el Element to be updated
+     * @param {String} value New element value
+     *
+     */
+    _setElementValue: function (el, value) {
+        var nodeName = el.get(&#x27;nodeName&#x27;).toLowerCase();
+        if (nodeName == &#x27;input&#x27; || nodeName == &#x27;textarea&#x27; || nodeName == &#x27;select&#x27;) {
+            var fieldType = (typeof FIELD_TYPES[el.get(&#x27;type&#x27;)] == &#x27;number&#x27;) ? FIELD_TYPES[el.get(&#x27;type&#x27;)] : el.get(&#x27;type&#x27;);
+            switch (fieldType) {
+            case FIELD_TYPES[&#x27;checkbox&#x27;]:
+                el.set(&#x27;checked&#x27;, value);
+                break;
+            case FIELD_TYPES[&#x27;radio&#x27;]:
+                el.set(&#x27;checked&#x27;, (el.get(&#x27;value&#x27;) == value));
+                break;
+            default:
+                el.set(&#x27;value&#x27;, value);
+            }
+        } else {
+            el.set(&#x27;innerHTML&#x27;, value);
+        }
+    },
+
+    /**
+     * Gets form element value
+     *
+     */
+    _getElementValue: function (el) {
+        var nodeName = el.get(&#x27;nodeName&#x27;).toLowerCase();
+        if (nodeName == &#x27;input&#x27; || nodeName == &#x27;textarea&#x27; || nodeName == &#x27;select&#x27;) {
+            var fieldType = (typeof FIELD_TYPES[el.get(&#x27;type&#x27;)] == &#x27;number&#x27;) ? FIELD_TYPES[el.get(&#x27;type&#x27;)] : el.get(&#x27;type&#x27;);
+            switch (fieldType) {
+            case FIELD_TYPES[&#x27;checkbox&#x27;]:
+                return el.get(&#x27;checked&#x27;);
+            }
+            return el.get(&#x27;value&#x27;);
+        }
+        return null;
+    },
+
+    /**
+     *
+     * Will generate javascript code as a string so then can be executed by eval function, will generated scope vars
+     * so inline functions called from directives from the html can use any variable placed in the scope
+     *
+     * @param {Object} scopeModel Any scope model for example such as an item from a list iteration
+     *
+     */
+    _generateScopeVarsCode: function (scopeModel) {
+        var varsString = &#x27;&#x27;;
+        for (var scopeVarName in scopeModel) {
+            if (scopeModel.hasOwnProperty(scopeVarName)) {
+                /* verify if its array item or plain model item, then set with the current model data */
+                var scopeItem = scopeModel[scopeVarName];
+                if (scopeItem &amp;&amp; scopeItem._info &amp;&amp; scopeItem._info.parentType == DATA_ARRAY) {
+                    scopeModel[scopeVarName] = this.get(&#x27;model&#x27;)[scopeItem._info.parent][scopeItem._info.index];
+                } else if (this.get(&#x27;model&#x27;)[scopeVarName] != null) {
+                    scopeModel[scopeVarName] = this.get(&#x27;model&#x27;)[scopeVarName];
+                }
+                varsString += Y.Lang.sub(SCOPE_VAR_TEMPLATE, {
+                    scopeVarName: scopeVarName
+                });
+            }
+        }
+        return varsString;
+    },
+
+    /**
+     * Model key should be unique representing the model in the main model object
+     *
+     *
+     */
+    _generateUniqueKey: function (bindKey, scopeModel) {
+        var tokenizedKeys = bindKey.split(&#x27;.&#x27;);
+        if (tokenizedKeys.length &gt; 1 &amp;&amp; typeof scopeModel[tokenizedKeys[0]] != &#x27;undefined&#x27;) {
+            var scopeItem = scopeModel[tokenizedKeys[0]];
+            bindKey = ((scopeItem._info &amp;&amp; scopeItem._info.parentType == DATA_ARRAY) ? (scopeItem._info.parent + &#x27;.&#x27; + scopeItem._info.index) : &#x27;&#x27;) + bindKey;
+        }
+        return bindKey;
+    },
+
+    /**
+     * Sets model directly in the main model object
+     *
+     */
+    _setModel: function (bindKey, value, scopeModel) {
+        var tokenizedKeys = bindKey.split(&#x27;.&#x27;);
+        // look first at the dynamic scope created for example loop scope
+        if (tokenizedKeys.length &gt; 1 &amp;&amp; typeof scopeModel[tokenizedKeys[0]] != &#x27;undefined&#x27;) {
+            var scopeItem = scopeModel[tokenizedKeys[0]];
+            if (scopeItem &amp;&amp; scopeItem._info &amp;&amp; scopeItem._info.parentType == DATA_ARRAY) {
+                tokenizedKeys.shift();
+                var arrayItem = this.get(&#x27;model&#x27;)[scopeItem._info.parent][scopeItem._info.index];
+                eval(this._generateObjectPropsAccessCode(tokenizedKeys, arrayItem));
+                return;
+            }
+        }
+        this._setModelProperty(tokenizedKeys, value);
+    },
+    
+    /**
+     * Retrieves model values using dot notation e.g person.name
+     *
+     */
+    _getModel: function (bindKey, scopeModel) {
+        var tokenizedKeys = bindKey.split(&#x27;.&#x27;);
+        if (tokenizedKeys.length &gt; 1 &amp;&amp; typeof scopeModel[tokenizedKeys[0]] != &#x27;undefined&#x27;) {
+            var property = scopeModel;
+            for (var i = 0; i &lt; tokenizedKeys.length; i++) {
+                property = property[tokenizedKeys[i]];
+            }
+            return property;
+        }
+        return this._getModelProperty(tokenizedKeys);
+    },
+
+    /**
+     * Generates code to set specific array items by going inside the object
+     *
+     */
+    _generateObjectPropsAccessCode: function (tokenizedProperties, baseObject) {
+        var code = &#x27;this.get(&quot;model&quot;)[scopeItem._info.parent][scopeItem._info.index]&#x27;;
+        Y.Array.each(tokenizedProperties, function (item) {
+            code += Y.Lang.sub(&#x27;[&quot;{property}&quot;]&#x27;, {
+                property: item
+            });
+        });
+        return (code + &#x27; = value&#x27;);
+    },
+    
+    /**
+     * Sets a property in the model by passing the access expression separating by . to access the nested properties
+     * 
+     * @param {Array} tokenizedProperties List of properties to access the property or nested property
+     * @param {Any} value Value to be set
+     */ 
+    _setModelProperty: function(tokenizedProperties, value) {
+        var code = &#x27;this.get(&quot;model&quot;)&#x27;;
+        Y.Array.each(tokenizedProperties, function (item) {
+            code += Y.Lang.sub(&#x27;[&quot;{property}&quot;]&#x27;, {
+                property: item
+            });
+        });
+        eval(code + &#x27; = value;&#x27;);
+    },
+    
+    /**
+     * Gets a property from the model by passing the access expression separating by . to access the nested properties
+     * 
+     * @param {Array} tokenizedProperties List of properties to access the property or nested property
+     */ 
+    _getModelProperty: function(tokenizedProperties) {
+        var code = &#x27;this.get(&quot;model&quot;)&#x27;;
+        Y.Array.each(tokenizedProperties, function (item) {
+            code += Y.Lang.sub(&#x27;[&quot;{property}&quot;]&#x27;, {
+                property: item
+            });
+        });
+        try {
+            return eval(code);
+        } catch(err) {
+            return null;
+        }
+    },
+    
+    _getDirectiveName: function (directiveName) {
+        return this.get(&#x27;prefix&#x27;) + directiveName;
+    }
+
+}, {
+    ATTRS: {
+        /**
+         * Main container where Y.Common.DomBind is going to look
+         *
+         * @attribute container
+         * @type Y.Node
+         */
+        container: {
+            value: null
+        },
+
+        /**
+         * Model that will be bind, every change will be reflected and centralized on this data unit
+         *
+         * @attribute model
+         * @type {Object}
+         * @optional
+         */
+        model: {
+            value: {}
+        },
+        
+        /**
+         * Controller methods
+         * 
+         * @attribute controller
+         * @type {Object}
+         * @default {}
+         */
+        controller: {
+            value: {}
+        },
+
+        /**
+         * Filter methods to be used on list/array iteration
+         * 
+         * @attribute filters
+         * @type {Object}
+         * @default {}
+         */
+        filters: {
+            value: {}
+        },
+
+        /**
+         * Map of templates each item should contain template markup, then each item can be referenced by using the template key
+         * 
+         * @attribute templates
+         * @type {Object}
+         * @default {}
+         */
+        templates: {
+            value: {}
+        },
+        
+        /**
+         * By default will use handlebars with Y.Template to process templates but custom engine can be used, please follow the description
+         * about how to use custom template engine http://yuilibrary.com/yui/docs/template/
+         * 
+         * @attribute templateEngine
+         * @type {Object}
+         * @default Handlebars
+         */ 
+        templateEngine: {
+            valueFn: function() {
+                return Y.Common.DomBind.HandleBars;
+            }
+        },
+        
+        /**
+         * Prefix to be used in the directives
+         * 
+         * @attribute prefix
+         * @type {String}
+         * @default &#x27;data-db&#x27;
+         */
+        prefix: {
+            value: &#x27;data-db&#x27;
+        }
+
+
+    }
+});
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

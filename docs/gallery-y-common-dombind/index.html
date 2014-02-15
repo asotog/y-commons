@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Gallery: gallery-y-common-dombind</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Maven+Pro:400,700">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.4.1/build/cssgrids/grids-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <script src="../../build/yui/yui-min.js"></script>
+    
+</head>
+<body>
+
+<div id="doc">
+    <h1>Gallery: gallery-y-common-dombind</h1>
+
+    
+        <a href="index.html#toc" class="jump">Jump to Table of Contents</a>
+    
+
+    <div class="yui3-g">
+        <div class="yui3-u-3-4">
+            <div id="main">
+                <div class="content"><div class="intro">
+    <p>
+	Utility to bind dom with javascript and viceversa, helping to avoid events attaching and data updates directly
+    </p>
+</div>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>
+To include the source files for Gallery: gallery-y-common-dombind and its dependencies, first load
+the YUI seed file if you haven't already loaded it.
+</p>
+
+<pre class="code prettyprint">&lt;script src=&quot;http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.11.0&#x2F;build&#x2F;yui&#x2F;yui-min.js&quot;&gt;&lt;&#x2F;script&gt;</pre>
+
+
+<p>
+Next, create a new YUI instance for your application and populate it with the
+modules you need by specifying them as arguments to the <code>YUI().use()</code> method.
+YUI will automatically load any dependencies required by the modules you
+specify.
+</p>
+
+<pre class="code prettyprint">&lt;script&gt;
+&#x2F;&#x2F; Create a new YUI instance and populate it with the required modules.
+YUI().use(&#x27;gallery-y-common-dombind&#x27;, function (Y) {
+    &#x2F;&#x2F; Gallery: gallery-y-common-dombind is available and ready for use. Add implementation
+    &#x2F;&#x2F; code here.
+});
+&lt;&#x2F;script&gt;</pre>
+
+
+<p>
+For more information on creating YUI instances and on the
+<a href="http://yuilibrary.com/yui/docs/api/classes/YUI.html#method_use"><code>use()</code> method</a>, see the
+documentation for the <a href="http://localhost:5000/docs/yui/index.html">YUI Global Object</a>.
+</p>
+
+
+<h2 id="description">Description</h2>
+
+<p>This component is focused on decrease the events and dom lookup attaching mainly on ajax or events based javascript applications, by taking care internally of the 
+model updates from view to model and viceversa</p>
+
+
+<p>Following code shows how is configured the component and for detailed explanation of what is each constructor's attribute please look <a href="index.html#api-docs">api docs</a>:</p>
+<pre class="code prettyprint">var dombind = new Y.Common.DomBind({
+    container: Y.one(&#x27;.simple-form&#x27;)
+});</pre>
+
+
+<h2 id="two-way-data-bind">Two way data bind</h2>
+
+<p>Sometimes when working with extensive  applications in javascript, attaching events and set data models can be really cumbersome, two way data binding is an approach to reflect model changes into dom and viceversa, this module provides an easy way to achieve this by just setting the declarations of the model bind in the markup:</p>
+
+<pre class="code prettyprint">&lt;div id=&quot;container&quot;&gt;
+    &lt;form&gt;
+        &lt;div&gt;
+        Name:
+        &lt;input type=&quot;text&quot; data-db-bind=&quot;name&quot;&#x2F;&gt;
+        &lt;&#x2F;div&gt;
+        &lt;div&gt;
+        Last Name:
+        &lt;input type=&quot;text&quot; data-db-bind=&quot;lastName&quot;&#x2F;&gt;
+        &lt;&#x2F;div&gt;
+        &lt;div&gt;
+        Married:
+        &lt;input type=&quot;checkbox&quot; data-db-bind=&quot;married&quot;&#x2F;&gt;
+        &lt;&#x2F;div&gt;
+        &lt;button data-db-onclick=&quot;submitPerson();&quot;&gt;submit&lt;&#x2F;button&gt;
+    &lt;&#x2F;form&gt;
+&lt;&#x2F;div&gt;</pre>
+
+
+<p>The two way data binding makes easier the way of how is updated the model as can be seen in <a href="http://localhost:5000/docs/gallery-y-common-dombind/simple-binding.html">simple binding example</a></p>
+
+
+
+<h2 id="controller-methods">Controller methods</h2>
+
+<p>Controller methods/actions comes to support the events attaching functionality of the application, for example on click do something or on focus do another thing, controller methods are specified on the contructor of the DomBind instance, on controller methods, <code>this</code> will refer to the Node element that is triggering the controller's method, given the following example, <code>this</code> will be the <code>button</code> Node:</p>
+
+
+<pre class="code prettyprint">&lt;div id=&quot;container&quot;&gt;
+    &lt;form&gt;
+        &lt;div&gt;
+        Name:
+        &lt;input type=&quot;text&quot; data-db-bind=&quot;name&quot;&#x2F;&gt;
+        &lt;&#x2F;div&gt;
+        &lt;div&gt;
+        Last Name:
+        &lt;input type=&quot;text&quot; data-db-bind=&quot;lastName&quot;&#x2F;&gt;
+        &lt;&#x2F;div&gt;
+        &lt;div&gt;
+        Married:
+        &lt;input type=&quot;checkbox&quot; data-db-bind=&quot;married&quot;&#x2F;&gt;
+        &lt;&#x2F;div&gt;
+        &lt;button data-db-onclick=&quot;submitPerson();&quot;&gt;submit&lt;&#x2F;button&gt;
+    &lt;&#x2F;form&gt;
+&lt;&#x2F;div&gt;</pre>
+
+
+<pre class="code prettyprint">var dombind = new Y.Common.DomBind({
+    container: Y.one(&#x27;#container&#x27;),
+    controller: {
+        submitPerson: function() {
+            alert(&#x27;Person submitted:&#x27; + Y.JSON.stringify(dombind.get(&#x27;model&#x27;)))
+        }
+    }
+});</pre>
+
+
+<h2 id="events-directives">Events directives</h2>
+
+<p>On previous section, was shown that events directives such as <code>data-db-onclick</code> can be defined directly in the markup and it will be possible to execute controller's methods, currenly there is a list of predefined directives that can be used:</p>
+
+
+<table>
+    <tbody>
+        <tr>
+            <th>Directive</th>
+            <th>Description</th>
+        </tr>
+        
+        <tr>
+            <td><code>-onclick</code></td>
+            <td><code>click</code> event</td>
+        </tr>
+        <tr>
+            <td><code>-onblur</code></td>
+            <td><code>blur</code> event</td>
+        </tr>
+        <tr>
+            <td><code>-onchange</code></td>
+            <td><code>change</code> event</td>
+        </tr>
+        <tr>
+            <td><code>-onfocus</code></td>
+            <td><code>focus</code> event</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h2 id="template-engine">Template Engine</h2>
+
+<p>Templates are commonly used on <code>-loop-model</code> directive to render each item while iterating the data, by default uses handlebars v1.3.0, which can be seen in the source code at <a href="https://github.com/asotog/y-commons/blob/master/src/gallery-y-common-dombind/js/gallery-y-common-dombind-handlebars.js">gallery-y-common-dombind-handlebars.js </a> file, but template engine can be easily changed to use another one by setting the attribute <a href="../../api/classes/Common.DomBind.html#attr_templateEngine">templateEngine</a> in the constructor</p>
+
+<h2 id="lists-template-iteration-binding-and-filtering">Lists: template, iteration, binding and filtering</h2>
+
+<h2 id="directives-creation">Directives creation</h2>
+
+<h2 id="prefix">Prefix</h2>
+
+<p>This module uses <code>data-</code> attributes to provide dom declarative based configuration, sometimes on development can be seen
+that this attribute can have conflicts with other functionality that also uses <code>data-</code>, for this reason this component provides the way to modify default <code>data-</code> prefix which is <code>data-db</code> to other one if there are conflicts.</p>
+
+<h2 id="important-limitations">Important limitations</h2>
+
+<h3 id="model-depth">Model depth</h3>
+
+<p>Currently only can use one level model and model object can not be accessed in depth, for example can only defined model objects as :</p>
+<pre class="code prettyprint">{
+    &quot;userId&quot;: 1243,
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;married&quot;: true,
+    &quot;gender&quot;: &quot;male&quot;,
+    &quot;futureTasks&quot;: [],
+    &quot;tomorrowTasks&quot;: [],
+    &quot;todayTasks&quot;: [{
+            &quot;taskId&quot;: 2501,
+            &quot;description&quot;: &quot;js trends and frontend&quot;,
+            &quot;name&quot;: &quot;JS Conf 2014&quot;,
+            &quot;date&quot;: &quot;2014-01-21&quot;,
+            &quot;isCompleted&quot;: false
+        }, {
+            &quot;taskId&quot;: 2301,
+            &quot;description&quot;: &quot;js conf&quot;,
+            &quot;name&quot;: &quot;NodeJS Conffff 54545&quot;,
+            &quot;date&quot;: &quot;2014-01-21&quot;,
+            &quot;isCompleted&quot;: true
+    }]
+}</pre>
+
+
+And can not be for example : 
+<pre class="code prettyprint">{
+    &quot;userId&quot;: 1243,
+    &quot;name&quot;: &quot;John Doe&quot;,
+    &quot;married&quot;: true,
+    &quot;gender&quot;: &quot;male&quot;,
+    &quot;phone&quot;: {
+        &quot;area&quot;: &quot;(2392)&quot;,
+        &quot;number&quot;: &quot;21313-231&quot;
+    },
+    &quot;futureTasks&quot;: [],
+    &quot;tomorrowTasks&quot;: [],
+    &quot;todayTasks&quot;: [{
+            &quot;taskId&quot;: 2501,
+            &quot;description&quot;: &quot;js trends and frontend&quot;,
+            &quot;name&quot;: &quot;JS Conf 2014&quot;,
+            &quot;date&quot;: &quot;2014-01-21&quot;,
+            &quot;isCompleted&quot;: false
+        }, {
+            &quot;taskId&quot;: 2301,
+            &quot;description&quot;: &quot;js conf&quot;,
+            &quot;name&quot;: &quot;NodeJS Conffff 54545&quot;,
+            &quot;date&quot;: &quot;2014-01-21&quot;,
+            &quot;isCompleted&quot;: true
+    }]
+}</pre>
+
+
+<p>Where <code>phone</code> is a compound object which has a second level, cases like this also applies for array lists, so are not currently supported, only single leveled model.</p>
+
+
+<h2 id="api-docs">API Docs</h2>
+
+<p>For detailed explanation of this component, default values and constructor arguments check <a href="../../api/classes/Common.DomBind.html">api docs</a></p></div>
+            </div>
+        </div>
+
+        <div class="yui3-u-1-4">
+            <div class="sidebar">
+                
+                    <div id="toc" class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Table of Contents</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="toc">
+<li>
+<a href="index.html#getting-started">Getting Started</a>
+</li>
+<li>
+<a href="index.html#description">Description</a>
+</li>
+<li>
+<a href="index.html#two-way-data-bind">Two way data bind</a>
+</li>
+<li>
+<a href="index.html#controller-methods">Controller methods</a>
+</li>
+<li>
+<a href="index.html#events-directives">Events directives</a>
+</li>
+<li>
+<a href="index.html#template-engine">Template Engine</a>
+</li>
+<li>
+<a href="index.html#lists-template-iteration-binding-and-filtering">Lists: template, iteration, binding and filtering</a>
+</li>
+<li>
+<a href="index.html#directives-creation">Directives creation</a>
+</li>
+<li>
+<a href="index.html#prefix">Prefix</a>
+</li>
+<li>
+<a href="index.html#important-limitations">Important limitations</a>
+<ul class="toc">
+<li>
+<a href="index.html#model-depth">Model depth</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="index.html#api-docs">API Docs</a>
+</li>
+</ul>
+                        </div>
+                    </div>
+                
+
+                
+                    <div class="sidebox">
+                        <div class="hd">
+                            <h2 class="no-toc">Examples</h2>
+                        </div>
+
+                        <div class="bd">
+                            <ul class="examples">
+                                
+                                    
+                                        <li data-description="This component provides a simple way to bind the dom to model and viceversa without any configuration, only by defining the model properties to be bind inside of the html">
+                                            <a href="example-simple-binding.html">Simple binding</a>
+                                        </li>
+                                    
+                                
+                                    
+                                        <li data-description="Multiple elements can be bind to same model property, reflecting the model updates to every element bind">
+                                            <a href="example-more-binding.html">Multiple elements binding</a>
+                                        </li>
+                                    
+                                
+                                    
+                                        <li data-description="The model also can be updated from the code directly and changes are going to be reflected in the ui">
+                                            <a href="example-setting-model-from-code.html">Set model from code</a>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </div>
+                    </div>
+                
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+
+</body>
+</html>
