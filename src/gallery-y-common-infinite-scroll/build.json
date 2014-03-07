@@ -1,0 +1,10 @@
+{
+    "name": "gallery-y-common-infinite-scroll",
+    "builds": {
+        "gallery-y-common-infinite-scroll": {
+            "jsfiles": [
+                "js/gallery-y-common-infinite-scroll.js"
+            ]
+        }
+    }
+}

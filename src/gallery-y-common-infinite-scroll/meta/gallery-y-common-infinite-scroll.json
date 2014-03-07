@@ -1,0 +1,14 @@
+{
+    "gallery-y-common-infinite-scroll": {
+        "requires": [
+            "yui-base",
+            "widget",
+            "base",
+            "node",
+            "node-event-delegate",
+            "event",
+            "io-base",
+            "json-parse"
+        ]
+    }
+}

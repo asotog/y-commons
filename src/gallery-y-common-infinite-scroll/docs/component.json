@@ -1,0 +1,11 @@
+{
+    "name"       : "gallery-y-common-infinite-scroll",
+    "displayName": "Gallery: gallery-y-common-infinite-scroll",
+    "description": "*Summary Goes Here*",
+    "author"     : [ "asotog88" ],
+    "use"        : [ "gallery-y-common-infinite-scroll" ],
+
+    "tags": [ "gallery" ],
+
+    "examples": []
+}
