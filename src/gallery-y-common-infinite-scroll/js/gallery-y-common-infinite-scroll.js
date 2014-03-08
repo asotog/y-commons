@@ -7,12 +7,12 @@ Y.InfiniteScroll = Y.Base.create('gallery-y-common-infinite-scroll', Y.Base, [],
 
     updateInitiated: false,
 
-    offset: null,
+    currentOffset: null, // currentOffset updated everytime more items are requested, initially has the same value as offset
 
     allItemsFetched: false,
 
     initializer: function () {
-        this.offset = this.get('offset');
+        this.currentOffset = this.get('offset');
         if (this.get('initialize')) {
             this._onScroll();
         }
@@ -24,13 +24,13 @@ Y.InfiniteScroll = Y.Base.create('gallery-y-common-infinite-scroll', Y.Base, [],
     _onScroll: function () {
         var me = this;
         
-        var scrollPos = 0;
+        var scrollPos = 0; // scroll bar position
         if (this.updateInitiated) {
             return;
         }
 
-        var pageHeight = document.documentElement.scrollHeight;
-        var clientHeight = document.documentElement.clientHeight;
+        var pageHeight = document.documentElement.scrollHeight; // document height
+        var clientHeight = document.documentElement.clientHeight; // visible height
 
         if (Y.UA.ie) {
             scrollPos = document.documentElement.scrollTop;
@@ -38,12 +38,12 @@ Y.InfiniteScroll = Y.Base.create('gallery-y-common-infinite-scroll', Y.Base, [],
             scrollPos = window.pageYOffset;
         }
 
-        if (pageHeight - (scrollPos + clientHeight) < 50  && !this.allItemsFetched) {
+        if (pageHeight - (scrollPos + clientHeight) < this.get('scrollBufferSize')  && !this.allItemsFetched) {
             this.updateInitiated = true;
             var offset = this.get('container').all('.item').size();
 
             this.fire(EV_LOADING);
-            document.documentElement.scrollTop += 60;
+            document.documentElement.scrollTop += this.get('scrollBufferSize'); // move the scroll bar
             
             if (this.get('requestCustomData')) {
                 Y.bind(this.get('requestCustomData'), this)(function(response) {
@@ -60,7 +60,7 @@ Y.InfiniteScroll = Y.Base.create('gallery-y-common-infinite-scroll', Y.Base, [],
     
     requestItems: function() {
         var me = this;
-        var url = Y.Lang.sub(this.get('dataSourceUrl'), {offset: this.offset});
+        var url = Y.Lang.sub(this.get('dataSourceUrl'), {offset: this.currentOffset});
         var oConn = Y.io(url, {
             on: {
                 success: function (id, o, args) {
@@ -76,10 +76,10 @@ Y.InfiniteScroll = Y.Base.create('gallery-y-common-infinite-scroll', Y.Base, [],
     
     _processResponse: function(response) {
         var me = this;
-        me.offset += me.get('offset');
+        me.currentOffset += me.get('offset');
         if (response.length > 0) {
             Y.Array.each(response, function (item) {
-                item = me.get('itemProcessor')(item);
+                item = me.get('itemPreProcessor')(item);
                 me.get('container').append(Y.Lang.sub(me.get('itemTemplate'), item));
             });
         } else {
@@ -144,10 +144,18 @@ Y.InfiniteScroll = Y.Base.create('gallery-y-common-infinite-scroll', Y.Base, [],
          * @example 
          * function(item) { return item; } 
          */
-        itemProcessor: {
+        itemPreProcessor: {
             value: function(item) {
                 return item;
             }
+        },
+        
+        /**
+         * Scroll buffer size to listen when moving the scroll and request more data
+         * 
+         */ 
+        scrollBufferSize: {
+            value: 60
         }
     }
 });
