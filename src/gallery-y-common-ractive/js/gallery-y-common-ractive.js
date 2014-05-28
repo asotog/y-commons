@@ -1,6 +1,7 @@
 
-Y.namespace('Common');
 
+Y.namespace('Common');
+ 
 function YRactive(options) {
     options.template = options.container.getHTML();
     options.container.empty();
@@ -14,3 +15,5 @@ Y.extend(YRactive, Ractive);
 YRactive.prototype.constructor = Ractive;
 
 Y.Common.Ractive = YRactive;
+
+Y.Common.RactiveDecorators = {};

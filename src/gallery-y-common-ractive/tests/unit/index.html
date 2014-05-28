@@ -21,6 +21,7 @@
             {{#signedIn}}
                 <!-- message for signed-in users -->
                 <p>Welcome back, {{username}}!</p>
+                <img decorator="imgSrc:'{{base}}48x48'"/>
             {{/signedIn}}
         </div>
         <script>
@@ -32,7 +33,11 @@
                 var ractive = new Y.Common.Ractive({
                     container: Y.one('#el'),
                     data: {
-                        signedIn: false
+                        signedIn: false,
+                        base: 'http://placehold.it/'
+                    },
+                    decorators: {
+                        imgSrc: Y.Common.RactiveDecorators.imgSource
                     }
                 });
                 ractive.on('signIn', function() {
