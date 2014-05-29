@@ -4,12 +4,15 @@ YUI.add('module-tests', function(Y) {
 
     suite.add(new Y.Test.Case({
         name: 'Automated Tests',
-        'test is empty': function() {
-            Y.Assert.fail('No Tests Provided For This Module');
+        'rendering test': function() {
+            this.wait(function () {
+                Y.Assert.isTrue(Y.all('.item').size() > 0);
+                
+            }, 1000);
         }
     }));
 
     Y.Test.Runner.add(suite);
 
 
-},'', { requires: [ 'test' ] });
+},'', { requires: [ 'test', 'node'] });
