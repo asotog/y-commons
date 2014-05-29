@@ -43,6 +43,7 @@ Y.Common.RactiveDecorators = {};
  */ 
 Y.Common.RactiveDecorators.imgSource = function (node, content) {
     node.src = content;
+    console.info(Y.one(node));
     return {
         teardown: function () {
 
@@ -51,4 +52,4 @@ Y.Common.RactiveDecorators.imgSource = function (node, content) {
 
 };
 
-}, '@VERSION@', {"requires": ["yui-base"]});
+}, '@VERSION@', {"requires": ["yui-base", "node"]});
