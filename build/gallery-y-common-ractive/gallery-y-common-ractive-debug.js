@@ -51,4 +51,4 @@ Y.Common.RactiveDecorators.imgSource = function (node, content) {
 
 };
 
-}, '@VERSION@', {"requires": ["yui-base", "node"]});
+}, '@VERSION@', {"requires": ["yui-base", "node", "base"]});
