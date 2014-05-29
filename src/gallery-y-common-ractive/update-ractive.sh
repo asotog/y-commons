@@ -5,4 +5,4 @@ cd ../../;
 grunt uglify:ractive;
 cd src/gallery-y-common-ractive;
 rm -r ractive-tmp;
-
+yogi build;
