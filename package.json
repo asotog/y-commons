@@ -7,7 +7,7 @@
     "url": "https://github.com/asotog/y-commons/issues"
   },
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">=0.10.0"
   },
   "directories": {
     "lib": "."
