@@ -13,6 +13,12 @@ function YRactive(options) {
     options.container.empty();
     options.el = options.container.getDOMNode();
     
+    var completeCb = options.complete;
+    options.complete = function() {
+        options.container.addClass('ractive-ready');
+        (completeCb) ? completeCb() : null;
+    }
+    
     YRactive.superclass.constructor.call(this, options);
 }
 
