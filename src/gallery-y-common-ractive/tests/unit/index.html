@@ -12,6 +12,7 @@
     <body class="yui3-skin-sam">
         <div id="logger"></div>
         <div id="el">
+            <h1>TEST CODE</h1>
             {{^signedIn}}
                 <!-- message for non-signed-in users -->
                 <p>Hi there! Please
@@ -23,6 +24,7 @@
                 <p>Welcome back, {{username}}!</p>
                 <img decorator="imgSrc:'{{base}}48x48'"/>
             {{/signedIn}}
+            <div class="style-test" decorator="style: 'background: url({{base}}48x48)'" style="width: 400px; height: 200px;"></div>
         </div>
         <script>
             YUI({
@@ -37,7 +39,8 @@
                         base: 'http://placehold.it/'
                     },
                     decorators: {
-                        imgSrc: Y.Common.RactiveDecorators.imgSource
+                        imgSrc: Y.Common.RactiveDecorators.imgSource,
+                        style: Y.Common.RactiveDecorators.style
                     }
                 });
                 ractive.on('signIn', function() {
