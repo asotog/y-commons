@@ -11,7 +11,7 @@ YUI modules with some common functionalities. List of functional modules listed 
 - Fields Validator
 - Compound Text Fields
 - Accordion
-- YUI/RactiveJS (Not documented yet)
+- YUI/RactiveJS (Not documented yet, this module is a YUI binder for the official [RactiveJS](http://www.ractivejs.org/) library)
 
 For further details visit [documentation](http://asotog.github.io/y-commons/) 
 
