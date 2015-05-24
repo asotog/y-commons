@@ -16,7 +16,7 @@ Y.InfiniteScroll = Y.Base.create('gallery-y-common-infinite-scroll', Y.Base, [],
         if (this.get('initialize')) {
             this._onScroll();
         }
-        Y.one(document).on('scroll', Y.bind(function () {
+        Y.one(window).on('scroll', Y.bind(function () {
             this._onScroll();
         }, this));
     },
